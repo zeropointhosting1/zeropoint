@@ -38,6 +38,16 @@ jobs:
           # Project Pages serve under /<repo-name>/ — leave unset instead if
           # deploying to a custom domain or a <user>.github.io root site.
           BASE_PATH: /${{ github.event.repository.name }}
+          # NEXT_PUBLIC_* vars are inlined into the client bundle at build
+          # time, not read at runtime — a static export has no server to
+          # read them later. Without these set here, the Deals page's
+          # DEALS_ENDPOINT resolves to null and falls back to its "not
+          # connected" empty state even though the Edge Function works fine.
+          # The anon key is safe as a plain repo variable (not a secret):
+          # it's designed to ship in the browser bundle and grants no access
+          # on its own — see app/lib/deals.ts.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: npm run build
 
       - name: Disable Jekyll processing
