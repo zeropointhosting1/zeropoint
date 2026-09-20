@@ -1,0 +1,164 @@
+name: zeropoint
+
+# Self-hosted Supabase (Postgres + Auth + PostgREST + Studio) plus the
+# ZeroPoint Next.js app. Only the app is meant to be reachable from the rest
+# of the LAN; everything else stays on the internal Docker network or is
+# bound to loopback for admin access via SSH tunnel.
+#
+# This intentionally omits Realtime, Storage, Edge Functions and the
+# analytics stack — ZeroPoint doesn't use them. Add them later from the
+# official https://github.com/supabase/supabase/blob/master/docker/docker-compose.yml
+# if a future phase needs file attachments or realtime updates.
+
+services:
+  db:
+    image: supabase/postgres:15.6.1.146
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      # Named "app-migrations" (not "migrations") so this bind mount doesn't
+      # shadow the image's own /docker-entrypoint-initdb.d/migrations, which
+      # provisions the auth/storage/realtime schemas. Runner script is
+      # prefixed "zz-" so it sorts after the image's own migrate.sh.
+      - ../supabase/migrations:/docker-entrypoint-initdb.d/app-migrations:ro
+      - ../supabase/seed.sql:/docker-entrypoint-initdb.d/zz-app-seed.sql:ro
+      - ./volumes/db/init-migrations.sh:/docker-entrypoint-initdb.d/zz-app-migrate.sh:ro
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXP: 3600
+    # Not published to the host: reachable only from other containers on
+    # this compose network. Never expose Postgres to the LAN or internet.
+    expose:
+      - "5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  auth:
+    image: supabase/gotrue:v2.158.1
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: ${SUPABASE_PUBLIC_URL}
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@db:5432/postgres
+      GOTRUE_SITE_URL: ${SITE_URL}
+      GOTRUE_URI_ALLOW_LIST: ${SITE_URL}
+      GOTRUE_DISABLE_SIGNUP: "true" # only the create-admin script may create users
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
+      GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED: "false"
+      GOTRUE_MAILER_AUTOCONFIRM: "true" # no SMTP by default on a LAN-only single-admin deployment
+      GOTRUE_SMTP_HOST: ${SMTP_HOST:-}
+      GOTRUE_SMTP_PORT: ${SMTP_PORT:-587}
+      GOTRUE_SMTP_USER: ${SMTP_USER:-}
+      GOTRUE_SMTP_PASS: ${SMTP_PASS:-}
+      GOTRUE_SMTP_SENDER_NAME: ZeroPoint Lab Docs
+    expose:
+      - "9999"
+
+  rest:
+    image: postgrest/postgrest:v12.2.0
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@db:5432/postgres
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+    expose:
+      - "3000"
+
+  meta:
+    image: supabase/postgres-meta:v0.84.2
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PG_META_PORT: 8080
+      PG_META_DB_HOST: db
+      PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    expose:
+      - "8080"
+
+  studio:
+    image: supabase/studio:20240729-ce42139
+    restart: unless-stopped
+    depends_on:
+      - meta
+      - rest
+    environment:
+      STUDIO_PG_META_URL: http://meta:8080
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SUPABASE_URL: http://kong:8000
+      SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+    expose:
+      - "3000"
+
+  kong:
+    image: kong:2.8.1
+    restart: unless-stopped
+    depends_on:
+      - auth
+      - rest
+      - studio
+    volumes:
+      - ./volumes/api/kong.yml:/home/kong/kong.yml.template:ro
+    # Kong's declarative config loader doesn't expand ${VARS} itself, so
+    # render the template with sed before starting (safer than eval/echo,
+    # which mangles the file's own YAML quoting). Kept on one line —
+    # folded YAML scalars split unpredictably on indentation.
+    entrypoint: bash -c 'sed -e "s|\$${SUPABASE_ANON_KEY}|$$SUPABASE_ANON_KEY|g" -e "s|\$${SUPABASE_SERVICE_ROLE_KEY}|$$SUPABASE_SERVICE_ROLE_KEY|g" /home/kong/kong.yml.template > /tmp/kong.yml && exec /docker-entrypoint.sh kong docker-start'
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /tmp/kong.yml
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+    # Loopback-only: this is the Supabase Studio + API gateway (management
+    # surface). Reach it via `ssh -L 8000:localhost:8000 <vm>`, never expose
+    # it to the LAN or internet.
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - kong
+    environment:
+      SUPABASE_URL: http://kong:8000
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      NODE_ENV: production
+    # LAN-facing: this is the only service other machines on the network
+    # should be able to reach. Host port is configurable (APP_PORT) in case
+    # 3000 is already taken on the host; the container always listens on
+    # 3000 internally.
+    ports:
+      - "0.0.0.0:${APP_PORT:-3000}:3000"
+
+volumes:
+  db-data:

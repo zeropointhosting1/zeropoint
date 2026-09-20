@@ -1,0 +1,9 @@
+# Filled in by `supabase link --project-ref <ref>`, or edit by hand with
+# the ref from your Supabase Cloud project's dashboard URL.
+project_id = "REPLACE_WITH_YOUR_PROJECT_REF"
+
+[functions.ebay-deals]
+# Public, non-sensitive data (search results) — no user auth involved, so
+# this skips Supabase's JWT check rather than requiring the anon key to be
+# sent as a Bearer token for a browser call that has no session anyway.
+verify_jwt = false

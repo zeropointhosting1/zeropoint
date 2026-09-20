@@ -1,0 +1,64 @@
+---
+title: "Why a Flat Network Doesn't Work Anymore"
+description: "Flat networks were fine when a home had five trusted devices on it. They aren't fine when it has fifty, and a third of them are IoT."
+date: "2026-01-14"
+---
+
+A flat network is any network where every device shares one broadcast domain — no VLANs, no segmentation, just a single subnet where a laptop, a smart plug, a NAS, and a guest's phone all sit on the same L2 segment and can, by default, talk to each other freely. Most home networks are still built this way, straight out of the box, because it's what the router does automatically and it works without any configuration at all.
+
+It used to be a reasonable default. It isn't anymore.
+
+## Why it used to be fine
+
+Ten or fifteen years ago, a typical home network had a handful of devices on it: a couple of laptops, a desktop, maybe a game console, a printer. Every device belonged to someone in the house, ran a real operating system with a real update cycle, and had no real reason to be hostile to the others. A flat network was low-risk because the population on it was small, trusted, and reasonably well-maintained.
+
+That population has changed completely.
+
+## The IoT problem
+
+A modern home network doesn't have five devices on it — it has dozens. Smart plugs, bulbs, thermostats, doorbell cameras, robot vacuums, TVs, speakers, sensors. Most of them share three properties that make them a categorically different kind of risk than a laptop:
+
+- **They run firmware, not an OS**, and that firmware is frequently years out of date the day you take it out of the box, with no meaningful patch cadence after that.
+- **They're built to a price point**, which means security review is rarely the priority it is for something like a phone or a laptop's operating system.
+- **They phone home constantly**, maintaining an open connection to a vendor's cloud that you don't control and can't audit — so the device's trustworthiness depends on a company's security practices, not just its own.
+
+None of that is a reason to avoid IoT devices entirely. It's a reason not to let them sit on the same broadcast domain as everything else you care about.
+
+<Callout tone="danger" title="The core problem">
+On a flat network, trust is all-or-nothing. If one device gets compromised, it doesn't just put *that device* at risk — it gets a direct line to every other device on the network, because nothing is stopping it.
+</Callout>
+
+## What actually goes wrong
+
+**Lateral movement.** This is the big one. If an attacker gets code execution on a single smart bulb — through a firmware vulnerability, a weak default credential, or a compromised vendor cloud push — a flat network hands them a launchpad. From that bulb they can scan for and reach your NAS, your laptops, your phones, any file share, any exposed admin panel. The bulb was never the target. It was the way in.
+
+**Botnets.** Mirai and its many descendants exist specifically because IoT devices are numerous, poorly patched, and often internet-facing by default. A flat home network doesn't cause this on its own, but it does nothing to stop a compromised device from being conscripted into a botnet and used to attack other networks, with your connection as the source.
+
+**Trivial reconnaissance.** Protocols like mDNS and UPnP broadcast device presence and capabilities to everything on the local segment, by design — that's how a smart TV finds your phone and vice versa. On a flat network, that convenience is also a gift to anything malicious already inside: a full map of what's on the network, handed over for free, no scanning required.
+
+**No blast radius.** Maybe the most important point: on a flat network, there's no concept of a blast radius at all. Every compromise is potentially a full compromise, because there's no boundary anywhere for an attacker to be stopped at.
+
+## The fix is segmentation, not better IoT devices
+
+You can't fix this by buying "more secure" smart plugs — the economics of the category make that an unreliable bet at best. What you can control is what those devices are allowed to talk to.
+
+The practical fix is VLANs: put IoT devices on their own segment, separate from the devices you actually trust, and put firewall rules between the segments that default to deny. This is exactly the structure behind the [home network on this site](/homelab) — three segments, each with a specific, narrow purpose:
+
+- **Trusted** — laptops, phones, the NAS. Full access to internal services.
+- **IoT** — smart devices. Internet access only, no path to Trusted, no path to each other where it can be avoided.
+- **Guest** — walled off from everything except the internet connection itself.
+
+A conceptual OPNsense-style rule set for the IoT segment looks something like this:
+
+```bash
+# IoT VLAN — default deny, explicit allow only
+block  in  on IOT_IF from IOT_NET to TRUSTED_NET
+block  in  on IOT_IF from IOT_NET to GUEST_NET
+allow  in  on IOT_IF from IOT_NET to any port {80, 443}   # internet only
+```
+
+Three lines, and the entire risk model changes. A compromised smart plug can still phone home to whatever cloud service it was already talking to — but it has no route to the NAS, no route to a laptop, no route to anything worth taking.
+
+## The takeaway
+
+A flat network isn't a mistake you can see — it works fine, right up until one device on it doesn't. The number and quality of devices sharing that broadcast domain has changed enormously in the last decade, and the default configuration most routers ship with hasn't kept up. Segmentation isn't an enterprise-only concept anymore. It's the minimum for a home network with IoT devices on it.

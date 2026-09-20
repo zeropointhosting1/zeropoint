@@ -1,0 +1,77 @@
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
+import { Bot, MessageCircle, Send, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+type ChatMessage = { id: number; role: "assistant" | "user"; text: string; href?: string; action?: string }
+
+const QUICK_PROMPTS = ["Help me plan a homelab", "Show me hardware deals", "What is the VM Sizer?", "Tell me about the community"]
+
+function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action"> {
+  const text = input.toLowerCase()
+  if (/deal|ebay|buy|hardware|elitedesk|mini pc/.test(text)) return { text: "The Deals page searches current eBay listings for proven homelab hardware, including EliteDesk Minis, network gear, and 10-inch rack parts.", href: "/deals", action: "Browse hardware deals" }
+  if (/sizer|size|cpu|ram|memory|workload|plex|immich|home assistant|nextcloud/.test(text)) return { text: "The VM Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage.", href: "/sizer", action: "Open the VM Sizer" }
+  if (/discord|community|people|share|chat/.test(text)) return { text: "The ZeroPoint community is for sharing builds, troubleshooting problems, comparing hardware, and learning with other homelabbers.", href: "/community", action: "Visit the community" }
+  if (/network|topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
+  if (/wifi|wi-fi|signal|coverage|access point|dead zone/.test(text)) return { text: "Wi-Fi Planning is the best starting point. It covers coverage, access-point placement, channels, roaming, and whether new hardware is actually necessary.", href: "/services#project-planner", action: "Plan a Wi-Fi project" }
+  if (/unifi|ubiquiti|gateway|dream machine|switch|camera/.test(text)) return { text: "UniFi Setup covers gateways, switches, access points, cameras, adoption, and network segmentation. Remote planning is available; physical installation depends on future service-area availability.", href: "/services#project-planner", action: "Plan a UniFi project" }
+  if (/homelab|proxmox|rack|server|virtual machine|\bvm\b/.test(text)) return { text: "A homelab project can start with workloads, size the compute, map networking and storage, and produce a rack plan before hardware is purchased.", href: "/services#project-planner", action: "Build a project brief" }
+  if (/remote|location|local|travel|area|where/.test(text)) return { text: "Planning, troubleshooting, UniFi configuration, and guided deployments can be handled remotely. Physical installation will only be offered within a defined service area once availability is finalized.", href: "/services", action: "View services" }
+  if (/price|pricing|cost|quote|rate|budget/.test(text)) return { text: "Service pricing is not published yet because project boundaries and the service area are still being finalized. The project planner gathers the details needed for an accurate quote later.", href: "/services#project-planner", action: "Create a project brief" }
+  if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint grew from a personal homelab into a community, a set of planning tools, documented infrastructure, and an upcoming installation service.", href: "/about", action: "About ZeroPoint" }
+  return { text: "I can guide you to hardware deals, VM sizing, the community, network topology, or services for UniFi, Wi-Fi, and homelab projects. What are you trying to build?" }
+}
+
+export function SiteChat() {
+  const [open, setOpen] = React.useState(false)
+  const [input, setInput] = React.useState("")
+  const [messages, setMessages] = React.useState<ChatMessage[]>([
+    { id: 1, role: "assistant", text: "Hi—I’m the ZeroPoint guide. Tell me what you want to build, buy, or understand, and I’ll point you in the right direction." },
+  ])
+  const nextId = React.useRef(2)
+  const logRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" })
+  }, [messages])
+
+  function send(text: string) {
+    const clean = text.trim()
+    if (!clean) return
+    const userMessage = { id: nextId.current++, role: "user" as const, text: clean }
+    const answer = answerFor(clean)
+    const reply = { id: nextId.current++, role: "assistant" as const, ...answer }
+    setMessages((current) => [...current, userMessage, reply])
+    setInput("")
+  }
+
+  return (
+    <div className="fixed right-4 bottom-4 z-50 sm:right-6 sm:bottom-6">
+      {open && (
+        <section aria-label="ZeroPoint site chat" className="mb-3 flex h-[min(580px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_24px_80px_-24px_var(--accent-glow)]">
+          <header className="flex items-center justify-between border-b border-border bg-surface-raised px-4 py-3.5">
+            <div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary"><Bot className="size-4.5" /></span><div><h2 className="text-sm font-semibold">ZeroPoint guide</h2><p className="mt-0.5 flex items-center gap-1.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase"><span className="size-1.5 rounded-full bg-success" />Automated · No live agent</p></div></div>
+            <button onClick={() => setOpen(false)} aria-label="Close chat" className="flex size-8 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-surface hover:text-foreground"><X className="size-4" /></button>
+          </header>
+
+          <div ref={logRef} role="log" aria-live="polite" className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
+            {messages.map((message) => <div key={message.id} className={message.role === "user" ? "ml-10" : "mr-8"}><p className={`rounded-xl px-3.5 py-3 text-sm leading-relaxed ${message.role === "user" ? "bg-primary text-primary-foreground" : "border border-border bg-surface-raised text-text-secondary"}`}>{message.text}</p>{message.href && <Link href={message.href} onClick={() => setOpen(false)} className="mt-2 inline-flex text-xs font-medium text-primary hover:underline">{message.action} →</Link>}</div>)}
+            {messages.length === 1 && <div className="flex flex-wrap gap-2 pt-1">{QUICK_PROMPTS.map((prompt) => <button key={prompt} onClick={() => send(prompt)} className="rounded-full border border-border px-3 py-1.5 text-[11px] text-text-secondary transition-colors hover:border-primary/30 hover:text-foreground">{prompt}</button>)}</div>}
+          </div>
+
+          <div className="border-t border-border bg-surface-raised/50 p-3">
+            <form onSubmit={(event) => { event.preventDefault(); send(input) }} className="flex gap-2"><Input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about a project..." aria-label="Chat message" autoComplete="off" /><Button type="submit" size="icon" disabled={!input.trim()}><Send className="size-4" /><span className="sr-only">Send</span></Button></form>
+            <div className="mt-2 flex items-center justify-between gap-3 px-1"><p className="text-[9px] text-text-tertiary">Runs locally · No messages sent</p><Link href="/services#project-planner" onClick={() => setOpen(false)} className="text-[10px] font-medium text-primary hover:underline">Plan a project</Link></div>
+          </div>
+        </section>
+      )}
+
+      <button onClick={() => setOpen((current) => !current)} aria-label={open ? "Close service chat" : "Open service chat"} aria-expanded={open} className="ml-auto flex h-12 items-center gap-2.5 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-[0_12px_36px_-12px_var(--accent-glow)] transition-transform hover:scale-[1.03]">
+        {open ? <X className="size-4" /> : <MessageCircle className="size-4" />}<span>{open ? "Close" : "Ask ZeroPoint"}</span>
+      </button>
+    </div>
+  )
+}
