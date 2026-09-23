@@ -10,6 +10,7 @@ const STATIC_ROUTES = [
   "/",
   "/about/",
   "/community/",
+  "/contact/",
   "/deals/",
   "/docs/",
   "/lab/",

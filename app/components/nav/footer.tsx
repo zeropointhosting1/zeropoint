@@ -1,13 +1,16 @@
 import Link from "next/link"
+import { Mail } from "lucide-react"
 import { Wordmark } from "./wordmark"
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "./brand-icons"
 import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { BUSINESS_INFO } from "@/lib/business-info"
+import { BOOKING_URL } from "@/lib/contact-config"
 
 const EXPLORE = [
   { label: "Homelab", href: "/lab" },
   { label: "Home Networking", href: "/property-technology" },
   { label: "Business", href: "/services" },
-  { label: "Start a Project", href: "/services#project-planner" },
+  { label: "Contact", href: "/contact" },
 ]
 
 const RESOURCES = [
@@ -38,6 +41,15 @@ export function Footer() {
             <p className="font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
               Connect
             </p>
+            <a href={`mailto:${BUSINESS_INFO.email}`} className="mt-4 flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-foreground">
+              <Mail className="size-4 text-primary" />
+              {BUSINESS_INFO.email}
+            </a>
+            {BOOKING_URL && (
+              <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="mt-2 block text-sm text-text-secondary transition-colors hover:text-foreground">
+                Book a call
+              </a>
+            )}
             <div className="mt-4 flex items-center gap-3">
               <a
                 href={DISCORD_URL}

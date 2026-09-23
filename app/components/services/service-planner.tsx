@@ -1,19 +1,25 @@
 "use client"
 
 import * as React from "react"
-import { Check, CheckCheck, Clipboard, MapPin, MonitorSmartphone } from "lucide-react"
+import { Check, CheckCheck, Clipboard, Loader2, MapPin, MonitorSmartphone, Send, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { formatServicePrice, PROJECT_GOALS, SERVICE_OFFERINGS, type ServiceId } from "@/lib/services"
+import { BUSINESS_INFO } from "@/lib/business-info"
+import { submitForm, type SubmitResult } from "@/lib/submit-form"
 
 type Delivery = "local" | "remote" | "unsure"
+type SendStatus = "idle" | "sending" | SubmitResult
 
 export function ServicePlanner() {
   const [services, setServices] = React.useState<ServiceId[]>([])
   const [goals, setGoals] = React.useState<string[]>([])
   const [delivery, setDelivery] = React.useState<Delivery>("unsure")
   const [notes, setNotes] = React.useState("")
+  const [name, setName] = React.useState("")
+  const [email, setEmail] = React.useState("")
   const [copied, setCopied] = React.useState(false)
+  const [sendStatus, setSendStatus] = React.useState<SendStatus>("idle")
 
   const selectedServices = SERVICE_OFFERINGS.filter((service) => services.includes(service.id))
   const estimatedFrom = selectedServices.reduce((sum, service) => sum + service.pricing.from, 0)
@@ -27,6 +33,8 @@ export function ServicePlanner() {
     `Starting estimate: ${selectedServices.length ? `From $${estimatedFrom} (final quote depends on scope)` : "N/A"}`,
   ].join("\n")
 
+  const canSend = (services.length > 0 || goals.length > 0) && name.trim() && email.trim()
+
   function toggleService(id: ServiceId) {
     setServices((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id])
   }
@@ -39,6 +47,17 @@ export function ServicePlanner() {
     await navigator.clipboard.writeText(brief)
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
+  }
+
+  async function sendBrief() {
+    setSendStatus("sending")
+    const result = await submitForm({
+      name,
+      email,
+      message: brief,
+      _subject: "New project brief from zeropoint.dev",
+    })
+    setSendStatus(result)
   }
 
   return (
@@ -83,6 +102,20 @@ export function ServicePlanner() {
           <span className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">4 · Anything else?</span>
           <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={5} placeholder="Current hardware, property size, rough budget, timeline, or what is not working..." className="mt-4 w-full resize-y rounded-xl border border-input bg-surface-raised px-4 py-3 text-sm text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/50 focus:ring-3 focus:ring-primary/10" />
         </label>
+
+        <fieldset>
+          <legend className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">5 · Where should this go?</legend>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <label className="block">
+              <span className="text-xs text-text-secondary">Name</span>
+              <input value={name} onChange={(event) => setName(event.target.value)} type="text" autoComplete="name" className="mt-2 w-full rounded-xl border border-input bg-surface-raised px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/50 focus:ring-3 focus:ring-primary/10" />
+            </label>
+            <label className="block">
+              <span className="text-xs text-text-secondary">Email</span>
+              <input value={email} onChange={(event) => setEmail(event.target.value)} type="email" autoComplete="email" className="mt-2 w-full rounded-xl border border-input bg-surface-raised px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/50 focus:ring-3 focus:ring-primary/10" />
+            </label>
+          </div>
+        </fieldset>
       </div>
 
       <aside className="sticky top-24 overflow-hidden rounded-2xl border border-primary/25 bg-surface/90 shadow-[0_24px_70px_-38px_var(--accent-glow),inset_0_1px_0_oklch(1_0_0/8%)]">
@@ -99,9 +132,25 @@ export function ServicePlanner() {
             <p className="font-mono text-sm font-semibold text-primary">From ${estimatedFrom}</p>
           </div>
         )}
-        <div className="border-t border-border px-6 py-5">
-          <Button onClick={copyBrief} className="w-full" disabled={!services.length && !goals.length}>{copied ? <Check className="size-4" /> : <Clipboard className="size-4" />}{copied ? "Copied" : "Copy project brief"}</Button>
-          <p className="mt-3 text-center text-[10px] leading-relaxed text-text-tertiary">Copy this brief to share through Discord or your preferred contact method. Final pricing is confirmed after scope review.</p>
+        <div className="space-y-3 border-t border-border px-6 py-5">
+          {sendStatus === "sent" ? (
+            <p className="flex items-center justify-center gap-2 rounded-xl border border-primary/25 bg-primary/5 px-4 py-3 text-sm font-medium text-primary"><Check className="size-4" />Sent — I&rsquo;ll follow up soon.</p>
+          ) : (
+            <>
+              {sendStatus === "error" && (
+                <p className="flex items-start gap-2 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive"><TriangleAlert className="mt-0.5 size-3.5 shrink-0" />Couldn&rsquo;t send that — try again, or email {BUSINESS_INFO.email} directly.</p>
+              )}
+              {sendStatus === "not-configured" && (
+                <p className="flex items-start gap-2 rounded-xl border border-warning/30 bg-warning/10 px-4 py-3 text-xs text-warning"><TriangleAlert className="mt-0.5 size-3.5 shrink-0" />Sending isn&rsquo;t connected yet — copy the brief and email it to {BUSINESS_INFO.email}.</p>
+              )}
+              <Button onClick={sendBrief} className="w-full" disabled={!canSend || sendStatus === "sending"}>
+                {sendStatus === "sending" ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
+                {sendStatus === "sending" ? "Sending…" : "Send brief"}
+              </Button>
+              <Button onClick={copyBrief} variant="outline" className="w-full" disabled={!services.length && !goals.length}>{copied ? <Check className="size-4" /> : <Clipboard className="size-4" />}{copied ? "Copied" : "Copy instead"}</Button>
+              <p className="text-center text-[10px] leading-relaxed text-text-tertiary">Add your name and email above to send. Final pricing is confirmed after scope review.</p>
+            </>
+          )}
         </div>
       </aside>
     </div>
