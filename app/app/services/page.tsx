@@ -33,7 +33,7 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
 const FAQ = [
   { q: "Do I need to know networking already?", a: "No. Most people booking a project don't. Explaining the tradeoffs in plain language is part of the job—you leave understanding what was built and why." },
   { q: "I'm not near you—can this still work?", a: "Yes, for most services. UniFi configuration, Wi-Fi planning, self-hosted deployments, and troubleshooting can all be done remotely over screen share. Physical installation depends on service-area availability." },
-  { q: "Do you sell hardware?", a: "No. Pricing is labor only. Use the Hardware Deals page to find gear and the VM Sizer to size it before you buy, then bring the plan to a project." },
+  { q: "Do you sell hardware?", a: "No. Pricing is labor only. Use the Hardware Deals page to find gear and the Workload Sizer to size it before you buy, then bring the plan to a project." },
   { q: "What happens after the project ends?", a: "You keep the configuration notes, a hardware/network plan, and ownership of every account and credential involved—nothing stays locked to a device only ZeroPoint can access." },
   { q: "How are my credentials handled during the project?", a: "Access is scoped to what the project actually needs and handed back at completion. You should change shared passwords once the work is done, same as with any contractor." },
   { q: "What if I only need part of a service?", a: "Say so in the project planner notes below. Scope is confirmed before work starts, so a partial UniFi cleanup or a single self-hosted app is fine—the listed price is just the starting point." },

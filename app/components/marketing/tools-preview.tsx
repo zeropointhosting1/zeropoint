@@ -7,12 +7,15 @@ import { Button } from "@/components/ui/button"
 import { Eyebrow } from "./eyebrow"
 import { SectionIndex } from "./section-index"
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion"
+import { WORKLOADS } from "@/lib/workload-catalog"
 
-const SAMPLE_WORKLOADS = [
-  { name: "Home Assistant", ram: "2 GB" },
-  { name: "Immich", ram: "4 GB" },
-  { name: "Plex", ram: "4 GB" },
-]
+// Reads straight from the sizer's own catalog (recommended profile) so
+// this preview can't drift from what /sizer actually shows.
+const SAMPLE_IDS = ["home-assistant", "immich", "plex"]
+const SAMPLE_WORKLOADS = SAMPLE_IDS.map((id) => {
+  const workload = WORKLOADS.find((w) => w.id === id)!
+  return { name: workload.name, ram: `${workload.requirements.recommended.ramGb} GB` }
+})
 
 export function ToolsPreview() {
   return (
@@ -55,7 +58,7 @@ export function ToolsPreview() {
                 ))}
               </div>
               <p className="mt-4 font-mono text-[9px] leading-relaxed tracking-wide text-text-tertiary uppercase">Small, sourced app catalog first. Expanded as the data earns trust.</p>
-              <Link href="/sizer" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">Size your VM <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+              <Link href="/sizer" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">Size your workloads <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </div>
 
             <div className="border-t border-border p-6 sm:p-7 md:border-t-0">

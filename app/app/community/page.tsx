@@ -94,7 +94,7 @@ export default function CommunityPage() {
         <section className="bg-surface">
           <div className="mx-auto max-w-6xl px-6 py-24 text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Want to see what I&rsquo;m running first?
+              Want to see what&rsquo;s actually running first?
             </h2>
             <p className="mx-auto mt-3 max-w-md text-text-secondary">
               The Network page documents the actual infrastructure behind

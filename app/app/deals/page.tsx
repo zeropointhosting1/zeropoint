@@ -7,7 +7,7 @@ import { RackBuilderPreview } from "@/components/deals/rack-builder-preview"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
-  title: "Deals — ZeroPoint",
+  title: "Hardware Deals — ZeroPoint",
   description:
     "Homelab starter hardware, pulled live from eBay's own search API — no scraping, no fabricated listings.",
   path: "/deals",
@@ -28,9 +28,8 @@ export default function DealsPage() {
             <p className="mt-5 max-w-2xl text-lg text-text-secondary">
               Used listings for the kind of hardware that actually gets a
               homelab off the ground — the same EliteDesk Minis and UniFi
-              gear running this site. Pulled live from eBay&rsquo;s search
-              API, not scraped, and not padded out with anything fake while
-              that&rsquo;s not live yet.
+              gear that run the ZeroPoint lab. Pulled live from eBay&rsquo;s
+              own search API and refreshed on every visit.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 border-t border-border pt-5 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">

@@ -89,7 +89,7 @@ export function Footer() {
         <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-tertiary sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} ZeroPoint Technology.</p>
           <p className="font-mono tracking-wider uppercase">
-            Built with Next.js · Deployed from the lab
+            Built with Next.js · Hosted on GitHub Pages
           </p>
         </div>
       </div>

@@ -3,6 +3,10 @@
 // static content rather than a dashboard hitting real infrastructure APIs.
 // Service names are sanitized (generic role, not the real hostname/app) so
 // this page doesn't hand out a map of internal attack surface.
+//
+// LAST_UPDATED is the single source for every "As of {date}" label on the
+// site — update it whenever this file's numbers are refreshed by hand.
+export const LAST_UPDATED = "2026-09-22"
 
 export type HypervisorNode = {
   id: string
@@ -35,8 +39,8 @@ export const NODES: HypervisorNode[] = [
     guests: { running: 1, total: 2 },
   },
   {
-    id: "pve2",
-    name: "pve2",
+    id: "pve02",
+    name: "pve02",
     hardware: "HP EliteDesk Mini",
     status: "Online",
     cores: 6,
@@ -84,7 +88,7 @@ export const SERVICES: Service[] = [
     label: "Mesh VPN",
     role: "Remote Access",
     type: "VM",
-    node: "pve2",
+    node: "pve02",
     status: "Running",
     uptime: "1d 23h",
   },
@@ -93,7 +97,7 @@ export const SERVICES: Service[] = [
     label: "Identity & SSO",
     role: "Authentication",
     type: "VM",
-    node: "pve2",
+    node: "pve02",
     status: "Running",
     uptime: "1d 23h",
   },

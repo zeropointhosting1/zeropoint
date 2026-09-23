@@ -66,7 +66,7 @@ export default async function DocArticlePage({
         className="inline-flex items-center gap-1.5 text-sm text-text-secondary transition-colors hover:text-foreground"
       >
         <ArrowLeft className="size-3.5" />
-        Docs
+        Learn
       </Link>
 
       <div className="mt-6 grid gap-12 xl:grid-cols-[1fr_200px]">

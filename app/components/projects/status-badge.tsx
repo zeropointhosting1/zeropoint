@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils"
 
 const TONE: Record<string, string> = {
-  Live: "text-success border-success/30 bg-success/10",
-  Documented: "text-primary border-primary/30 bg-primary/10",
   "In Progress": "text-primary border-primary/30 bg-primary/10",
   Planned: "text-text-tertiary border-border bg-transparent",
   Archived: "text-text-tertiary border-border bg-transparent",

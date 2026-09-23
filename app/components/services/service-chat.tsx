@@ -13,7 +13,7 @@ const QUICK_PROMPTS = ["Help me plan a homelab", "I need better home Wi-Fi", "He
 function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action"> {
   const text = input.toLowerCase()
   if (/deal|ebay|buy|hardware|elitedesk|mini pc/.test(text)) return { text: "The Deals page searches current eBay listings for proven homelab hardware, including EliteDesk Minis, network gear, and 10-inch rack parts.", href: "/deals", action: "Browse hardware deals" }
-  if (/sizer|size|cpu|ram|memory|workload|plex|immich|home assistant|nextcloud/.test(text)) return { text: "The VM Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage.", href: "/sizer", action: "Open the VM Sizer" }
+  if (/sizer|size|cpu|ram|memory|workload|plex|immich|home assistant|nextcloud/.test(text)) return { text: "The Workload Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage.", href: "/sizer", action: "Open the Workload Sizer" }
   if (/discord|community|people|share|chat/.test(text)) return { text: "The ZeroPoint community is for sharing builds, troubleshooting problems, comparing hardware, and learning with other homelabbers.", href: "/community", action: "Visit the community" }
   if (/network|topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
   if (/home network|house|residential|wifi|wi-fi|signal|coverage|access point|dead zone|iot/.test(text)) return { text: "ZeroPoint Home covers Wi-Fi, UniFi, IoT separation, cameras, network racks, and troubleshooting for homes and recreational properties.", href: "/property-technology", action: "Explore home networking" }
@@ -24,7 +24,7 @@ function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action">
   if (/price|pricing|cost|quote|rate|budget/.test(text)) return { text: "Service pricing is not published yet because project boundaries and the service area are still being finalized. The project planner gathers the details needed for an accurate quote later.", href: "/services#project-planner", action: "Create a project brief" }
   if (/learn|guide|docs|documentation/.test(text)) return { text: "Learn contains practical guides and field notes written while building networks, infrastructure, and homelabs.", href: "/docs", action: "Browse Learn" }
   if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint is an enthusiast-driven technology brand with three areas: homelabs, home networking, and straightforward technology setup for small businesses.", href: "/about", action: "About ZeroPoint" }
-  return { text: "I can guide you to ZeroPoint Lab, home networking, small-business services, Learn, projects, hardware deals, or the VM Sizer. What are you trying to build?" }
+  return { text: "I can guide you to ZeroPoint Lab, home networking, small-business services, Learn, projects, hardware deals, or the Workload Sizer. What are you trying to build?" }
 }
 
 export function SiteChat() {

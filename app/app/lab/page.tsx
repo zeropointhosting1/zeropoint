@@ -12,6 +12,7 @@ import { DiscordChatMock } from "@/components/marketing/discord-chat-mock"
 import { DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
 import { PROJECTS } from "@/lib/projects"
+import { LAST_UPDATED } from "@/lib/homelab-data"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
@@ -23,7 +24,7 @@ export const metadata: Metadata = pageMetadata({
 const START_PATHS = [
   { icon: BookOpen, label: "I want to learn", title: "Learn it and build it yourself.", copy: "Free guides, field notes, planning tools, infrastructure diagrams, and a community that understands the project.", action: "Start learning", href: "/docs" },
   { icon: ClipboardList, label: "Help me design it", title: "Turn the idea into a complete plan.", copy: "Work through goals, workloads, hardware, storage, networking, remote access, and the services the lab should run.", action: "Plan my lab", href: "/services#project-planner" },
-  { icon: Wrench, label: "Help me build it", title: "Get hands-on setup help.", copy: "Guided assistance with the environment, networking, Proxmox, and selected self-hosted services—without pretending it is 24/7 support.", action: "Build my lab", href: "/services#project-planner" },
+  { icon: Wrench, label: "Help me build it", title: "Get hands-on setup help.", copy: "Guided, scoped sessions on the environment, networking, Proxmox, and selected self-hosted services.", action: "Build my lab", href: "/services#project-planner" },
 ]
 
 const JOURNEY = [
@@ -36,8 +37,8 @@ const JOURNEY = [
 ]
 
 const TOOLS = [
-  { icon: Calculator, status: "Available", title: "VM Sizer", copy: "Estimate resources for common self-hosted workloads with visible assumptions.", href: "/sizer", action: "Size workloads" },
-  { icon: Search, status: "Available", title: "Hardware Finder", copy: "Browse current listings for proven mini PCs, networking gear, and rack parts.", href: "/deals", action: "Find hardware" },
+  { icon: Calculator, status: "Available", title: "Workload Sizer", copy: "Estimate resources for common self-hosted workloads with visible assumptions.", href: "/sizer", action: "Size workloads" },
+  { icon: Search, status: "Available", title: "Hardware Deals", copy: "Browse current listings for proven mini PCs, networking gear, and rack parts.", href: "/deals", action: "Find hardware" },
   { icon: PackageSearch, status: "Planned", title: "Rack Planner", copy: "Turn compute, networking, shelves, patching, and power into one complete layout.", href: "/deals#rack-concept", action: "See the concept" },
 ]
 
@@ -47,7 +48,7 @@ const SERVICES = [
   { icon: CircleHelp, title: "Remote Help", copy: "Focused troubleshooting or a second opinion on an existing lab, upgrade, or broken deployment." },
 ]
 
-const CURRENT_PROJECTS = PROJECTS.filter((project) => project.status === "Documented" && project.id !== "zeropoint-website").slice(0, 3)
+const CURRENT_PROJECTS = PROJECTS.filter((project) => project.status === "In Progress" && project.id !== "zeropoint-website").slice(0, 3)
 
 export default function LabPage() {
   return (
@@ -59,7 +60,7 @@ export default function LabPage() {
           <div className="relative mx-auto max-w-6xl px-6 pt-40 pb-24">
             <div className="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-24">
               <div><Eyebrow>ZeroPoint Lab</Eyebrow><h1 className="mt-5 max-w-4xl text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build the lab<br /><span className="text-primary">you keep thinking about.</span></h1><p className="mt-7 max-w-2xl text-lg leading-relaxed text-text-secondary">Explore a real working homelab, learn how the pieces fit together, use the planning tools, or get help turning your own idea into a build.</p><div className="mt-9 flex flex-wrap gap-3"><Button size="lg" render={<a href="#build-your-own" />}>Build your own <ArrowRight className="size-4" /></Button><Button size="lg" variant="outline" render={<Link href="/network" />}>Explore the real Lab</Button></div></div>
-              <div className="overflow-hidden rounded-2xl border border-primary/20 bg-surface/80 p-5 shadow-[0_28px_90px_-42px_var(--accent-glow)]"><div className="flex items-center justify-between border-b border-border pb-4"><div><p className="font-mono text-xs tracking-[0.16em] text-primary uppercase">Current physical build</p><p className="mt-1 text-sm text-text-secondary">Compact hardware · real workloads</p></div><span className="flex items-center gap-2 font-mono text-[9px] text-success uppercase"><span className="size-2 rounded-full bg-success" />Running</span></div><div className="mt-5 rounded-xl border-x-4 border-y border-border bg-background/60 p-3"><LabUnit unit="4U" label="Patch + switching" tone="text-text-secondary" /><LabUnit unit="3U" label="UniFi gateway" tone="text-primary" /><LabUnit unit="2U" label="HP EliteDesk · pve01" tone="text-success" /><LabUnit unit="1U" label="HP EliteDesk · pve2" tone="text-success" /></div><p className="mt-4 text-xs leading-relaxed text-text-tertiary">A simplified view of the current compute and network stack—not a fake live hardware dashboard.</p></div>
+              <div className="overflow-hidden rounded-2xl border border-primary/20 bg-surface/80 p-5 shadow-[0_28px_90px_-42px_var(--accent-glow)]"><div className="flex items-center justify-between border-b border-border pb-4"><div><p className="font-mono text-xs tracking-[0.16em] text-primary uppercase">Current physical build</p><p className="mt-1 text-sm text-text-secondary">Compact hardware · real workloads</p></div><span className="flex items-center gap-2 font-mono text-[9px] text-text-tertiary uppercase">As of {LAST_UPDATED}</span></div><div className="mt-5 rounded-xl border-x-4 border-y border-border bg-background/60 p-3"><LabUnit unit="4U" label="Patch + switching" tone="text-text-secondary" /><LabUnit unit="3U" label="UniFi gateway" tone="text-primary" /><LabUnit unit="2U" label="HP EliteDesk · pve01" tone="text-success" /><LabUnit unit="1U" label="HP EliteDesk · pve02" tone="text-success" /></div><p className="mt-4 text-xs leading-relaxed text-text-tertiary">A simplified view of the current compute and network stack, updated by hand.</p></div>
             </div>
           </div>
         </section>
@@ -68,7 +69,7 @@ export default function LabPage() {
 
         <HomelabStrip />
 
-        <section className="border-b border-border"><div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start lg:gap-20"><div><Eyebrow>Inside the build</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Real hardware. Real constraints. Real documentation.</h2><p className="mt-4 text-lg leading-relaxed text-text-secondary">The Lab combines compact compute, managed networking, segmented VLANs, self-hosted workloads, remote access, and monitoring. The sanitized diagrams show how it actually fits together.</p><div className="mt-7"><Button variant="outline" render={<Link href="/projects" />}>View all projects <ArrowRight className="size-4" /></Button></div></div><div><HardwareShowcase /><div className="mt-8 grid gap-3 sm:grid-cols-3">{CURRENT_PROJECTS.map((project) => <Link key={project.id} href={project.href ?? "/projects"} className="group rounded-xl border border-border bg-surface-raised p-5"><p className="font-mono text-[9px] tracking-wider text-primary uppercase">Documented build</p><h3 className="mt-3 font-semibold group-hover:text-primary">{project.title}</h3><p className="mt-2 text-xs leading-relaxed text-text-secondary">{project.description}</p></Link>)}</div></div></div></div></section>
+        <section className="border-b border-border"><div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start lg:gap-20"><div><Eyebrow>Inside the build</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Real hardware. Real constraints. Real documentation.</h2><p className="mt-4 text-lg leading-relaxed text-text-secondary">The Lab combines compact compute, managed networking, segmented VLANs, self-hosted workloads, remote access, and monitoring. The sanitized diagrams show how it actually fits together.</p><div className="mt-7"><Button variant="outline" render={<Link href="/projects" />}>View all projects <ArrowRight className="size-4" /></Button></div></div><div><HardwareShowcase /><div className="mt-8 grid gap-3 sm:grid-cols-3">{CURRENT_PROJECTS.map((project) => <Link key={project.id} href={project.href ?? "/projects"} className="group rounded-xl border border-border bg-surface-raised p-5"><p className="font-mono text-[9px] tracking-wider text-primary uppercase">Running in the lab</p><h3 className="mt-3 font-semibold group-hover:text-primary">{project.title}</h3><p className="mt-2 text-xs leading-relaxed text-text-secondary">{project.description}</p></Link>)}</div></div></div></div></section>
 
         <FullTopology />
 

@@ -52,9 +52,9 @@ export default function ProjectsPage() {
               Projects
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-text-secondary">
-              The full scope of what&rsquo;s actually running, not a skills
-              list. Some of these link to real documentation already; the
-              rest are marked planned rather than padded out.
+              The full scope of what&rsquo;s actually running today, plus
+              what&rsquo;s next. Finished builds link to real documentation;
+              everything else is marked planned.
             </p>
           </div>
         </section>
@@ -75,15 +75,15 @@ export default function ProjectsPage() {
               Prefer real incidents to project summaries?
             </h2>
             <p className="mx-auto mt-3 max-w-md text-text-secondary">
-              The Troubleshooting Journal covers actual failures — symptoms,
-              investigation, root cause, and what changed afterward.
+              Field notes cover actual failures — symptoms, investigation,
+              root cause, and what changed afterward.
             </p>
             <div className="mt-6">
               <Link
                 href="/docs"
                 className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground"
               >
-                Read the guides
+                Read the field notes
                 <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>

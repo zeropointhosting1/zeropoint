@@ -1,9 +1,12 @@
-// The full portfolio scope — not every project has a dedicated deep case
-// study yet. `status` is honest about that: "Documented" links somewhere
-// real (the Homelab or Network pages, which already cover it accurately);
-// "Planned" means exactly that, and isn't linked anywhere yet.
+// The full portfolio scope — not every project has a dedicated case study
+// yet (see /work once populated). `status` is honest about that:
+// "In Progress" means it's real and running today, covered by the Network
+// or Homelab pages even without its own write-up yet; "Planned" means
+// exactly that, and isn't linked anywhere yet. Statuses here must agree
+// with lib/homelab-data.ts's SERVICES — a service marked "Running" there
+// shouldn't be "Planned" here.
 
-export type ProjectStatus = "Documented" | "Planned"
+export type ProjectStatus = "In Progress" | "Planned"
 
 export type Project = {
   id: string
@@ -21,7 +24,7 @@ export const PROJECTS: Project[] = [
     description:
       "UniFi Cloud Gateway Ultra, a U7 Lite AP, VLAN segmentation across Trusted/IoT/Guest, and the troubleshooting that came with actually running it.",
     tags: ["UniFi", "VLANs", "Firewall"],
-    status: "Documented",
+    status: "In Progress",
     href: "/network",
   },
   {
@@ -30,7 +33,7 @@ export const PROJECTS: Project[] = [
     description:
       "Two HP EliteDesk Mini nodes running a Proxmox cluster — multi-node virtualization, VM deployment, and the Linux administration underneath it.",
     tags: ["Proxmox", "Virtualization", "Linux"],
-    status: "Documented",
+    status: "In Progress",
     href: "/network",
   },
   {
@@ -39,7 +42,7 @@ export const PROJECTS: Project[] = [
     description:
       "Cisco switching behind OPNsense, its own routing domain and firewall policy, kept deliberately separate from the home network.",
     tags: ["Cisco", "OPNsense", "Routing"],
-    status: "Documented",
+    status: "In Progress",
     href: "/network",
   },
   {
@@ -48,7 +51,7 @@ export const PROJECTS: Project[] = [
     description:
       "This site — Next.js, a static export deployed to GitHub Pages, MDX-powered documentation, and a privacy-conscious \"Your Connection\" panel instead of generic analytics.",
     tags: ["Next.js", "MDX", "Privacy"],
-    status: "Documented",
+    status: "In Progress",
     href: "/",
   },
   {
@@ -57,7 +60,8 @@ export const PROJECTS: Project[] = [
     description:
       "Centralized authentication in front of internal applications — OIDC/OAuth instead of a separate login for every service.",
     tags: ["Authentik", "OIDC", "Identity"],
-    status: "Planned",
+    status: "In Progress",
+    href: "/network",
   },
   {
     id: "remote-access",
@@ -65,7 +69,8 @@ export const PROJECTS: Project[] = [
     description:
       "Tailscale for remote administration, so management interfaces never need to be exposed to the public internet.",
     tags: ["Tailscale", "VPN"],
-    status: "Planned",
+    status: "In Progress",
+    href: "/network",
   },
   {
     id: "internal-dashboard",
@@ -73,7 +78,8 @@ export const PROJECTS: Project[] = [
     description:
       "A Dockerized internal tool for service monitoring and CPU-temperature telemetry across the homelab.",
     tags: ["Docker", "Monitoring"],
-    status: "Planned",
+    status: "In Progress",
+    href: "/network",
   },
   {
     id: "vaultwarden",

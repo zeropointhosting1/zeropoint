@@ -65,7 +65,7 @@ export const NET_NODES: NetNode[] = [
     size: 8,
     tone: "success",
     description:
-      "Two HP EliteDesk Mini nodes (pve01, pve2) running a Proxmox cluster — VMs for internal services like SSO, remote access, and monitoring.",
+      "Two HP EliteDesk Mini nodes (pve01, pve02) running a Proxmox cluster — VMs for internal services like SSO, remote access, and monitoring.",
   },
   {
     id: "ap",

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useInView } from "framer-motion"
 import { useCountUp } from "@/lib/use-count-up"
-import { HOMELAB_STATS } from "@/lib/homelab-data"
+import { HOMELAB_STATS, LAST_UPDATED } from "@/lib/homelab-data"
 
 const STATS = [
   { label: "Nodes", value: HOMELAB_STATS.nodes },
@@ -27,10 +27,13 @@ export function InfraStats() {
   const inView = useInView(ref, { once: true, amount: 0.5 })
 
   return (
-    <div ref={ref} className="mt-14 grid grid-cols-2 gap-8 border-t border-border pt-8 sm:grid-cols-4">
-      {STATS.map((s) => (
-        <Stat key={s.label} label={s.label} value={s.value} start={inView} />
-      ))}
+    <div>
+      <div ref={ref} className="mt-14 grid grid-cols-2 gap-8 border-t border-border pt-8 sm:grid-cols-4">
+        {STATS.map((s) => (
+          <Stat key={s.label} label={s.label} value={s.value} start={inView} />
+        ))}
+      </div>
+      <p className="mt-4 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
     </div>
   )
 }
