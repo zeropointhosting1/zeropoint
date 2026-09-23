@@ -37,7 +37,7 @@ export function ToolsPreview() {
           </motion.div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportOnce} transition={{ duration: 0.6 }} className="overflow-hidden rounded-2xl border border-border bg-background/65">
+        <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportOnce} transition={{ duration: 0.2 }} className="overflow-hidden rounded-2xl border border-border bg-background/65">
           <div className="grid md:grid-cols-2">
             <div className="p-6 sm:p-7 md:border-r md:border-border">
               <div className="flex items-start justify-between gap-4">
@@ -72,7 +72,7 @@ export function ToolsPreview() {
               </div>
               <Link href="/deals" className="group mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">See current listings <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </div>
-            <Link href="/deals" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServerCog className="size-5" /></span><span className="min-w-0 flex-1"><span className="flex items-center gap-2"><strong className="text-sm">Rack Planner</strong><span className="rounded-full border border-warning/25 px-2 py-0.5 font-mono text-[8px] tracking-wider text-warning uppercase">Planned</span></span><span className="mt-1 block text-xs text-text-secondary">A complete rack layout and price breakdown.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+            <Link href="/deals#rack-concept" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServerCog className="size-5" /></span><span className="min-w-0 flex-1"><span className="flex items-center gap-2"><strong className="text-sm">Rack Planner</strong><span className="rounded-full border border-warning/25 px-2 py-0.5 font-mono text-[8px] tracking-wider text-warning uppercase">Planned</span></span><span className="mt-1 block text-xs text-text-secondary">A complete rack layout and price breakdown.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             <Link href="/docs" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6 md:border-l"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan"><BookOpen className="size-5" /></span><span className="min-w-0 flex-1"><strong className="text-sm">Guides + Field Notes</strong><span className="mt-1 block text-xs text-text-secondary">Networking and infrastructure explained from real builds.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
           </div>
         </motion.div>

@@ -5,11 +5,13 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { VmSizingCalculator } from "@/components/sizer/vm-sizing-calculator"
 import { HYPERVISORS } from "@/lib/hypervisor-catalog"
 import { WORKLOADS } from "@/lib/workload-catalog"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "VM Sizer — ZeroPoint",
   description: "Estimate CPU, memory, and storage for common self-hosted workloads and hypervisors using documented requirements and transparent assumptions.",
-}
+  path: "/sizer",
+})
 
 export default function SizerPage() {
   return (

@@ -16,10 +16,10 @@ export function FullTopology() {
       <div className="bg-topology-glow pointer-events-none absolute inset-0" />
       <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="mb-10 max-w-2xl"
         >
           <Eyebrow>Full topology</Eyebrow>
@@ -37,7 +37,7 @@ export function FullTopology() {
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="overflow-x-auto rounded-2xl border border-primary/20 bg-surface/85 p-5 shadow-[0_28px_90px_-42px_var(--accent-glow),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-8"
         >
           <div className="min-w-[760px] sm:min-w-[900px]">

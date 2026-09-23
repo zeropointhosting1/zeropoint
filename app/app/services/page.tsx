@@ -7,11 +7,13 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ServicePlanner } from "@/components/services/service-planner"
 import { NetworkSecurityComparison } from "@/components/services/network-security-comparison"
 import { formatServicePrice, SERVICE_OFFERINGS } from "@/lib/services"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Business Networking and Technology — ZeroPoint",
   description: "Practical networks, Wi-Fi, device security, backups, documentation, and technology support for small organizations.",
-}
+  path: "/services",
+})
 
 const PROCESS = [
   { n: "01", title: "Assess", copy: "Understand the property, current equipment, goals, constraints, and budget." },

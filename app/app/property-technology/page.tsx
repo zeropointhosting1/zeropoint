@@ -6,11 +6,13 @@ import { Footer } from "@/components/nav/footer"
 import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { PropertyAssessment } from "@/components/property/property-assessment"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Home Networking — ZeroPoint",
   description: "Wi-Fi, UniFi, home networks, IoT separation, network racks, and troubleshooting for homes and recreational properties.",
-}
+  path: "/property-technology",
+})
 
 const OUTCOMES = [
   { icon: Signal, title: "Internet that reaches the property", copy: "Evaluate available wired, fixed-wireless, satellite, and cellular options before choosing the network around them." },

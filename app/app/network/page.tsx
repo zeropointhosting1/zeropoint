@@ -8,12 +8,14 @@ import { FullTopology } from "@/components/network/full-topology"
 import { NodesSection } from "@/components/homelab/nodes-section"
 import { ServicesSection } from "@/components/homelab/services-section"
 import { NetworkSection } from "@/components/homelab/network-section"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Lab — ZeroPoint",
   description:
     "The full ZeroPoint infrastructure: hypervisor nodes, running services, and the topology tying them together — the UniFi home network and the isolated Cisco lab.",
-}
+  path: "/network",
+})
 
 export default function NetworkPage() {
   return (

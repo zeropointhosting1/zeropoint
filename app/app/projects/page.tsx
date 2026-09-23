@@ -18,11 +18,13 @@ import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ProjectCard } from "@/components/projects/project-card"
 import { PROJECTS } from "@/lib/projects"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects — ZeroPoint",
   description: "Everything being built, broken, and documented in the ZeroPoint lab.",
-}
+  path: "/projects",
+})
 
 const ICONS: Record<string, typeof Home> = {
   "home-network": Home,

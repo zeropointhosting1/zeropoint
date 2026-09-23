@@ -18,10 +18,10 @@ export function LiveTopologySection() {
       <div className="bg-topology-glow pointer-events-none absolute inset-0" />
       <div className="relative mx-auto max-w-6xl px-6 py-16 sm:py-20">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="mx-auto mb-10 max-w-2xl text-center"
         >
           <div className="mb-3 flex justify-center"><SectionIndex n="03" /></div>
@@ -38,7 +38,7 @@ export function LiveTopologySection() {
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="overflow-x-auto rounded-2xl border border-primary/15 bg-surface-raised p-5 shadow-[0_0_50px_-18px_var(--accent-glow)] sm:p-8"
         >
           <div className="min-w-[760px] sm:min-w-[900px]">

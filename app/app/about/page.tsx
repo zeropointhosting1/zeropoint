@@ -6,15 +6,14 @@ import { Footer } from "@/components/nav/footer"
 import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "@/components/nav/brand-icons"
-import { DISCORD_URL } from "@/lib/site-config"
+import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About — ZeroPoint",
   description: "Why ZeroPoint exists — practical technology services backed by hands-on learning, documentation, and a community that shares the work.",
-}
-
-const GITHUB_URL = "https://github.com"
-const LINKEDIN_URL = "https://linkedin.com"
+  path: "/about",
+})
 
 const STORY = [
   {
@@ -133,8 +132,12 @@ export default function AboutPage() {
             <p className="mx-auto mt-4 max-w-lg text-text-secondary">Join the Discord, follow the code, or connect with me professionally.</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Button size="lg" className="shadow-[0_0_32px_-8px_var(--accent-glow)]" render={<a href={DISCORD_URL} target="_blank" rel="noreferrer" />}><DiscordIcon className="size-4" />Join the Discord</Button>
-              <Button size="lg" variant="outline" render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}><GithubIcon className="size-4" />GitHub</Button>
-              <Button size="lg" variant="outline" render={<a href={LINKEDIN_URL} target="_blank" rel="noreferrer" />}><LinkedinIcon className="size-4" />LinkedIn</Button>
+              {SOCIAL_LINKS.github && (
+                <Button size="lg" variant="outline" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}><GithubIcon className="size-4" />GitHub</Button>
+              )}
+              {SOCIAL_LINKS.linkedin && (
+                <Button size="lg" variant="outline" render={<a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" />}><LinkedinIcon className="size-4" />LinkedIn</Button>
+              )}
             </div>
             <Link href="/network" className="group mt-10 inline-flex items-center gap-1.5 text-sm text-text-secondary transition-colors hover:text-foreground">See the infrastructure <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" /></Link>
           </div>

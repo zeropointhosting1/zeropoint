@@ -8,12 +8,14 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { DiscordChatMock } from "@/components/marketing/discord-chat-mock"
 import { DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Community — ZeroPoint",
   description:
     "Homelab, the ZeroPoint Discord — a place for people building, breaking, and troubleshooting their own homelabs.",
-}
+  path: "/community",
+})
 
 const WHAT = [
   {

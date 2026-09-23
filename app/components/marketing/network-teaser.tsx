@@ -51,7 +51,7 @@ export function NetworkTeaser() {
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="rounded-2xl border border-primary/20 bg-surface/85 p-4 shadow-[0_24px_70px_-38px_var(--accent-glow),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-6"
         >
           <DualNetworkGlyph animated={inView && !reduced} />

@@ -21,7 +21,7 @@ const STEPS = [
 
 export function RackBuilderPreview() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-surface">
+    <section id="rack-concept" className="relative overflow-hidden border-b border-border bg-surface">
       <div className="pointer-events-none absolute right-0 top-0 size-[520px] rounded-full bg-primary/5 blur-3xl" />
       <div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-24">
         <div>

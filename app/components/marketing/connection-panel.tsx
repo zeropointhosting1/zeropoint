@@ -209,7 +209,7 @@ export function ConnectionPanel() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={viewportOnce}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             className="relative flex min-w-0 flex-col justify-center overflow-hidden rounded-2xl border border-primary/20 bg-surface-raised shadow-[0_0_40px_-16px_var(--accent-glow)]"
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(ellipse_at_top,var(--accent-glow),transparent_70%)]" />
@@ -256,10 +256,10 @@ export function ConnectionPanel() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="mt-8"
         >
           <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">

@@ -5,16 +5,18 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { Button } from "@/components/ui/button"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Homelab Planning Tools — ZeroPoint",
   description: "Size self-hosted workloads, find suitable hardware, and plan a complete homelab before spending money.",
-}
+  path: "/tools",
+})
 
 const TOOLS = [
   { icon: Calculator, status: "Available", title: "VM Sizer", copy: "Choose common self-hosted apps and get a transparent CPU, memory, and system-storage starting point backed by official requirements.", href: "/sizer", action: "Size your workloads" },
   { icon: Search, status: "Available", title: "Hardware Deals", copy: "Search current eBay listings for proven mini PCs, network gear, and compact rack components without wading through unrelated parts.", href: "/deals", action: "Browse current deals" },
-  { icon: ServerCog, status: "Planned", title: "Rack Designer", copy: "Turn workloads and hardware into a complete 10-inch rack layout with compatibility guidance and a full price breakdown.", href: "/deals", action: "See the rack concept" },
+  { icon: ServerCog, status: "Planned", title: "Rack Designer", copy: "Turn workloads and hardware into a complete 10-inch rack layout with compatibility guidance and a full price breakdown.", href: "/deals#rack-concept", action: "See the rack concept" },
 ]
 
 export default function ToolsPage() {

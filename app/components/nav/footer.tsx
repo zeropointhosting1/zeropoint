@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Wordmark } from "./wordmark"
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "./brand-icons"
-import { DISCORD_URL } from "@/lib/site-config"
+import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
 
 const EXPLORE = [
   { label: "Homelab", href: "/lab" },
@@ -48,24 +48,28 @@ export function Footer() {
               >
                 <DiscordIcon className="size-4" />
               </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noreferrer"
-                className="flex size-9 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:border-primary/40 hover:text-foreground"
-                aria-label="GitHub"
-              >
-                <GithubIcon className="size-4" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noreferrer"
-                className="flex size-9 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:border-primary/40 hover:text-foreground"
-                aria-label="LinkedIn"
-              >
-                <LinkedinIcon className="size-4" />
-              </a>
+              {SOCIAL_LINKS.github && (
+                <a
+                  href={SOCIAL_LINKS.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex size-9 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:border-primary/40 hover:text-foreground"
+                  aria-label="GitHub"
+                >
+                  <GithubIcon className="size-4" />
+                </a>
+              )}
+              {SOCIAL_LINKS.linkedin && (
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex size-9 items-center justify-center rounded-md border border-border text-text-secondary transition-colors hover:border-primary/40 hover:text-foreground"
+                  aria-label="LinkedIn"
+                >
+                  <LinkedinIcon className="size-4" />
+                </a>
+              )}
             </div>
           </div>
         </div>

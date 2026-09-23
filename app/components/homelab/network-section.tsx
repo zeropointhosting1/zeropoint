@@ -43,10 +43,10 @@ export function NetworkSection() {
 
         {/* Home network */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="mt-14 flex items-center gap-2"
         >
           <h3 className="text-lg font-semibold text-foreground">Home Network</h3>
@@ -60,27 +60,27 @@ export function NetworkSection() {
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="mt-5 rounded-2xl border border-border bg-surface-raised p-6 sm:p-8"
         >
           <HomeNetworkTopology chain={HOME_CHAIN} vlans={VLANS} animated={homeInView && !reduced} />
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.2, delay: 0.1 }}
           className="mt-10"
         >
           <HardwareShowcase />
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.2, delay: 0.15 }}
           className="mt-10"
         >
           <VlanLegend vlans={VLANS} />
@@ -88,10 +88,10 @@ export function NetworkSection() {
 
         {/* Cisco lab */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="mt-20 flex items-center gap-2"
         >
           <h3 className="text-lg font-semibold text-foreground">Cisco Lab</h3>
@@ -105,7 +105,7 @@ export function NetworkSection() {
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.2 }}
           className="mt-5"
         >
           <CiscoLabPanel animated={labInView && !reduced} />

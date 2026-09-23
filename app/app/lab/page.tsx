@@ -12,11 +12,13 @@ import { DiscordChatMock } from "@/components/marketing/discord-chat-mock"
 import { DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
 import { PROJECTS } from "@/lib/projects"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Homelab — ZeroPoint Lab",
   description: "Learn to build a homelab, use practical planning tools, explore the real ZeroPoint Lab, join the community, or get help designing your own.",
-}
+  path: "/lab",
+})
 
 const START_PATHS = [
   { icon: BookOpen, label: "I want to learn", title: "Learn it and build it yourself.", copy: "Free guides, field notes, planning tools, infrastructure diagrams, and a community that understands the project.", action: "Start learning", href: "/docs" },
@@ -36,7 +38,7 @@ const JOURNEY = [
 const TOOLS = [
   { icon: Calculator, status: "Available", title: "VM Sizer", copy: "Estimate resources for common self-hosted workloads with visible assumptions.", href: "/sizer", action: "Size workloads" },
   { icon: Search, status: "Available", title: "Hardware Finder", copy: "Browse current listings for proven mini PCs, networking gear, and rack parts.", href: "/deals", action: "Find hardware" },
-  { icon: PackageSearch, status: "Planned", title: "Rack Planner", copy: "Turn compute, networking, shelves, patching, and power into one complete layout.", href: "/deals", action: "See the concept" },
+  { icon: PackageSearch, status: "Planned", title: "Rack Planner", copy: "Turn compute, networking, shelves, patching, and power into one complete layout.", href: "/deals#rack-concept", action: "See the concept" },
 ]
 
 const SERVICES = [

@@ -3,11 +3,13 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { getDocsByCategory } from "@/lib/docs"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Learn — ZeroPoint",
   description: "Practical networking, infrastructure, and homelab guides from ZeroPoint.",
-}
+  path: "/docs",
+})
 
 export default function DocsIndexPage() {
   const groups = getDocsByCategory()

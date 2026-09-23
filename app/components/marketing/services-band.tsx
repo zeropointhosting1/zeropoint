@@ -40,7 +40,7 @@ export function ServicesBand() {
           </motion.div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportOnce} transition={{ duration: 0.6 }} className="overflow-hidden rounded-2xl border border-border bg-background/65">
+        <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportOnce} transition={{ duration: 0.2 }} className="overflow-hidden rounded-2xl border border-border bg-background/65">
           <div className="divide-y divide-border">
             {SERVICE_OFFERINGS.map((service) => {
               const Icon = OFFERING_ICONS[service.id] ?? ServerCog

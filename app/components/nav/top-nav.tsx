@@ -11,9 +11,7 @@ import { Wordmark } from "./wordmark"
 import { NAV_LINKS } from "./nav-links"
 import { GithubIcon, DiscordIcon } from "./brand-icons"
 import { ScrollProgress } from "./scroll-progress"
-import { DISCORD_URL } from "@/lib/site-config"
-
-const GITHUB_URL = "https://github.com"
+import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
 
 const NAV_GROUPS: Record<string, string[]> = {
   "/lab": ["/lab", "/community", "/tools", "/deals", "/sizer", "/network"],
@@ -78,10 +76,12 @@ export function TopNav() {
           </ul>
 
           <div className="hidden items-center gap-2 xl:flex">
-            <Button variant="ghost" size="icon" render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}>
-              <GithubIcon className="size-4" />
-              <span className="sr-only">GitHub</span>
-            </Button>
+            {SOCIAL_LINKS.github && (
+              <Button variant="ghost" size="icon" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}>
+                <GithubIcon className="size-4" />
+                <span className="sr-only">GitHub</span>
+              </Button>
+            )}
             <Button variant="ghost" size="icon" render={<a href={DISCORD_URL} target="_blank" rel="noreferrer" />}>
               <DiscordIcon className="size-4" />
               <span className="sr-only">Discord</span>
@@ -148,15 +148,17 @@ export function TopNav() {
             </motion.ul>
             <div className="absolute inset-x-6 bottom-8 flex items-center justify-between border-t border-border pt-6">
               <div className="flex items-center gap-4">
-                <a
-                  href={GITHUB_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 text-sm text-text-secondary"
-                >
-                  <GithubIcon className="size-4" />
-                  GitHub
-                </a>
+                {SOCIAL_LINKS.github && (
+                  <a
+                    href={SOCIAL_LINKS.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm text-text-secondary"
+                  >
+                    <GithubIcon className="size-4" />
+                    GitHub
+                  </a>
+                )}
                 <a
                   href={DISCORD_URL}
                   target="_blank"

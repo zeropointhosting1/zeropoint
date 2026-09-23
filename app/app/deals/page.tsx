@@ -4,12 +4,14 @@ import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { DealsGrid } from "@/components/deals/deals-grid"
 import { RackBuilderPreview } from "@/components/deals/rack-builder-preview"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Deals — ZeroPoint",
   description:
     "Homelab starter hardware, pulled live from eBay's own search API — no scraping, no fabricated listings.",
-}
+  path: "/deals",
+})
 
 export default function DealsPage() {
   return (

@@ -5,6 +5,13 @@ import type { NextConfig } from "next";
 // left unset). The deploy workflow sets BASE_PATH to the repo name.
 const basePath = process.env.BASE_PATH ?? "";
 
+// next/image and any other client-side code that builds an asset path from
+// a string (rather than next/link, which prefixes basePath automatically)
+// needs basePath exposed as a NEXT_PUBLIC_ var so it gets inlined into the
+// client bundle. Setting it here means the deploy workflow only has to set
+// BASE_PATH once — see lib/base-path.ts for the consumer.
+process.env.NEXT_PUBLIC_BASE_PATH = basePath;
+
 const nextConfig: NextConfig = {
   // Fully static export — GitHub Pages has no server, so no API routes,
   // no headers()/cookies(), no on-demand rendering.

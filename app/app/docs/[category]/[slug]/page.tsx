@@ -10,6 +10,9 @@ import { getAllDocs, getDocsByCategory, getDocSource, extractToc, categoryLabel 
 import { mdxComponents } from "@/components/docs/mdx-components"
 import { Toc } from "@/components/docs/toc"
 import { DiscordCallout } from "@/components/docs/discord-callout"
+import { JsonLd } from "@/components/seo/json-ld"
+import { pageMetadata } from "@/lib/metadata"
+import { BUSINESS_INFO } from "@/lib/business-info"
 
 export function generateStaticParams() {
   return getAllDocs().map((doc) => ({ category: doc.category, slug: doc.slug }))
@@ -23,10 +26,11 @@ export async function generateMetadata({
   const { category, slug } = await params
   const doc = getDocSource(category, slug)
   if (!doc) return {}
-  return {
+  return pageMetadata({
     title: `${doc.frontmatter.title} — ZeroPoint Learn`,
     description: doc.frontmatter.description,
-  }
+    path: `/docs/${category}/${slug}`,
+  })
 }
 
 export default async function DocArticlePage({
@@ -47,6 +51,16 @@ export default async function DocArticlePage({
 
   return (
     <article>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: doc.frontmatter.title,
+          description: doc.frontmatter.description,
+          datePublished: doc.frontmatter.date,
+          author: { "@type": "Person", name: BUSINESS_INFO.name },
+        }}
+      />
       <Link
         href="/docs"
         className="inline-flex items-center gap-1.5 text-sm text-text-secondary transition-colors hover:text-foreground"

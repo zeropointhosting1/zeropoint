@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Activity, ArrowRight, Boxes, Network, Server } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { WORKLOADS } from "@/lib/workload-catalog"
+import { withBasePath } from "@/lib/base-path"
 
 // Logo files live in /public/logos, sourced from each project's own brand
 // assets (or simple-icons for the plain single-color marks).
@@ -38,9 +39,12 @@ const STACK = [
 const MARQUEE_COPIES = 5
 const MARQUEE_TRACK = Array.from({ length: MARQUEE_COPIES }, () => STACK).flat()
 
+// Hidden state stays mostly visible (opacity 0.6, not 0) so the
+// server-rendered HTML never paints a blank hero before hydration —
+// only a subtle settle-in remains.
 const enter = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as const } }),
+  hidden: { opacity: 0.6, y: 10 },
+  visible: (delay: number) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as const } }),
 }
 
 const LAB_SIGNALS = [
@@ -57,17 +61,17 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
       <div className="relative mx-auto grid min-h-[760px] max-w-6xl items-center gap-16 px-6 pt-32 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-28">
         <div>
-          <motion.p custom={0.04} initial="hidden" animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Homelabs · Home Networks · Small Business</motion.p>
-          <motion.h1 custom={reduced ? 0 : 0.1} initial="hidden" animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build better<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">technology.</span></motion.h1>
-          <motion.p custom={reduced ? 0 : 0.24} initial="hidden" animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network and small business, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
-          <motion.div custom={reduced ? 0 : 0.35} initial="hidden" animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
+          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Homelabs · Home Networks · Small Business</motion.p>
+          <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build better<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">technology.</span></motion.h1>
+          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network and small business, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
+          <motion.div custom={reduced ? 0 : 0.35} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
             <Button size="lg" render={<Link href="/lab" />}>Build your homelab <ArrowRight className="size-4" /></Button>
             <Button size="lg" variant="outline" render={<Link href="/services#project-planner" />}>Start a project</Button>
           </motion.div>
-          <motion.p custom={reduced ? 0 : 0.44} initial="hidden" animate="visible" variants={enter} className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
+          <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
         </div>
 
-        <motion.div custom={reduced ? 0 : 0.18} initial="hidden" animate="visible" variants={enter}>
+        <motion.div custom={reduced ? 0 : 0.18} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter}>
           <div className="theme-dark overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_28px_90px_-42px_var(--accent-glow)]">
             <div className="flex items-center justify-between border-b border-border px-6 py-5"><div><p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Inside ZeroPoint Lab</p><p className="mt-1 text-sm text-text-secondary">The infrastructure behind the brand</p></div><span className="flex items-center gap-2 font-mono text-[9px] tracking-wider text-success uppercase"><span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-50" /><span className="relative inline-flex size-2 rounded-full bg-success" /></span>Running</span></div>
             <div className="grid grid-cols-2 gap-px bg-border">{LAB_SIGNALS.map(({ icon: Icon, label, value }) => <div key={label} className="bg-surface p-5"><Icon className="size-4 text-primary" /><p className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">{label}</p><p className="mt-1 text-sm font-medium text-foreground">{value}</p></div>)}</div>
@@ -80,7 +84,7 @@ export function Hero() {
         <p className="mx-auto max-w-6xl px-6 font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">Platforms we work with</p>
         <div className="relative mt-4 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div className="flex w-max gap-3 animate-marquee">
-            {MARQUEE_TRACK.map((item, index) => <StackPill key={index} {...item} />)}
+            {MARQUEE_TRACK.map((item, index) => <StackPill key={index} {...item} duplicate={index >= STACK.length} />)}
           </div>
         </div>
       </div>
@@ -88,12 +92,12 @@ export function Hero() {
   )
 }
 
-function StackPill({ name, logo }: { name: string; logo: string }) {
+function StackPill({ name, logo, duplicate }: { name: string; logo: string; duplicate?: boolean }) {
   return (
-    <span className="flex shrink-0 items-center gap-3 rounded-full border border-border bg-surface-raised py-2 pr-4 pl-2 text-sm font-medium text-foreground shadow-[inset_0_1px_0_oklch(1_0_0/6%)]">
+    <span aria-hidden={duplicate} className="flex shrink-0 items-center gap-3 rounded-full border border-border bg-surface-raised py-2 pr-4 pl-2 text-sm font-medium text-foreground shadow-[inset_0_1px_0_oklch(1_0_0/6%)]">
       <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
         <Image
-          src={`/logos/${logo}.svg`}
+          src={withBasePath(`/logos/${logo}.svg`)}
           alt={`${name} logo`}
           width={22}
           height={22}
