@@ -1,4 +1,7 @@
 import type { Metadata } from "next"
+import fs from "node:fs"
+import path from "node:path"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Network, Search, ShieldCheck, Share2, Users, Wrench } from "lucide-react"
 import { TopNav } from "@/components/nav/top-nav"
@@ -7,7 +10,14 @@ import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { BUSINESS_INFO } from "@/lib/business-info"
+import { withBasePath } from "@/lib/base-path"
 import { pageMetadata } from "@/lib/metadata"
+
+// Checked at build time — static export, so no runtime way to know if the
+// photo has been added. Falls back to the initials badge below until
+// public/about/headshot.jpg exists.
+const HAS_HEADSHOT = fs.existsSync(path.join(process.cwd(), "public/about/headshot.jpg"))
 
 export const metadata: Metadata = pageMetadata({
   title: "About — ZeroPoint",
@@ -67,7 +77,7 @@ export default function AboutPage() {
                 Built in the lab.<br /><span className="text-primary">Applied in the real world.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-                ZeroPoint grew from hands-on homelabbing into a larger mission: help property owners and small businesses build reliable, secure technology—and share what we learn with the community.
+                I&rsquo;m {BUSINESS_INFO.name}, based in {BUSINESS_INFO.city}. ZeroPoint grew from hands-on homelabbing into a larger mission: help property owners and small businesses build reliable, secure technology—and share what I learn with the community.
               </p>
             </div>
 
@@ -75,13 +85,20 @@ export default function AboutPage() {
               <div className="pointer-events-none absolute -top-20 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/8 blur-3xl" />
               <p className="relative font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Current chapter</p>
               <div className="relative mt-6 flex items-center gap-4">
-                <span className="flex size-14 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-xl font-semibold text-primary">ZP</span>
-                <div><p className="font-semibold text-foreground">IT support professional</p><p className="mt-1 text-sm text-text-secondary">Learning networking by operating it</p></div>
+                {HAS_HEADSHOT ? (
+                  <Image src={withBasePath("/about/headshot.jpg")} alt={BUSINESS_INFO.name} width={56} height={56} unoptimized className="size-14 shrink-0 rounded-2xl border border-primary/20 object-cover" />
+                ) : (
+                  <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-xl font-semibold text-primary">ZP</span>
+                )}
+                <div><p className="font-semibold text-foreground">{BUSINESS_INFO.credentialLine}</p><p className="mt-1 text-sm text-text-secondary">Still learning, out loud, in public</p></div>
               </div>
               <dl className="relative mt-7 divide-y divide-border border-t border-border">
-                <ProfileRow label="Focus" value="Networking · Infrastructure" />
+                <ProfileRow label="Based in" value={BUSINESS_INFO.city} />
+                <ProfileRow label="Experience" value={`${BUSINESS_INFO.yearsInIt} in IT`} />
                 <ProfileRow label="Environment" value="UniFi · Proxmox · Cisco" />
-                <ProfileRow label="Approach" value="Build · Document · Share" />
+                {BUSINESS_INFO.certifications.length > 0 && (
+                  <ProfileRow label="Certifications" value={BUSINESS_INFO.certifications.join(", ")} />
+                )}
               </dl>
               <p className="relative mt-6 border-l border-primary/50 pl-4 text-sm leading-relaxed text-text-secondary">
                 “The failures are not edited out. They are usually where the best documentation begins.”

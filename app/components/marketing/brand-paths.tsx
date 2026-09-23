@@ -7,7 +7,7 @@ import { viewportOnce } from "@/lib/motion"
 
 const PATHS = [
   { icon: FlaskConical, label: "Homelab", title: "Build your own infrastructure.", copy: "Proxmox, networking, self-hosting, storage, remote access, and custom homelab builds.", action: "Explore Homelab", href: "/lab", accent: "from-primary/18" },
-  { icon: HouseWifi, label: "Home Networking", title: "Make your home network actually work.", copy: "Reliable Wi-Fi, UniFi, smart-device networking, network racks, and troubleshooting.", action: "Explore Home Networking", href: "/property-technology", accent: "from-brand-cyan/15" },
+  { icon: HouseWifi, label: "Home Networking", title: "Make your home network actually work.", copy: "Reliable Wi-Fi, UniFi, smart-device networking, network racks, and troubleshooting.", action: "Explore Home Networking", href: "/home-networking", accent: "from-brand-cyan/15" },
   { icon: Building2, label: "Small Business", title: "Straightforward technology for small businesses.", copy: "Reliable networks, Wi-Fi, devices, guest networks, and practical office technology.", action: "Explore Business", href: "/services", accent: "from-brand-pink/13" },
 ]
 

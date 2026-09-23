@@ -23,7 +23,7 @@ export function PropertyBand() {
           <motion.div variants={fadeUp}><Eyebrow>ZeroPoint Home</Eyebrow></motion.div>
           <motion.h2 variants={fadeUp} className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">A better network for every part of the property.</motion.h2>
           <motion.p variants={fadeUp} className="mt-5 max-w-md text-lg leading-relaxed text-text-secondary">Wi-Fi, UniFi, IoT separation, cameras, racks, and troubleshooting for homes, cabins, rentals, workshops, and connected outbuildings.</motion.p>
-          <motion.div variants={fadeUp} className="mt-8"><Button render={<Link href="/property-technology" />}>Explore home networking <ArrowUpRight className="size-4" /></Button></motion.div>
+          <motion.div variants={fadeUp} className="mt-8"><Button render={<Link href="/home-networking" />}>Explore home networking <ArrowUpRight className="size-4" /></Button></motion.div>
         </motion.div>
         <div className="grid gap-3 sm:grid-cols-2">{CAPABILITIES.map(({ icon: Icon, title, copy }, index) => <motion.article key={title} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportOnce} transition={{ duration: 0.2, delay: index * 0.07 }} className="rounded-2xl border border-border bg-surface-raised p-6"><span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Icon className="size-5" /></span><h3 className="mt-5 font-semibold text-foreground">{title}</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">{copy}</p></motion.article>)}</div>
       </div>

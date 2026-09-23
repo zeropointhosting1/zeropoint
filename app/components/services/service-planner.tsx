@@ -4,7 +4,13 @@ import * as React from "react"
 import { Check, CheckCheck, Clipboard, Loader2, MapPin, MonitorSmartphone, Send, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { formatServicePrice, PROJECT_GOALS, SERVICE_OFFERINGS, type ServiceId } from "@/lib/services"
+import { formatServicePrice, offeringsFor, PROJECT_GOALS, SERVICE_OFFERINGS, type ServiceAudience, type ServiceId } from "@/lib/services"
+
+const AUDIENCE_GROUPS: { audience: ServiceAudience; label: string }[] = [
+  { audience: "home", label: "Home" },
+  { audience: "business", label: "Small business" },
+  { audience: "homelab", label: "Homelab" },
+]
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { submitForm, type SubmitResult } from "@/lib/submit-form"
 
@@ -22,7 +28,9 @@ export function ServicePlanner() {
   const [sendStatus, setSendStatus] = React.useState<SendStatus>("idle")
 
   const selectedServices = SERVICE_OFFERINGS.filter((service) => services.includes(service.id))
-  const estimatedFrom = selectedServices.reduce((sum, service) => sum + service.pricing.from, 0)
+  const pricedServices = selectedServices.filter((service) => service.pricing.from !== null)
+  const hasUnpricedSelection = selectedServices.some((service) => service.pricing.from === null)
+  const estimatedFrom = pricedServices.reduce((sum, service) => sum + (service.pricing.from ?? 0), 0)
   const brief = [
     "ZEROPOINT PROJECT BRIEF",
     "",
@@ -30,7 +38,7 @@ export function ServicePlanner() {
     `Delivery: ${delivery === "local" ? "On-site / local" : delivery === "remote" ? "Remote" : "Not sure yet"}`,
     `Goals: ${goals.length ? goals.join(", ") : "Not selected"}`,
     `Notes: ${notes.trim() || "None provided"}`,
-    `Starting estimate: ${selectedServices.length ? `From $${estimatedFrom} (final quote depends on scope)` : "N/A"}`,
+    `Starting estimate: ${pricedServices.length ? `From $${estimatedFrom}${hasUnpricedSelection ? " + services still being priced" : ""} (final quote depends on scope)` : "N/A"}`,
   ].join("\n")
 
   const canSend = (services.length > 0 || goals.length > 0) && name.trim() && email.trim()
@@ -65,16 +73,23 @@ export function ServicePlanner() {
       <div className="space-y-10">
         <fieldset>
           <legend className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">1 · What do you need help with?</legend>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {SERVICE_OFFERINGS.map((service) => {
-              const active = services.includes(service.id)
-              return (
-                <button key={service.id} type="button" onClick={() => toggleService(service.id)} className={cn("rounded-xl border p-4 text-left transition-colors", active ? "border-primary/50 bg-primary/8" : "border-border bg-surface-raised hover:border-primary/25")}>
-                  <span className="flex items-start justify-between gap-4"><span><strong className="text-sm text-foreground">{service.title}</strong><span className="mt-1 block text-xs text-text-secondary">{service.short}</span></span><span className={cn("flex size-5 shrink-0 items-center justify-center rounded-full border", active ? "border-primary bg-primary text-primary-foreground" : "border-border")}>{active && <Check className="size-3" />}</span></span>
-                  <span className="mt-3 block font-mono text-[10px] font-medium text-primary">{formatServicePrice(service.pricing)}</span>
-                </button>
-              )
-            })}
+          <div className="mt-4 space-y-6">
+            {AUDIENCE_GROUPS.map(({ audience, label }) => (
+              <div key={audience}>
+                <p className="mb-3 text-xs font-medium text-text-tertiary">{label}</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {offeringsFor(audience).map((service) => {
+                    const active = services.includes(service.id)
+                    return (
+                      <button key={service.id} type="button" onClick={() => toggleService(service.id)} className={cn("rounded-xl border p-4 text-left transition-colors", active ? "border-primary/50 bg-primary/8" : "border-border bg-surface-raised hover:border-primary/25")}>
+                        <span className="flex items-start justify-between gap-4"><span><strong className="text-sm text-foreground">{service.title}</strong><span className="mt-1 block text-xs text-text-secondary">{service.short}</span></span><span className={cn("flex size-5 shrink-0 items-center justify-center rounded-full border", active ? "border-primary bg-primary text-primary-foreground" : "border-border")}>{active && <Check className="size-3" />}</span></span>
+                        <span className="mt-3 block font-mono text-[10px] font-medium text-primary">{formatServicePrice(service.pricing)}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </fieldset>
 
@@ -126,10 +141,10 @@ export function ServicePlanner() {
           <Summary label="Goals" value={goals} />
           {notes.trim() && <div><p className="font-mono text-[8px] tracking-wider text-text-tertiary uppercase">Notes</p><p className="mt-2 whitespace-pre-wrap text-xs leading-relaxed text-text-secondary">{notes}</p></div>}
         </div>
-        {selectedServices.length > 0 && (
+        {pricedServices.length > 0 && (
           <div className="flex items-center justify-between border-t border-border px-6 py-4">
             <p className="text-xs font-medium text-foreground">Starting estimate</p>
-            <p className="font-mono text-sm font-semibold text-primary">From ${estimatedFrom}</p>
+            <p className="font-mono text-sm font-semibold text-primary">From ${estimatedFrom}{hasUnpricedSelection && "+"}</p>
           </div>
         )}
         <div className="space-y-3 border-t border-border px-6 py-5">

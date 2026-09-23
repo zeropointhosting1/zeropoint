@@ -2,16 +2,20 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Hero } from "@/components/marketing/hero"
 import { ToolsPreview } from "@/components/marketing/tools-preview"
-import { CommunityBand } from "@/components/marketing/community-band"
 import { BrandPaths } from "@/components/marketing/brand-paths"
 import { LabShowcase } from "@/components/marketing/lab-showcase"
+import { CaseStudiesSlot } from "@/components/marketing/case-studies-slot"
+import { HowItWorks } from "@/components/marketing/how-it-works"
+import { Testimonials } from "@/components/marketing/testimonials"
 import { ServicesCta } from "@/components/marketing/services-cta"
 import { JsonLd } from "@/components/seo/json-ld"
 import { SITE_URL } from "@/lib/site-config"
 import { BUSINESS_INFO } from "@/lib/business-info"
 
-// One journey: plan with the tools, learn with the community, get help
-// building, then inspect the real lab that proves the work behind it.
+// Hero -> audience cards -> proof (the lab, plus case studies once any
+// exist) -> planning tools -> how it works -> testimonials (hidden while
+// empty) -> contact CTA. Discord stays off the homepage — it's on /lab
+// and /community only.
 export default function HomePage() {
   return (
     <>
@@ -32,8 +36,10 @@ export default function HomePage() {
         <Hero />
         <BrandPaths />
         <LabShowcase />
+        <CaseStudiesSlot />
         <ToolsPreview />
-        <CommunityBand />
+        <HowItWorks />
+        <Testimonials />
         <ServicesCta />
       </main>
       <Footer />

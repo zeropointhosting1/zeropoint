@@ -66,8 +66,8 @@ export function Hero() {
           <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build better<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">technology.</span></motion.h1>
           <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network and small business, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
           <motion.div custom={reduced ? 0 : 0.35} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
-            <Button size="lg" render={<Link href="/lab" />}>Build your homelab <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/services#project-planner" />}>Start a project</Button>
+            <Button size="lg" render={<Link href="/contact" />}>Book a free consult <ArrowRight className="size-4" /></Button>
+            <Button size="lg" variant="outline" render={<Link href="/lab" />}>Explore the lab</Button>
           </motion.div>
           <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
         </div>

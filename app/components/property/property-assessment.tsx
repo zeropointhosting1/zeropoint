@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { submitForm, type SubmitResult } from "@/lib/submit-form"
 
-const PROPERTY_TYPES = ["Cabin or camp", "Short-term rental", "Workshop or outbuilding", "Primary residence", "Other"]
+const PROPERTY_TYPES = ["Primary residence", "Cabin or camp", "Short-term rental", "Workshop or outbuilding", "Other"]
 const NEEDS = ["Internet or Wi-Fi", "Coverage between buildings", "Cameras", "Remote monitoring", "IoT security", "Cellular backup"]
 
 type SendStatus = "idle" | "sending" | SubmitResult

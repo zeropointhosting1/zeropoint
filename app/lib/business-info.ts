@@ -7,4 +7,7 @@ export const BUSINESS_INFO = {
   telephone: "{{TODO: phone (optional, leave blank to omit)}}",
   city: "{{TODO: city/region}}",
   areaServed: "{{TODO: on-site service area}}",
+  yearsInIt: "{{TODO: years of IT/networking experience}}",
+  credentialLine: "{{TODO: a confident one-line credential — e.g. current role, years of experience, or what you've built}}",
+  certifications: [] as string[], // {{TODO: certifications, if any — leave empty to omit the row}}
 }
