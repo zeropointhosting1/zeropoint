@@ -8,9 +8,14 @@ import { BOOKING_URL } from "@/lib/contact-config"
 
 const EXPLORE = [
   { label: "Homelab", href: "/lab" },
-  { label: "Home Networking", href: "/property-technology" },
+  { label: "Home Networking", href: "/home-networking" },
   { label: "Business", href: "/services" },
   { label: "Contact", href: "/contact" },
+]
+
+const LEGAL = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ]
 
 const RESOURCES = [
@@ -86,8 +91,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-tertiary sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} ZeroPoint Technology.</p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-border pt-6 text-xs text-text-tertiary sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p>© {new Date().getFullYear()} ZeroPoint Technology.</p>
+            {LEGAL.map((link) => (
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-foreground">
+                {link.label}
+              </Link>
+            ))}
+          </div>
           <p className="font-mono tracking-wider uppercase">
             Built with Next.js · Hosted on GitHub Pages
           </p>
