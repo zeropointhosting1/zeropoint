@@ -107,7 +107,7 @@ export default function CommunityPage() {
                 href="/docs"
                 className="group flex items-center gap-1.5 px-2 text-sm text-text-secondary transition-colors hover:text-foreground"
               >
-                Read the Docs
+                Read the guides
                 <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>

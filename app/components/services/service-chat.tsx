@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 
 type ChatMessage = { id: number; role: "assistant" | "user"; text: string; href?: string; action?: string }
 
-const QUICK_PROMPTS = ["Help me plan a homelab", "Show me hardware deals", "What is the VM Sizer?", "Tell me about the community"]
+const QUICK_PROMPTS = ["Help me plan a homelab", "I need better home Wi-Fi", "Help with a business network", "Show me hardware deals"]
 
 function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action"> {
   const text = input.toLowerCase()
@@ -16,13 +16,15 @@ function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action">
   if (/sizer|size|cpu|ram|memory|workload|plex|immich|home assistant|nextcloud/.test(text)) return { text: "The VM Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage.", href: "/sizer", action: "Open the VM Sizer" }
   if (/discord|community|people|share|chat/.test(text)) return { text: "The ZeroPoint community is for sharing builds, troubleshooting problems, comparing hardware, and learning with other homelabbers.", href: "/community", action: "Visit the community" }
   if (/network|topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
-  if (/wifi|wi-fi|signal|coverage|access point|dead zone/.test(text)) return { text: "Wi-Fi Planning is the best starting point. It covers coverage, access-point placement, channels, roaming, and whether new hardware is actually necessary.", href: "/services#project-planner", action: "Plan a Wi-Fi project" }
+  if (/home network|house|residential|wifi|wi-fi|signal|coverage|access point|dead zone|iot/.test(text)) return { text: "ZeroPoint Home covers Wi-Fi, UniFi, IoT separation, cameras, network racks, and troubleshooting for homes and recreational properties.", href: "/property-technology", action: "Explore home networking" }
+  if (/business|office|employee|guest network|workstation/.test(text)) return { text: "ZeroPoint Business focuses on straightforward Wi-Fi, UniFi networks, switching, employee and guest networks, device setup, and documentation for small businesses.", href: "/services", action: "Explore business services" }
   if (/unifi|ubiquiti|gateway|dream machine|switch|camera/.test(text)) return { text: "UniFi Setup covers gateways, switches, access points, cameras, adoption, and network segmentation. Remote planning is available; physical installation depends on future service-area availability.", href: "/services#project-planner", action: "Plan a UniFi project" }
-  if (/homelab|proxmox|rack|server|virtual machine|\bvm\b/.test(text)) return { text: "A homelab project can start with workloads, size the compute, map networking and storage, and produce a rack plan before hardware is purchased.", href: "/services#project-planner", action: "Build a project brief" }
+  if (/homelab|proxmox|rack|server|virtual machine|\bvm\b/.test(text)) return { text: "ZeroPoint Lab brings together homelab builds, planning tools, hardware deals, the community, and the documented infrastructure behind ZeroPoint.", href: "/lab", action: "Explore the homelab" }
   if (/remote|location|local|travel|area|where/.test(text)) return { text: "Planning, troubleshooting, UniFi configuration, and guided deployments can be handled remotely. Physical installation will only be offered within a defined service area once availability is finalized.", href: "/services", action: "View services" }
   if (/price|pricing|cost|quote|rate|budget/.test(text)) return { text: "Service pricing is not published yet because project boundaries and the service area are still being finalized. The project planner gathers the details needed for an accurate quote later.", href: "/services#project-planner", action: "Create a project brief" }
-  if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint grew from a personal homelab into a community, a set of planning tools, documented infrastructure, and an upcoming installation service.", href: "/about", action: "About ZeroPoint" }
-  return { text: "I can guide you to hardware deals, VM sizing, the community, network topology, or services for UniFi, Wi-Fi, and homelab projects. What are you trying to build?" }
+  if (/learn|guide|docs|documentation/.test(text)) return { text: "Learn contains practical guides and field notes written while building networks, infrastructure, and homelabs.", href: "/docs", action: "Browse Learn" }
+  if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint is an enthusiast-driven technology brand with three areas: homelabs, home networking, and straightforward technology setup for small businesses.", href: "/about", action: "About ZeroPoint" }
+  return { text: "I can guide you to ZeroPoint Lab, home networking, small-business services, Learn, projects, hardware deals, or the VM Sizer. What are you trying to build?" }
 }
 
 export function SiteChat() {

@@ -4,15 +4,17 @@ import { GithubIcon, LinkedinIcon, DiscordIcon } from "./brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
 
 const EXPLORE = [
-  { label: "Community", href: "/community" },
-  { label: "Planning Tools", href: "/tools" },
-  { label: "Services", href: "/services" },
-  { label: "The Lab", href: "/network" },
+  { label: "Homelab", href: "/lab" },
+  { label: "Home Networking", href: "/property-technology" },
+  { label: "Business", href: "/services" },
+  { label: "Start a Project", href: "/services#project-planner" },
 ]
 
 const RESOURCES = [
-  { label: "Docs", href: "/docs" },
+  { label: "Learn", href: "/docs" },
   { label: "Projects", href: "/projects" },
+  { label: "Community", href: "/community" },
+  { label: "Tools & Deals", href: "/tools" },
   { label: "About", href: "/about" },
 ]
 
@@ -24,8 +26,8 @@ export function Footer() {
           <div>
             <Wordmark />
             <p className="mt-4 max-w-xs text-sm text-text-secondary">
-              Helping people plan, build, secure, and understand better
-              homelabs.
+              Homelab knowledge applied to better home networks, practical
+              small-business technology, and builds you can understand.
             </p>
           </div>
 
@@ -69,7 +71,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-tertiary sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} ZeroPoint. Self-hosted, naturally.</p>
+          <p>© {new Date().getFullYear()} ZeroPoint Technology.</p>
           <p className="font-mono tracking-wider uppercase">
             Built with Next.js · Deployed from the lab
           </p>

@@ -9,8 +9,8 @@ import { NetworkSecurityComparison } from "@/components/services/network-securit
 import { formatServicePrice, SERVICE_OFFERINGS } from "@/lib/services"
 
 export const metadata: Metadata = {
-  title: "Services — ZeroPoint",
-  description: "UniFi setup, Wi-Fi planning, homelab builds, self-hosted applications, and remote infrastructure help.",
+  title: "Business Networking and Technology — ZeroPoint",
+  description: "Practical networks, Wi-Fi, device security, backups, documentation, and technology support for small organizations.",
 }
 
 const PROCESS = [
@@ -45,7 +45,7 @@ export default function ServicesPage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
           <div className="relative mx-auto grid min-h-[650px] max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-            <div><Eyebrow>ZeroPoint Services</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Your network,<br /><span className="text-primary">built properly.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Planning, installation, and guided support for UniFi networks, Wi-Fi, homelabs, Proxmox, and self-hosted services—with documentation you keep.</p></div>
+            <div><Eyebrow>ZeroPoint Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Straightforward technology<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Planning and setup for Wi-Fi, UniFi networks, switching, employee and guest networks, office devices, and clear network documentation.</p></div>
             <div className="border-y border-border py-6">
               <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">What you keep</p>
               <div className="mt-5 divide-y divide-border">

@@ -24,7 +24,7 @@ export async function generateMetadata({
   const doc = getDocSource(category, slug)
   if (!doc) return {}
   return {
-    title: `${doc.frontmatter.title} — ZeroPoint Docs`,
+    title: `${doc.frontmatter.title} — ZeroPoint Learn`,
     description: doc.frontmatter.description,
   }
 }

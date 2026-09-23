@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight, Calculator, Check, Search, Server } from "lucide-react"
+import { ArrowUpRight, BookOpen, Calculator, Check, Search, Server, ServerCog } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Eyebrow } from "./eyebrow"
 import { SectionIndex } from "./section-index"
@@ -22,13 +22,13 @@ export function ToolsPreview() {
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={staggerContainer}>
           <motion.div variants={fadeUp}>
             <SectionIndex n="01" className="mb-3" />
-            <Eyebrow>Tools for homelabbers</Eyebrow>
+            <Eyebrow>Learn + Tools</Eyebrow>
           </motion.div>
           <motion.h2 variants={fadeUp} className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-            Plan the build.<br />Find the hardware.
+            Want to build it yourself?<br />We&rsquo;ll help you learn.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-5 max-w-md text-lg leading-relaxed text-text-secondary">
-            Start with the workloads, estimate what they need, then find hardware that fits. The assumptions and sources stay visible.
+            Size the workloads, find suitable hardware, understand the network, and follow practical field notes from the Lab.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8">
             <Button render={<Link href="/tools" />}>
@@ -72,6 +72,8 @@ export function ToolsPreview() {
               </div>
               <Link href="/deals" className="group mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">See current listings <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </div>
+            <Link href="/deals" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServerCog className="size-5" /></span><span className="min-w-0 flex-1"><span className="flex items-center gap-2"><strong className="text-sm">Rack Planner</strong><span className="rounded-full border border-warning/25 px-2 py-0.5 font-mono text-[8px] tracking-wider text-warning uppercase">Planned</span></span><span className="mt-1 block text-xs text-text-secondary">A complete rack layout and price breakdown.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+            <Link href="/docs" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6 md:border-l"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan"><BookOpen className="size-5" /></span><span className="min-w-0 flex-1"><strong className="text-sm">Guides + Field Notes</strong><span className="mt-1 block text-xs text-text-secondary">Networking and infrastructure explained from real builds.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
           </div>
         </motion.div>
       </div>

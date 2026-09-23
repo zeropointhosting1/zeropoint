@@ -15,6 +15,10 @@ import { DISCORD_URL } from "@/lib/site-config"
 
 const GITHUB_URL = "https://github.com"
 
+const NAV_GROUPS: Record<string, string[]> = {
+  "/lab": ["/lab", "/community", "/tools", "/deals", "/sizer", "/network"],
+}
+
 export function TopNav() {
   const [scrolled, setScrolled] = React.useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -41,25 +45,21 @@ export function TopNav() {
             : "border-b border-transparent bg-transparent"
         )}
       >
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <Link href="/" className="group text-foreground">
             <Wordmark />
           </Link>
 
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex">
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 xl:flex">
             {NAV_LINKS.map((link) => {
-              const active =
-                link.href === "/"
-                  ? pathname === "/"
-                  : link.href === "/tools"
-                    ? ["/tools", "/deals", "/sizer"].some((href) => pathname.startsWith(href))
-                    : pathname.startsWith(link.href)
+              const matchPaths = NAV_GROUPS[link.href] ?? [link.href]
+              const active = link.href === "/" ? pathname === "/" : matchPaths.some((href) => pathname.startsWith(href))
               return (
                 <li key={link.href} className="group relative">
                   <Link
                     href={link.href}
                     className={cn(
-                      "relative block rounded-md px-3.5 py-2 text-sm transition-colors",
+                      "relative block rounded-md px-2.5 py-2 text-[13px] transition-colors",
                       active ? "text-foreground" : "text-text-secondary hover:text-foreground"
                     )}
                   >
@@ -77,7 +77,7 @@ export function TopNav() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <Button variant="ghost" size="icon" render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}>
               <GithubIcon className="size-4" />
               <span className="sr-only">GitHub</span>
@@ -86,15 +86,15 @@ export function TopNav() {
               <DiscordIcon className="size-4" />
               <span className="sr-only">Discord</span>
             </Button>
-            <Button size="sm" render={<Link href="/community" />}>
-              Join the Community
+            <Button size="sm" render={<Link href="/services#project-planner" />}>
+              Start a Project
               <ArrowRight className="size-3.5" />
             </Button>
           </div>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="flex size-9 items-center justify-center rounded-md text-foreground lg:hidden"
+            className="flex size-9 items-center justify-center rounded-md text-foreground xl:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -110,7 +110,7 @@ export function TopNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-background lg:hidden"
+            className="fixed inset-0 z-40 bg-background xl:hidden"
           >
             <div className="flex h-16 items-center justify-end px-6">
               <button
@@ -167,8 +167,8 @@ export function TopNav() {
                   Discord
                 </a>
               </div>
-              <Button size="sm" render={<Link href="/community" />}>
-                Join the Community
+              <Button size="sm" render={<Link href="/services#project-planner" />}>
+                Start a Project
               </Button>
             </div>
           </motion.div>

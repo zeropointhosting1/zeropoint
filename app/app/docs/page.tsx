@@ -5,8 +5,8 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { getDocsByCategory } from "@/lib/docs"
 
 export const metadata: Metadata = {
-  title: "Docs — ZeroPoint",
-  description: "Networking, infrastructure, and security notes from the ZeroPoint lab.",
+  title: "Learn — ZeroPoint",
+  description: "Practical networking, infrastructure, and homelab guides from ZeroPoint.",
 }
 
 export default function DocsIndexPage() {
@@ -14,8 +14,8 @@ export default function DocsIndexPage() {
 
   return (
     <div>
-      <Eyebrow>Field notes</Eyebrow>
-      <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Documentation</h1>
+      <Eyebrow>Learn</Eyebrow>
+      <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Guides and field notes</h1>
       <p className="mt-4 max-w-xl text-lg text-text-secondary">
         Networking, infrastructure, and security notes written while actually
         building the lab — not a manual, a record of what was learned.

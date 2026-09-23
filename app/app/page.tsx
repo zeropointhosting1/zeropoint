@@ -2,9 +2,10 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Hero } from "@/components/marketing/hero"
 import { ToolsPreview } from "@/components/marketing/tools-preview"
-import { ServicesBand } from "@/components/marketing/services-band"
 import { CommunityBand } from "@/components/marketing/community-band"
-import { NetworkTeaser } from "@/components/marketing/network-teaser"
+import { BrandPaths } from "@/components/marketing/brand-paths"
+import { LabShowcase } from "@/components/marketing/lab-showcase"
+import { ServicesCta } from "@/components/marketing/services-cta"
 
 // One journey: plan with the tools, learn with the community, get help
 // building, then inspect the real lab that proves the work behind it.
@@ -14,10 +15,11 @@ export default function HomePage() {
       <TopNav />
       <main>
         <Hero />
+        <BrandPaths />
+        <LabShowcase />
         <ToolsPreview />
         <CommunityBand />
-        <ServicesBand />
-        <NetworkTeaser />
+        <ServicesCta />
       </main>
       <Footer />
     </>

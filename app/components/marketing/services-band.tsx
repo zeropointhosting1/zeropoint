@@ -25,17 +25,17 @@ export function ServicesBand() {
         <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={staggerContainer}>
           <motion.div variants={fadeUp}>
             <SectionIndex n="03" className="mb-3" />
-            <Eyebrow>Services</Eyebrow>
+            <Eyebrow>ZeroPoint Business</Eyebrow>
           </motion.div>
           <motion.h2 variants={fadeUp} className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-            Or skip ahead—<br />we&rsquo;ll build it with you.
+            Practical IT without<br />an internal IT department.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-5 max-w-md text-lg leading-relaxed text-text-secondary">
-            Not everyone wants to DIY the whole stack. UniFi installs, homelab builds, and self-hosted deployments—planned and documented so you own what gets built.
+            Networks, Wi-Fi, device security, backups, and focused support for small organizations that need reliable technology without unnecessary complexity.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8">
             <Button render={<Link href="/services" />}>
-              See services &amp; pricing <ArrowUpRight className="size-4" />
+              Explore business services <ArrowUpRight className="size-4" />
             </Button>
           </motion.div>
         </motion.div>

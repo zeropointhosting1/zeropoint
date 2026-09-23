@@ -10,7 +10,7 @@ import { DISCORD_URL } from "@/lib/site-config"
 
 export const metadata: Metadata = {
   title: "About — ZeroPoint",
-  description: "Why ZeroPoint exists — learning technology by actually building it, and documenting what breaks along the way.",
+  description: "Why ZeroPoint exists — practical technology services backed by hands-on learning, documentation, and a community that shares the work.",
 }
 
 const GITHUB_URL = "https://github.com"
@@ -65,10 +65,10 @@ export default function AboutPage() {
             <div>
               <Eyebrow>About ZeroPoint</Eyebrow>
               <h1 className="mt-5 max-w-3xl text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">
-                Built to learn.<br /><span className="text-primary">Shared to help.</span>
+                Built in the lab.<br /><span className="text-primary">Applied in the real world.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-                Reading about technology and running it yourself create two very different kinds of understanding. ZeroPoint is where theory becomes hands-on experience.
+                ZeroPoint grew from hands-on homelabbing into a larger mission: help property owners and small businesses build reliable, secure technology—and share what we learn with the community.
               </p>
             </div>
 

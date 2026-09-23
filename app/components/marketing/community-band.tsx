@@ -24,7 +24,7 @@ export function CommunityBand() {
         >
           <motion.div variants={fadeUp}>
             <SectionIndex n="02" className="mb-3" />
-            <Eyebrow>Community</Eyebrow>
+            <Eyebrow>Homelab Community</Eyebrow>
           </motion.div>
           <motion.h2
             variants={fadeUp}
@@ -33,7 +33,7 @@ export function CommunityBand() {
             You&rsquo;re not building this alone.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 max-w-md text-lg text-text-secondary">
-            Homelab is a Discord for people running the same kind of setup —
+            The Discord is one part of ZeroPoint Lab—a place for people running the same kind of setup to
             share what you&rsquo;re building, get a second opinion when
             something breaks, or just talk shop with people who actually
             care about VLANs.

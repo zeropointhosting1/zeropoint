@@ -33,12 +33,10 @@ export function NetworkTeaser() {
             variants={fadeUp}
             className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl"
           >
-            The network, mapped.
+            Access points, clients,<br />and trust zones.
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-4 max-w-md text-lg text-text-secondary">
-            Two networks with two different jobs — the house runs on UniFi,
-            the Cisco lab gets its own routing domain off OPNsense. One
-            never trusts the other.
+            Follow traffic from the gateway through each access point to the devices beneath it. Trusted clients and IoT equipment share the air—not the same level of access—and the lab stays behind its own firewall.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8">
             <Button render={<Link href="/network" />}>
@@ -54,7 +52,7 @@ export function NetworkTeaser() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={viewportOnce}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-primary/20 bg-surface/85 p-6 shadow-[0_24px_70px_-38px_var(--accent-glow),inset_0_1px_0_oklch(1_0_0/8%)]"
+          className="rounded-2xl border border-primary/20 bg-surface/85 p-4 shadow-[0_24px_70px_-38px_var(--accent-glow),inset_0_1px_0_oklch(1_0_0/8%)] sm:p-6"
         >
           <DualNetworkGlyph animated={inView && !reduced} />
         </motion.div>

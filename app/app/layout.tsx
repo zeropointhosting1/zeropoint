@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ZeroPoint — Build a Better Homelab",
+  title: "ZeroPoint — Homelabs, Home Networking, and Business Technology",
   description:
-    "Plan, build, secure, and understand your homelab with practical tools, real infrastructure, community knowledge, and setup services.",
+    "Hands-on homelab knowledge, better home networking, and straightforward technology setup for small businesses.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
