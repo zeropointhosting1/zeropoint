@@ -5,11 +5,7 @@ import {
   Monitor,
   Wifi,
   Waypoints,
-  Camera,
-  Volume2,
   Lightbulb,
-  Plug,
-  PawPrint,
   Smartphone,
   Laptop,
   Lock,
@@ -21,7 +17,7 @@ import { DiagramCanvas } from "@/components/network-diagram/diagram-canvas"
 import { DiagramEdge } from "@/components/network-diagram/edge"
 import { PacketPulse } from "@/components/network-diagram/packet-pulse"
 import { cn } from "@/lib/utils"
-import { SERVICES, NODES } from "@/lib/homelab-data"
+import { SERVICES, NODES, VLANS } from "@/lib/homelab-data"
 
 // A flowing, glowing multicolor dot-stream along the edge — the "data
 // flowing through the wire" look from the reference screenshot, layered on
@@ -90,14 +86,14 @@ type Tone = "primary" | "success" | "warning" | "muted"
 
 type Leaf = { id: string; label: string; tag?: string; tone: Tone; icon: LucideIcon }
 
+// Grouped into one badge rather than one per device — individual device
+// types and counts (which camera, how many pet feeders) aren't necessary
+// to show the shape of the network, and are unnecessary detail about a
+// private home to publish. The count comes from the same VLANS data the
+// rest of the Network page uses, so it can't drift out of sync.
+const IOT_COUNT = (VLANS.find((v) => v.id === "iot")?.wired ?? 0) + (VLANS.find((v) => v.id === "iot")?.wifi ?? 0)
 const IOT_DEVICES: Leaf[] = [
-  { id: "cam1", label: "Camera", tag: "Zero IoT", tone: "warning", icon: Camera },
-  { id: "cam2", label: "Camera", tag: "Zero IoT", tone: "warning", icon: Camera },
-  { id: "speaker", label: "Speaker", tag: "Zero IoT", tone: "warning", icon: Volume2 },
-  { id: "bulb", label: "Smart Bulb", tag: "Zero IoT", tone: "warning", icon: Lightbulb },
-  { id: "plug", label: "Smart Plug", tag: "Zero IoT", tone: "warning", icon: Plug },
-  { id: "feeder1", label: "Pet Feeder", tag: "Zero IoT", tone: "warning", icon: PawPrint },
-  { id: "feeder2", label: "Pet Feeder", tag: "Zero IoT", tone: "warning", icon: PawPrint },
+  { id: "iot-group", label: `IoT ×${IOT_COUNT}`, tag: "Zero IoT", tone: "warning", icon: Lightbulb },
 ]
 
 const TRUSTED_DEVICES: Leaf[] = [
@@ -187,18 +183,18 @@ function NodeBadge({
       {tag && (
         <text
           x={size / 2}
-          y={-6}
+          y={-8}
           textAnchor="middle"
-          className={cn("font-mono text-[7px] tracking-wider uppercase", iconClass)}
+          className={cn("font-mono text-[11px] tracking-wider uppercase", iconClass)}
         >
           {tag}
         </text>
       )}
       <text
         x={size / 2}
-        y={size + 13}
+        y={size + 16}
         textAnchor="middle"
-        className="fill-foreground/80 font-mono text-[9px] font-medium tracking-wide uppercase"
+        className="fill-foreground font-mono text-[11px] font-medium tracking-wide uppercase"
       >
         {label}
       </text>
@@ -274,7 +270,7 @@ export function LiveTopology({ animated }: { animated: boolean }) {
         </>
       )}
 
-      <NodeBadge x={internet.x} y={internet.y} icon={Globe} label="AT&T Internet" size={36} animated={animated} />
+      <NodeBadge x={internet.x} y={internet.y} icon={Globe} label="ISP" size={36} animated={animated} />
       <NodeBadge x={gateway.x} y={gateway.y} icon={Router} label="Gateway" size={36} animated={animated} />
       <NodeBadge x={desktop.x} y={desktop.y} icon={Monitor} label="Desktop" size={30} animated={animated} />
       <NodeBadge x={ap.x} y={ap.y} icon={Wifi} label="Living Room AP" size={32} animated={animated} />

@@ -11,7 +11,6 @@ export function ServiceList({ services }: { services: Service[] }) {
             <th className="px-5 py-4 font-mono font-normal tracking-wider">Service</th>
             <th className="px-5 py-4 font-mono font-normal tracking-wider">Role</th>
             <th className="px-5 py-4 font-mono font-normal tracking-wider">Node</th>
-            <th className="px-5 py-4 font-mono font-normal tracking-wider">Uptime</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +32,6 @@ export function ServiceList({ services }: { services: Service[] }) {
                 <td className="px-5 py-4 font-medium text-foreground">{s.label}</td>
                 <td className="px-5 py-4 text-text-secondary">{s.role}</td>
                 <td className="px-5 py-4 font-mono text-xs text-text-secondary">{s.node}</td>
-                <td className="px-5 py-4 font-mono text-xs text-text-secondary">{s.uptime ?? "—"}</td>
               </tr>
             )
           })}

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
 import { CheckCircle2, Loader2, Mail, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BUSINESS_INFO } from "@/lib/business-info"
@@ -17,6 +18,9 @@ const HELP_OPTIONS = [
 type Status = "idle" | "submitting" | SubmitResult
 
 export function ContactForm() {
+  const searchParams = useSearchParams()
+  const prefillMessage = searchParams.get("message") ?? ""
+  const prefillHelp = searchParams.get("help") ?? ""
   const [status, setStatus] = React.useState<Status>("idle")
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -110,7 +114,7 @@ export function ContactForm() {
           id="help"
           name="help"
           required
-          defaultValue=""
+          defaultValue={HELP_OPTIONS.some((o) => o.label === prefillHelp) ? prefillHelp : ""}
           className="mt-2 w-full rounded-xl border border-input bg-surface px-4 py-3 text-base text-foreground outline-none focus:border-primary/60 focus:ring-3 focus:ring-primary/10"
         >
           <option value="" disabled>
@@ -131,6 +135,7 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
+          defaultValue={prefillMessage}
           placeholder="What's going on, and what would you like to happen?"
           className="mt-2 w-full resize-y rounded-xl border border-input bg-surface px-4 py-3 text-base leading-relaxed text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10"
         />

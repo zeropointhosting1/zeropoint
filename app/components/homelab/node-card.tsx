@@ -42,8 +42,6 @@ export function NodeCard({ node }: { node: HypervisorNode }) {
         <dd className="text-right font-mono text-foreground">
           {node.guests.running}/{node.guests.total} running
         </dd>
-        <dt className="text-text-secondary">Uptime</dt>
-        <dd className="text-right font-mono text-foreground">{node.uptime}</dd>
       </dl>
     </div>
   )

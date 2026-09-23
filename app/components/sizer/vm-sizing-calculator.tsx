@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import {
   Activity,
   Check,
@@ -17,6 +18,8 @@ import {
   Minus,
   PlayCircle,
   Router,
+  Search,
+  Send,
   Server,
   ShieldCheck,
   Terminal,
@@ -24,6 +27,7 @@ import {
   Zap,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import { HYPERVISORS } from "@/lib/hypervisor-catalog"
 import { PROFILE_LABELS, WORKLOADS, type UsageProfile } from "@/lib/workload-catalog"
 
@@ -104,6 +108,18 @@ export function VmSizingCalculator() {
   function toggle(id: string) {
     setSelected((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id])
   }
+
+  const sizingSummary = chosen.length
+    ? [
+        "Workload Sizer results:",
+        `Apps: ${chosen.map((w) => w.name).join(", ")}`,
+        `Usage level: ${PROFILE_LABELS[profile].label}`,
+        `Hypervisor: ${hypervisor.name}`,
+        `Total to provision: ${grandTotal.cpu} vCPU / ${grandTotal.ramGb} GB RAM / ${grandTotal.storageGb} GB disk`,
+        "",
+        "I'd like help turning this into a build: ",
+      ].join("\n")
+    : ""
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_340px] lg:items-start">
@@ -280,6 +296,17 @@ export function VmSizingCalculator() {
               <p className="flex items-center gap-2 text-xs font-medium text-foreground"><ShieldCheck className="size-3.5 text-primary" />Headroom included</p>
               <p className="mt-2 text-xs leading-relaxed text-text-tertiary">Colored segments above are each app&rsquo;s official requirement; the gray segment is ZeroPoint&rsquo;s 10% CPU / 20% RAM / 15% disk buffer. The hypervisor line is separate and comes from its own documented minimum.</p>
               <p className="mt-3 text-xs leading-relaxed text-warning">Media, photo libraries, synced files, backups, and redundancy are not included.</p>
+            </div>
+
+            <div className="space-y-2.5 border-t border-border px-6 py-5">
+              <Button variant="outline" className="w-full" render={<Link href={`/deals?minRam=${grandTotal.ramGb}`} />}>
+                <Search className="size-4" />
+                Find hardware that fits
+              </Button>
+              <Button className="w-full" render={<Link href={`/contact?message=${encodeURIComponent(sizingSummary)}`} />}>
+                <Send className="size-4" />
+                Bring this to a project
+              </Button>
             </div>
           </>
         ) : (

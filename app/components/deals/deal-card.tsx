@@ -42,6 +42,7 @@ export function DealCard({ deal }: { deal: Deal }) {
           </span>
         </div>
         {deal.shipping && <p className="mt-1 text-xs text-text-tertiary">{deal.shipping}</p>}
+        {deal.isHotDeal && <p className="mt-2 text-xs leading-relaxed text-warning">Why this pick: priced below other current listings for this search.</p>}
       </div>
     </a>
   )

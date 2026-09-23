@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { CalendarClock, Mail, MessageSquareText, FileCheck2 } from "lucide-react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
@@ -55,7 +56,9 @@ export default function ContactPage() {
           <div className="mx-auto max-w-6xl px-6 py-20">
             <div className="grid gap-16 lg:grid-cols-[1fr_360px]">
               <div className="rounded-2xl border border-border bg-background p-8 shadow-[0_24px_70px_-38px_var(--accent-glow)] sm:p-10">
-                <ContactForm />
+                <Suspense fallback={null}>
+                  <ContactForm />
+                </Suspense>
               </div>
 
               <div>

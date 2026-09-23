@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
@@ -48,7 +49,9 @@ export default function DealsPage() {
               <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Find the parts to start building.</h2>
               <p className="mt-3 max-w-2xl text-text-secondary">Current searches now include compact 10-inch rack components alongside compute and networking gear.</p>
             </div>
-            <DealsGrid />
+            <Suspense fallback={null}>
+              <DealsGrid />
+            </Suspense>
           </div>
         </section>
 

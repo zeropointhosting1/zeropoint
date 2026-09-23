@@ -1,35 +1,13 @@
 "use client"
 
-import { Router, Waypoints, Wifi } from "lucide-react"
 import { motion } from "framer-motion"
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion"
 import { HardwareCard } from "./hardware-card"
+import { HARDWARE } from "@/lib/hardware-catalog"
 
-const HARDWARE = [
-  {
-    id: "gateway",
-    role: "Gateway",
-    product: "UniFi Cloud Gateway Ultra",
-    spec: "Routing, firewall, and the UniFi OS console",
-    icon: Router,
-  },
-  {
-    id: "switch",
-    role: "Switch",
-    product: "UniFi Flex Mini",
-    spec: "Compact managed switch feeding the AP",
-    icon: Waypoints,
-  },
-  {
-    id: "ap",
-    role: "Access Point",
-    product: "UniFi U7 Lite",
-    spec: "Broadcasts the Trusted, IoT & Guest SSIDs",
-    icon: Wifi,
-  },
-]
-
-export function HardwareShowcase() {
+// `photos` is resolved server-side (fs.existsSync can't run in a "use
+// client" file) and handed down as a plain id -> url map.
+export function HardwareShowcase({ photos = {} }: { photos?: Record<string, string> }) {
   return (
     <div>
       <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
@@ -44,7 +22,7 @@ export function HardwareShowcase() {
       >
         {HARDWARE.map((h) => (
           <motion.div key={h.id} variants={fadeUp}>
-            <HardwareCard icon={h.icon} role={h.role} product={h.product} spec={h.spec} />
+            <HardwareCard icon={h.icon} role={h.role} product={h.product} spec={h.spec} photoSrc={photos[h.id]} />
           </motion.div>
         ))}
       </motion.div>

@@ -43,6 +43,39 @@ export type DealsResponse = {
   updatedAt: string
 }
 
+// Title substrings that flag a listing as too weak or bundled to be worth
+// showing here, even though it matched a search term — e.g. an EliteDesk
+// listed with a low-end AMD APU, a listing padded out with a monitor, or a
+// DDR3-era board that can't take the RAM these builds actually need.
+// Applied client-side (case-insensitive) since the Edge Function's own
+// exclusions are keyword/category based, not spec based.
+export const WEAK_SPEC_PATTERNS = [
+  "a6-", "a8-", "amd a6", "amd a8",
+  "ddr3",
+  "with monitor", "w/ monitor", "+ monitor", "and monitor",
+]
+
+export function isWeakListing(title: string): boolean {
+  const lower = title.toLowerCase()
+  return WEAK_SPEC_PATTERNS.some((pattern) => lower.includes(pattern))
+}
+
+// eBay's Browse API doesn't expose structured specs, only the listing
+// title — so this is a best-effort regex read of a "16GB" / "16 GB"
+// pattern, not a guaranteed-accurate spec. Used to link in from the sizer
+// with a minimum RAM the visitor actually needs; a listing whose RAM
+// can't be determined from its title is kept rather than hidden, since a
+// failed guess shouldn't hide a real match.
+export function listingRamGb(title: string): number | null {
+  const match = title.match(/(\d{1,3})\s*gb\b/i)
+  return match ? Number(match[1]) : null
+}
+
+export function meetsMinRam(title: string, minRamGb: number): boolean {
+  const ram = listingRamGb(title)
+  return ram === null || ram >= minRamGb
+}
+
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 

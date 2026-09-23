@@ -1,18 +1,21 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 import rehypeSlug from "rehype-slug"
 import rehypePrettyCode from "rehype-pretty-code"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import { getAllDocs, getDocsByCategory, getDocSource, extractToc, categoryLabel } from "@/lib/docs"
+import { ArrowLeft, ArrowRight, Clock, MessageCircleQuestion } from "lucide-react"
+import { getAllDocs, getDocsByCategory, getDocSource, extractToc, categoryLabel, readingTime, formatHumanDate } from "@/lib/docs"
 import { mdxComponents } from "@/components/docs/mdx-components"
 import { Toc } from "@/components/docs/toc"
 import { DiscordCallout } from "@/components/docs/discord-callout"
+import { Button } from "@/components/ui/button"
 import { JsonLd } from "@/components/seo/json-ld"
 import { pageMetadata } from "@/lib/metadata"
 import { BUSINESS_INFO } from "@/lib/business-info"
+import { withBasePath } from "@/lib/base-path"
 
 export function generateStaticParams() {
   return getAllDocs().map((doc) => ({ category: doc.category, slug: doc.slug }))
@@ -58,7 +61,7 @@ export default async function DocArticlePage({
           headline: doc.frontmatter.title,
           description: doc.frontmatter.description,
           datePublished: doc.frontmatter.date,
-          author: { "@type": "Person", name: BUSINESS_INFO.name },
+          author: { "@type": "Person", name: doc.frontmatter.author ?? BUSINESS_INFO.name },
         }}
       />
       <Link
@@ -78,7 +81,19 @@ export default async function DocArticlePage({
             {doc.frontmatter.title}
           </h1>
           <p className="mt-3 text-text-secondary">{doc.frontmatter.description}</p>
-          <p className="mt-3 font-mono text-xs text-text-tertiary">{doc.frontmatter.date}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-text-tertiary">
+            <span>{doc.frontmatter.author ?? BUSINESS_INFO.name}</span>
+            <span aria-hidden="true">·</span>
+            <span>{formatHumanDate(doc.frontmatter.date)}</span>
+            <span aria-hidden="true">·</span>
+            <span className="flex items-center gap-1"><Clock className="size-3" />{readingTime(doc.source)} min read</span>
+          </div>
+
+          {doc.frontmatter.heroDiagram && (
+            <div className="relative mt-8 aspect-video max-w-2xl overflow-hidden rounded-xl border border-border">
+              <Image src={withBasePath(doc.frontmatter.heroDiagram)} alt="" fill unoptimized className="object-cover" />
+            </div>
+          )}
 
           <div className="docs-prose mt-10 max-w-2xl">
             <MDXRemote
@@ -94,6 +109,17 @@ export default async function DocArticlePage({
                 },
               }}
             />
+          </div>
+
+          <div className="mt-12 flex flex-col items-start justify-between gap-4 rounded-2xl border border-primary/25 bg-primary/5 p-5 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <MessageCircleQuestion className="size-5 text-primary" />
+              <div>
+                <p className="text-sm font-medium text-foreground">Dealing with this yourself?</p>
+                <p className="text-sm text-text-secondary">Bring it to a project and get hands-on help.</p>
+              </div>
+            </div>
+            <Button size="sm" className="w-full sm:w-auto" render={<Link href="/contact" />}>Get help with this</Button>
           </div>
 
           <DiscordCallout />

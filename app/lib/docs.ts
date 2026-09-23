@@ -9,6 +9,11 @@ export type DocFrontmatter = {
   title: string
   description: string
   date: string
+  // Optional — defaults to BUSINESS_INFO.name when omitted.
+  author?: string
+  // Optional path to a hero diagram image under public/, shown above the
+  // article body when set. Most articles won't have one.
+  heroDiagram?: string
 }
 
 export type DocMeta = DocFrontmatter & {
@@ -90,8 +95,30 @@ export function getDocSource(
   const { content, data } = matter(raw)
   return {
     source: content,
-    frontmatter: { title: data.title, description: data.description, date: data.date },
+    frontmatter: {
+      title: data.title,
+      description: data.description,
+      date: data.date,
+      author: data.author,
+      heroDiagram: data.heroDiagram,
+    },
   }
+}
+
+// ~200wpm, rounded up to a whole minute, minimum 1 — a plain word-count
+// estimate off the raw MDX source (close enough; doesn't need to strip
+// syntax to be a useful "how long is this" signal).
+export function readingTime(source: string): number {
+  const words = source.trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(words / 200))
+}
+
+export function formatHumanDate(iso: string): string {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  })
 }
 
 // Matches rehype-slug's own algorithm (both are backed by github-slugger),

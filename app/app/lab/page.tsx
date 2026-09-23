@@ -8,6 +8,8 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { HomelabStrip } from "@/components/marketing/homelab-strip"
 import { FullTopology } from "@/components/network/full-topology"
 import { HardwareShowcase } from "@/components/homelab/hardware-showcase"
+import { HARDWARE } from "@/lib/hardware-catalog"
+import { localPhotoMap } from "@/lib/local-photo"
 import { DiscordChatMock } from "@/components/marketing/discord-chat-mock"
 import { DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
@@ -51,6 +53,8 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
 const CURRENT_PROJECTS = PROJECTS.filter((project) => project.status === "In Progress" && project.id !== "zeropoint-website").slice(0, 3)
 
 export default function LabPage() {
+  const hardwarePhotos = localPhotoMap(HARDWARE.map((h) => h.id), "lab/hardware")
+
   return (
     <>
       <TopNav />
@@ -69,7 +73,7 @@ export default function LabPage() {
 
         <HomelabStrip />
 
-        <section className="border-b border-border"><div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start lg:gap-20"><div><Eyebrow>Inside the build</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Real hardware. Real constraints. Real documentation.</h2><p className="mt-4 text-lg leading-relaxed text-text-secondary">The Lab combines compact compute, managed networking, segmented VLANs, self-hosted workloads, remote access, and monitoring. The sanitized diagrams show how it actually fits together.</p><div className="mt-7"><Button variant="outline" render={<Link href="/projects" />}>View all projects <ArrowRight className="size-4" /></Button></div></div><div><HardwareShowcase /><div className="mt-8 grid gap-3 sm:grid-cols-3">{CURRENT_PROJECTS.map((project) => <Link key={project.id} href={project.href ?? "/projects"} className="group rounded-xl border border-border bg-surface-raised p-5"><p className="font-mono text-[9px] tracking-wider text-primary uppercase">Running in the lab</p><h3 className="mt-3 font-semibold group-hover:text-primary">{project.title}</h3><p className="mt-2 text-xs leading-relaxed text-text-secondary">{project.description}</p></Link>)}</div></div></div></div></section>
+        <section className="border-b border-border"><div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start lg:gap-20"><div><Eyebrow>Inside the build</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Real hardware. Real constraints. Real documentation.</h2><p className="mt-4 text-lg leading-relaxed text-text-secondary">The Lab combines compact compute, managed networking, segmented VLANs, self-hosted workloads, remote access, and monitoring. The sanitized diagrams show how it actually fits together.</p><div className="mt-7"><Button variant="outline" render={<Link href="/projects" />}>View all projects <ArrowRight className="size-4" /></Button></div></div><div><HardwareShowcase photos={hardwarePhotos} /><div className="mt-8 grid gap-3 sm:grid-cols-3">{CURRENT_PROJECTS.map((project) => <Link key={project.id} href={project.href ?? "/projects"} className="group rounded-xl border border-border bg-surface-raised p-5"><p className="font-mono text-[9px] tracking-wider text-primary uppercase">Running in the lab</p><h3 className="mt-3 font-semibold group-hover:text-primary">{project.title}</h3><p className="mt-2 text-xs leading-relaxed text-text-secondary">{project.description}</p></Link>)}</div></div></div></div></section>
 
         <FullTopology />
 

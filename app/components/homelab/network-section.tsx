@@ -51,7 +51,7 @@ export function NetworkSection() {
         >
           <h3 className="text-lg font-semibold text-foreground">Home Network</h3>
           <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
-            AT&amp;T → UniFi
+            ISP → UniFi
           </span>
         </motion.div>
 

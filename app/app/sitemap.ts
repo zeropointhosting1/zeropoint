@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { SITE_URL } from "@/lib/site-config"
 import { getAllDocs } from "@/lib/docs"
+import { getAllCaseStudies } from "@/lib/work"
 
 export const dynamic = "force-static"
 
@@ -28,9 +29,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: doc.date,
   }))
 
+  const caseStudies = getAllCaseStudies().map((study) => ({
+    url: `${SITE_URL}/work/${study.slug}/`,
+    lastModified: study.date,
+  }))
+
   const staticEntries = STATIC_ROUTES.map((route) => ({
     url: `${SITE_URL}${route}`,
   }))
 
-  return [...staticEntries, ...docs]
+  return [...staticEntries, ...docs, ...caseStudies]
 }

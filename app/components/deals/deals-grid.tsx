@@ -1,10 +1,13 @@
 "use client"
 
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
 import { ArrowDownUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DealCard } from "./deal-card"
-import { DEALS_ENDPOINT, DEAL_CATEGORIES, SUPABASE_ANON_KEY, type Deal } from "@/lib/deals"
+import { DEALS_ENDPOINT, DEAL_CATEGORIES, SUPABASE_ANON_KEY, isWeakListing, meetsMinRam, type Deal } from "@/lib/deals"
+
+const PAGE_SIZE = 12
 
 type State =
   | { status: "not-connected" }
@@ -31,11 +34,15 @@ function EmptyPanel({ title, body }: { title: string; body: string }) {
 }
 
 export function DealsGrid() {
+  const searchParams = useSearchParams()
+  const minRam = Number(searchParams.get("minRam")) || null
+
   const [state, setState] = React.useState<State>(
     DEALS_ENDPOINT ? { status: "loading" } : { status: "not-connected" }
   )
   const [sort, setSort] = React.useState<SortMode>("relevance")
   const [category, setCategory] = React.useState<string>("All")
+  const [visibleCount, setVisibleCount] = React.useState(PAGE_SIZE)
 
   React.useEffect(() => {
     if (!DEALS_ENDPOINT) return
@@ -103,20 +110,29 @@ export function DealsGrid() {
     )
   }
 
-  const filtered = category === "All" ? state.deals : state.deals.filter((d) => d.category === category)
+  const strongListings = state.deals
+    .filter((d) => !isWeakListing(d.title))
+    .filter((d) => (minRam ? meetsMinRam(d.title, minRam) : true))
+  const filtered = category === "All" ? strongListings : strongListings.filter((d) => d.category === category)
   const sorted = [...filtered].sort((a, b) => {
     if (sort === "price-asc") return a.price - b.price
     if (sort === "price-desc") return b.price - a.price
     return 0
   })
+  const visible = sorted.slice(0, visibleCount)
 
   return (
     <div>
+      {minRam && (
+        <p className="mb-4 rounded-lg border border-primary/25 bg-primary/5 px-4 py-2.5 text-xs text-text-secondary">
+          Filtered to listings that fit {minRam} GB RAM or more, from your Workload Sizer results.
+        </p>
+      )}
       <div className="mb-5 flex flex-wrap items-center gap-2">
         {["All", ...DEAL_CATEGORIES].map((c) => (
           <button
             key={c}
-            onClick={() => setCategory(c)}
+            onClick={() => { setCategory(c); setVisibleCount(PAGE_SIZE) }}
             className={cn(
               "rounded-full border px-3 py-1.5 font-mono text-[11px] tracking-wider whitespace-nowrap uppercase transition-colors",
               category === c
@@ -157,11 +173,23 @@ export function DealsGrid() {
       {sorted.length === 0 ? (
         <EmptyPanel title="No listings in this category" body="Try a different filter, or check back later." />
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {sorted.map((deal) => (
-            <DealCard key={deal.id} deal={deal} />
-          ))}
-        </div>
+        <>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((deal) => (
+              <DealCard key={deal.id} deal={deal} />
+            ))}
+          </div>
+          {sorted.length > visible.length && (
+            <div className="mt-8 flex justify-center">
+              <button
+                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                className="rounded-full border border-border px-5 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                Load more ({sorted.length - visible.length} remaining)
+              </button>
+            </div>
+          )}
+        </>
       )}
       <p className="mt-6 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
         Updated {new Date(state.updatedAt).toLocaleString()}

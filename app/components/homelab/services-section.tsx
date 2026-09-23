@@ -36,7 +36,7 @@ export function ServicesSection() {
           variants={fadeUp}
           className="mt-10"
         >
-          <ServiceList services={SERVICES} />
+          <ServiceList services={SERVICES.filter((s) => s.status === "Running")} />
         </motion.div>
       </div>
     </section>

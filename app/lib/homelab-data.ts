@@ -121,7 +121,7 @@ export type VlanSegment = {
 export type ChainNode = { id: string; label: string }
 
 export const HOME_CHAIN: ChainNode[] = [
-  { id: "isp", label: "AT&T" },
+  { id: "isp", label: "ISP" },
   { id: "gateway", label: "Cloud Gateway" },
   { id: "switch", label: "Flex Mini" },
   { id: "ap", label: "Access Point" },

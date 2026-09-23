@@ -4,11 +4,13 @@ import { ProjectArt } from "./project-art"
 import { StatusBadge } from "./status-badge"
 import { TechBadge } from "./tech-badge"
 import type { Project } from "@/lib/projects"
+import { localPhoto } from "@/lib/local-photo"
 
 export function ProjectCard({ project, icon }: { project: Project; icon: LucideIcon }) {
+  const photoSrc = localPhoto(`lab/projects/${project.id}.jpg`) ?? undefined
   const body = (
     <>
-      <ProjectArt icon={icon} label={project.status} className="aspect-video w-full" />
+      <ProjectArt icon={icon} label={project.status} photoSrc={photoSrc} className="aspect-video w-full" />
       <div className="p-5">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-semibold tracking-tight text-foreground">{project.title}</h3>

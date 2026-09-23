@@ -29,3 +29,12 @@ Nothing below is invented. Placeholders are marked `{{TODO: ...}}` in code (most
 - [ ] **New business service prices** (`app/lib/services.ts`, `SERVICE_OFFERINGS`) — starting prices weren't set for the new business-specific services, so each shows `{{TODO: starting price}}` until you set one: Office Network & Wi-Fi, Guest & Device Separation, Firewall & Remote Access, Backups, Onboarding/Offboarding & Account Hygiene, Monthly Support.
 - [ ] **IoT & Camera Separation** (home, same file) — also needs a starting price.
 - [ ] **Payment terms** (`app/services/page.tsx`, FAQ) — deposit/invoice terms for the "How does payment work?" answer.
+
+## Phase 5 — Photos, and a finding on affiliate links
+
+- [ ] **Photos** (optional — falls back to the existing icon treatment until added): project/hardware cards now check for a real photo and use it automatically once present.
+  - `app/public/lab/projects/{id}.jpg` — one per project in `app/lib/projects.ts` (ids: `home-network`, `proxmox-cluster`, `enterprise-network-lab`, `zeropoint-website`, `sso`, `remote-access`, `internal-dashboard`, `vaultwarden`, `siem`, `windows-lab`)
+  - `app/public/lab/hardware/{id}.jpg` — `gateway`, `switch`, `ap`
+  - `app/public/about/headshot.jpg` (listed above too)
+- [ ] **Affiliate disclosure — not needed, confirmed no affiliate program is wired up.** I checked `supabase/functions/ebay-deals/index.ts`: it uses eBay's Browse API and passes through `itemWebUrl` as-is — no campaign/partner/affiliate query params (no eBay Partner Network campaign ID, etc.) are appended anywhere. Since the links aren't actually affiliate links, I didn't add a disclosure — adding one would misrepresent the relationship. If you sign up for the eBay Partner Network later, the link-builder in that function is the one place to add the campaign ID, and a disclosure should go in at the same time.
+- [ ] **Case studies** — the Work page and homepage both hide the case-study section until at least one exists. To add one: copy `app/content/work/_TEMPLATE.mdx` to a new file in that same folder without the leading underscore, fill in the frontmatter and the problem/design/build/result sections, and it'll appear automatically (and get its own `/work/<slug>/` page).

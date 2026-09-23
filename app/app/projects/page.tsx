@@ -18,11 +18,12 @@ import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ProjectCard } from "@/components/projects/project-card"
 import { PROJECTS } from "@/lib/projects"
+import { getAllCaseStudies } from "@/lib/work"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
-  title: "Projects — ZeroPoint",
-  description: "Everything being built, broken, and documented in the ZeroPoint lab.",
+  title: "Work — ZeroPoint",
+  description: "Real client projects, plus everything being built, broken, and documented in the ZeroPoint lab.",
   path: "/projects",
 })
 
@@ -40,6 +41,8 @@ const ICONS: Record<string, typeof Home> = {
 }
 
 export default function ProjectsPage() {
+  const caseStudies = getAllCaseStudies()
+
   return (
     <>
       <TopNav />
@@ -49,19 +52,37 @@ export default function ProjectsPage() {
           <div className="relative mx-auto max-w-6xl px-6 pt-36 pb-16">
             <Eyebrow>Selected work</Eyebrow>
             <h1 className="mt-4 text-5xl font-bold tracking-tight text-balance sm:text-6xl">
-              Projects
+              Work
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-text-secondary">
-              The full scope of what&rsquo;s actually running today, plus
-              what&rsquo;s next. Finished builds link to real documentation;
-              everything else is marked planned.
+              Real client projects, and the full scope of what&rsquo;s
+              actually running in the ZeroPoint lab today, plus what&rsquo;s
+              next.
             </p>
           </div>
         </section>
 
+        {caseStudies.length > 0 && (
+          <section className="border-b border-border">
+            <div className="mx-auto max-w-6xl px-6 py-16">
+              <Eyebrow>Case studies</Eyebrow>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {caseStudies.map((study) => (
+                  <Link key={study.slug} href={`/work/${study.slug}`} className="group rounded-2xl border border-border bg-surface-raised p-6 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-primary/30">
+                    <h3 className="text-lg font-semibold group-hover:text-primary">{study.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-text-secondary">{study.summary}</p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">Read the case study <ArrowUpRight className="size-3.5" /></span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="border-b border-border">
           <div className="mx-auto max-w-6xl px-6 py-16">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {caseStudies.length > 0 && <Eyebrow>Lab projects</Eyebrow>}
+            <div className={caseStudies.length > 0 ? "mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"}>
               {PROJECTS.map((project) => (
                 <ProjectCard key={project.id} project={project} icon={ICONS[project.id]} />
               ))}

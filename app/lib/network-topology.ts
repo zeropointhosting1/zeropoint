@@ -27,7 +27,7 @@ export const NET_NODES: NetNode[] = [
   {
     id: "internet",
     label: "Internet",
-    sublabel: "AT&T Fiber",
+    sublabel: "ISP",
     x: 60,
     y: 240,
     size: 9,
