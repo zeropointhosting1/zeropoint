@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { Activity, ArrowRight, Boxes, Network, Server } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { AppMarquee } from "./app-marquee"
 import { LAST_UPDATED } from "@/lib/homelab-data"
 
 // Hidden state stays mostly visible (opacity 0.6, not 0) so the
@@ -46,6 +47,8 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
+
+      <AppMarquee label="Platforms we work with" />
     </section>
   )
 }
