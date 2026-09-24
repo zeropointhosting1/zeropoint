@@ -29,12 +29,13 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
       <div className="relative mx-auto grid min-h-[760px] max-w-6xl items-center gap-16 px-6 pt-32 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-28">
         <div>
-          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Homelabs · Home Networks · Small Business</motion.p>
+          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Homelabs · Home Networks · Business Tech · Websites</motion.p>
           <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build better<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">technology.</span></motion.h1>
-          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network and small business, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
+          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network, your office, and your business&rsquo;s website, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
           <motion.div custom={reduced ? 0 : 0.35} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
             <Button size="lg" render={<Link href="/contact" />}>Book a free consult <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/lab" />}>Explore the lab</Button>
+            <Button size="lg" variant="outline" render={<Link href="/websites" />}>Business websites</Button>
+            <Button size="lg" variant="ghost" render={<Link href="/lab" />}>Explore the lab</Button>
           </motion.div>
           <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
         </div>

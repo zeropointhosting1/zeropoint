@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata({
-    title: "ZeroPoint — Homelabs, Home Networking, and Business Technology",
+    title: "ZeroPoint — Homelabs, Home Networking, Business Technology, and Websites",
     description:
-      "Hands-on homelab knowledge, better home networking, and straightforward technology setup for small businesses.",
+      "Hands-on homelab knowledge, better home networking, straightforward technology setup for small businesses, and websites and dashboards for restaurants and small businesses.",
     path: "/",
   }),
 };
