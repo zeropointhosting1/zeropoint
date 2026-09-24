@@ -10,7 +10,7 @@ import { HARDWARE } from "@/lib/hardware-catalog"
 export function HardwareShowcase({ photos = {} }: { photos?: Record<string, string> }) {
   return (
     <div>
-      <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
+      <p className="mb-4 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
         Hardware
       </p>
       <motion.div

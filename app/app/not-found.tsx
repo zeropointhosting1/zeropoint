@@ -12,7 +12,7 @@ export default function NotFound() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
           <div className="relative mx-auto flex min-h-[560px] max-w-3xl flex-col items-center justify-center px-6 py-32 text-center">
-            <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase">404</p>
+            <p className="font-mono text-xs tracking-[0.14em] text-primary uppercase">404</p>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
               This page doesn&rsquo;t exist.
             </h1>

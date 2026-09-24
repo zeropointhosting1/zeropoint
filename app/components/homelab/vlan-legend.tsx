@@ -22,7 +22,7 @@ export function VlanLegend({ vlans }: { vlans: VlanSegment[] }) {
           <div key={v.id} className="bg-surface-raised p-5">
             <div className="flex items-center gap-2">
               <span className={cn("size-1.5 rounded-full", DOT[v.tone])} />
-              <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
+              <span className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
                 VLAN {v.vlanId}
               </span>
             </div>

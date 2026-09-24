@@ -16,7 +16,7 @@ export function NodeCard({ node }: { node: HypervisorNode }) {
         </div>
         <span
           className={cn(
-            "inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase",
+            "inline-flex items-center gap-1.5 font-mono text-[11px] tracking-wider uppercase",
             online ? "text-success" : "text-text-tertiary"
           )}
         >

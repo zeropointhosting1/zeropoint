@@ -267,7 +267,7 @@ export function DealsGrid() {
                 key={opt.value}
                 onClick={() => setSort(opt.value)}
                 className={cn(
-                  "px-3 py-1.5 font-mono text-[10px] tracking-wider whitespace-nowrap uppercase transition-colors",
+                  "px-3 py-1.5 font-mono text-[11px] tracking-wider whitespace-nowrap uppercase transition-colors",
                   sort === opt.value
                     ? "bg-primary/10 text-primary"
                     : "text-text-tertiary hover:text-foreground"

@@ -45,8 +45,8 @@ export function StarterBuilds() {
             const recommended = build.id === recommendedId
             return (
               <article key={build.id} className={`flex flex-col rounded-2xl border p-6 ${recommended ? "border-primary/50 bg-primary/5" : "border-border bg-surface-raised"}`}>
-                {recommended && <p className="mb-3 font-mono text-[10px] tracking-wider text-primary uppercase">Matches your Sizer results</p>}
-                <p className="font-mono text-xs tracking-[0.16em] text-primary uppercase">{build.targetPriceLabel}</p>
+                {recommended && <p className="mb-3 font-mono text-[11px] tracking-wider text-primary uppercase">Matches your Sizer results</p>}
+                <p className="font-mono text-xs tracking-[0.12em] text-primary uppercase">{build.targetPriceLabel}</p>
                 <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">{build.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">{build.tagline}</p>
 
@@ -58,7 +58,7 @@ export function StarterBuilds() {
                 <div className="mt-5 overflow-hidden rounded-xl border-x-4 border-y border-border bg-background/60 p-2.5">
                   {build.rackUnits.map((unit) => (
                     <div key={unit.unit} className="mb-1 grid grid-cols-[28px_1fr] items-center gap-2 rounded-md border border-border bg-surface px-2.5 py-2 last:mb-0">
-                      <span className="font-mono text-[10px] text-text-tertiary">{unit.unit}</span>
+                      <span className="font-mono text-[11px] text-text-tertiary">{unit.unit}</span>
                       <span className="text-[11px] font-medium text-foreground">{unit.label}</span>
                     </div>
                   ))}
@@ -75,7 +75,7 @@ export function StarterBuilds() {
 
                 <div className="mt-5 flex flex-wrap gap-1.5">
                   {build.goodFor.map((item) => (
-                    <span key={item} className="rounded-full border border-border px-2 py-1 font-mono text-[10px] text-text-tertiary">{item}</span>
+                    <span key={item} className="rounded-full border border-border px-2 py-1 font-mono text-[11px] text-text-tertiary">{item}</span>
                   ))}
                 </div>
 

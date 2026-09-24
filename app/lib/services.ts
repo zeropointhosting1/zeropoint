@@ -70,7 +70,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
   {
     id: "iot-camera-separation",
     audience: "home",
-    title: "IoT & Camera Separation",
+    title: "Smart Device & Camera Safety",
     short: "Keep smart devices away from what matters",
     description: "Put smart plugs, cameras, and other IoT devices on their own network so they can't reach your personal computers and private files.",
     signs: ["Cheap smart devices sitting on the same network as your work laptop", "You want cameras without exposing them to the internet", "You don't know what a device could reach if it were compromised"],

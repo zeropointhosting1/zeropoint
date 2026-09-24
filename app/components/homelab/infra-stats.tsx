@@ -33,7 +33,7 @@ export function InfraStats() {
           <Stat key={s.label} label={s.label} value={s.value} start={inView} />
         ))}
       </div>
-      <p className="mt-4 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
+      <p className="mt-4 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
     </div>
   )
 }

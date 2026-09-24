@@ -56,24 +56,24 @@ export function PropertyAssessment() {
     <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
       <div className="space-y-8">
         <fieldset>
-          <legend className="font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">1 · What kind of property is it?</legend>
+          <legend className="font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">1 · What kind of property is it?</legend>
           <div className="mt-4 flex flex-wrap gap-2">
             {PROPERTY_TYPES.map((type) => <button key={type} type="button" onClick={() => setPropertyType(type)} className={`rounded-full border px-4 py-2.5 text-sm transition-colors ${propertyType === type ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface hover:border-primary/40"}`}>{type}</button>)}
           </div>
         </fieldset>
 
         <fieldset>
-          <legend className="font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">2 · What needs attention?</legend>
+          <legend className="font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">2 · What needs attention?</legend>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {NEEDS.map((need) => <button key={need} type="button" onClick={() => toggleNeed(need)} className={`flex items-center justify-between rounded-xl border p-4 text-left text-sm transition-colors ${needs.includes(need) ? "border-primary/60 bg-primary/10 text-foreground" : "border-border bg-surface hover:border-primary/35"}`}><span>{need}</span><span className={`flex size-5 items-center justify-center rounded-full border ${needs.includes(need) ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>{needs.includes(need) && <Check className="size-3" />}</span></button>)}
           </div>
         </fieldset>
 
-        <label className="block"><span className="font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">3 · General location</span><input value={location} onChange={(event) => setLocation(event.target.value)} placeholder="Town, region, or service area" className="mt-4 w-full rounded-xl border border-input bg-surface px-4 py-3 text-base text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
-        <label className="block"><span className="font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">4 · What is working—or not working—today?</span><textarea value={details} onChange={(event) => setDetails(event.target.value)} rows={5} placeholder="Current internet provider, number of buildings, dead zones, existing cameras or smart devices, and what you want to manage remotely…" className="mt-4 w-full resize-y rounded-xl border border-input bg-surface px-4 py-3 text-base leading-relaxed text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
+        <label className="block"><span className="font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">3 · General location</span><input value={location} onChange={(event) => setLocation(event.target.value)} placeholder="Town, region, or service area" className="mt-4 w-full rounded-xl border border-input bg-surface px-4 py-3 text-base text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
+        <label className="block"><span className="font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">4 · What is working—or not working—today?</span><textarea value={details} onChange={(event) => setDetails(event.target.value)} rows={5} placeholder="Current internet provider, number of buildings, dead zones, existing cameras or smart devices, and what you want to manage remotely…" className="mt-4 w-full resize-y rounded-xl border border-input bg-surface px-4 py-3 text-base leading-relaxed text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
 
         <fieldset>
-          <legend className="font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">5 · Where should this go?</legend>
+          <legend className="font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">5 · Where should this go?</legend>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <label className="block"><span className="text-sm text-text-tertiary">Name</span><input value={name} onChange={(event) => setName(event.target.value)} type="text" autoComplete="name" className="mt-2 w-full rounded-xl border border-input bg-surface px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
             <label className="block"><span className="text-sm text-text-tertiary">Email</span><input value={email} onChange={(event) => setEmail(event.target.value)} type="email" autoComplete="email" className="mt-2 w-full rounded-xl border border-input bg-surface px-4 py-2.5 text-sm text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10" /></label>
@@ -82,7 +82,7 @@ export function PropertyAssessment() {
       </div>
 
       <aside className="h-fit rounded-2xl border border-primary/25 bg-surface p-6 shadow-[0_24px_70px_-38px_var(--accent-glow)] lg:sticky lg:top-24">
-        <p className="font-mono text-xs tracking-[0.16em] text-primary uppercase">Assessment brief</p>
+        <p className="font-mono text-xs tracking-[0.12em] text-primary uppercase">Assessment brief</p>
         <h3 className="mt-3 text-xl font-semibold">Start with the property, not a shopping list.</h3>
         <p className="mt-3 text-sm leading-relaxed text-text-secondary">This creates a short brief for an initial conversation. No equipment or final pricing is recommended until the property, connection options, and coverage needs are understood.</p>
         <dl className="mt-6 divide-y divide-border border-y border-border text-sm"><Summary label="Property" value={propertyType} /><Summary label="Location" value={location || "Not provided"} /><Summary label="Priorities" value={needs.length ? needs.join(", ") : "Not selected"} /></dl>

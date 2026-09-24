@@ -20,7 +20,7 @@ export function MdxPre({ className, children, ...props }: React.ComponentPropsWi
   }, [])
 
   return (
-    <div className="group relative">
+    <div className="theme-dark group relative">
       <pre ref={preRef} className={cn("overflow-x-auto rounded-xl border border-border bg-surface-raised p-4 text-sm", className)} {...props}>
         {children}
       </pre>

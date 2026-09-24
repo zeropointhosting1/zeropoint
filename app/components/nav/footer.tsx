@@ -36,16 +36,14 @@ export function Footer() {
           <div>
             <Wordmark />
             <p className="mt-4 max-w-xs text-sm text-text-secondary">
-              Homelab knowledge applied to better home networks, practical
-              small-business technology, and builds you can understand.
-            </p>
+              Tech help for homes and small businesses — reliable Wi-Fi, safer networks, websites, and home servers, explained in plain English.</p>
           </div>
 
           <FooterColumn title="Explore" links={EXPLORE} />
           <FooterColumn title="Resources" links={RESOURCES} />
 
           <div>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
+            <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
               Connect
             </p>
             <a href={`mailto:${BUSINESS_INFO.email}`} className="mt-4 flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-foreground">
@@ -120,7 +118,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
+      <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
         {title}
       </p>
       <ul className="mt-4 grid gap-2.5">

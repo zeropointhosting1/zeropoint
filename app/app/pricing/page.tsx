@@ -57,7 +57,7 @@ export default function PricingPage() {
               </div>
             </div>
             <div className="border-y border-border py-6">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">How pricing works</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">How pricing works</p>
               <div className="mt-5 divide-y divide-border">
                 {HOW.map(({ icon: Icon, title, copy }) => <div key={title} className="flex items-center gap-3 py-4 text-sm text-text-secondary"><span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span><div><span className="block font-medium text-foreground">{title}</span><span className="block text-xs">{copy}</span></div></div>)}
               </div>

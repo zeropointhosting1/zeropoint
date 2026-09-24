@@ -14,7 +14,7 @@ export function WhyThisModel() {
             <article key={tier.id} className="rounded-2xl border border-border bg-surface-raised p-6">
               <h3 className="text-sm font-semibold text-foreground">{tier.name}</h3>
               <p className="mt-2 text-xs leading-relaxed text-text-secondary">{tier.whyItWorks}</p>
-              <dl className="mt-4 space-y-1.5 border-t border-border pt-4 font-mono text-[10px] text-text-tertiary">
+              <dl className="mt-4 space-y-1.5 border-t border-border pt-4 font-mono text-[11px] text-text-tertiary">
                 <div className="flex justify-between"><dt>CPU</dt><dd className="text-text-secondary">{tier.cpu}</dd></div>
                 <div className="flex justify-between"><dt>Max RAM</dt><dd className="text-text-secondary">{tier.maxRamGb} GB</dd></div>
                 <div className="flex justify-between"><dt>NVMe</dt><dd className="text-text-secondary">{tier.nvmeSlots} slot{tier.nvmeSlots === 1 ? "" : "s"}</dd></div>

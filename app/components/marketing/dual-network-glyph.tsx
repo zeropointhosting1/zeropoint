@@ -26,8 +26,8 @@ function DeviceCard({ x, y, label, zone, tone }: { x: number; y: number; label: 
     <g transform={`translate(${x} ${y})`}>
       <rect width="98" height="54" rx="11" className={`${colors.fill} ${colors.border}`} />
       <circle cx="15" cy="17" r="3" className={colors.dot} />
-      <text x="25" y="20" className="fill-foreground text-[10px] font-semibold">{label}</text>
-      <text x="14" y="40" className={`${colors.text} font-mono text-[10px] tracking-wide uppercase`}>{zone}</text>
+      <text x="25" y="20" className="fill-foreground text-[11px] font-semibold">{label}</text>
+      <text x="14" y="40" className={`${colors.text} font-mono text-[11px] tracking-wide uppercase`}>{zone}</text>
     </g>
   )
 }
@@ -39,8 +39,8 @@ function AccessPointCard({ x, y, label, detail, animated }: { x: number; y: numb
       <circle cx="20" cy="22" r="3" className="fill-primary" />
       <path d="M13 18 Q20 11 27 18" className="fill-none stroke-primary" strokeWidth="1.5" strokeLinecap="round" />
       <path d="M9 14 Q20 3 31 14" className="fill-none stroke-primary/60" strokeWidth="1.5" strokeLinecap="round" />
-      <text x="39" y="22" className="fill-foreground text-[10px] font-semibold">{label}</text>
-      <text x="14" y="44" className="fill-text-secondary font-mono text-[10px] tracking-wide uppercase">{detail}</text>
+      <text x="39" y="22" className="fill-foreground text-[11px] font-semibold">{label}</text>
+      <text x="14" y="44" className="fill-text-secondary font-mono text-[11px] tracking-wide uppercase">{detail}</text>
       {animated && <rect x="-2" y="-2" width="128" height="62" rx="15" className="fill-none stroke-primary/35" strokeWidth="1"><animate attributeName="opacity" values="0.65;0.12;0.65" dur="2.6s" repeatCount="indefinite" /></rect>}
     </g>
   )
@@ -53,12 +53,12 @@ export function DualNetworkGlyph({ animated }: { animated: boolean }) {
 
   return (
     <DiagramCanvas viewBox="0 0 900 455" className="h-full w-full" ariaLabel="Live network preview showing devices connected beneath two access points and an isolated lab network">
-      <text x="24" y="25" className="fill-text-secondary font-mono text-[10px] tracking-[0.16em] uppercase">Home network · live flow</text>
+      <text x="24" y="25" className="fill-text-secondary font-mono text-[11px] tracking-[0.12em] uppercase">Home network · live flow</text>
       <circle cx="870" cy="21" r="3" className="fill-success">{animated && <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite" />}</circle>
-      <text x="860" y="25" textAnchor="end" className="fill-success font-mono text-[10px] tracking-[0.14em] uppercase">Online</text>
+      <text x="860" y="25" textAnchor="end" className="fill-success font-mono text-[11px] tracking-[0.14em] uppercase">Online</text>
 
       <rect x="14" y="216" width="628" height="226" rx="16" className="fill-primary/3 stroke-primary/15" strokeDasharray="4 7" />
-      <text x="30" y="238" className="fill-primary font-mono text-[10px] tracking-[0.14em] uppercase">Wireless coverage + client VLANs</text>
+      <text x="30" y="238" className="fill-primary font-mono text-[11px] tracking-[0.14em] uppercase">Wireless coverage + client VLANs</text>
 
       <DiagramEdge id="preview-wan" d="M450,52 L450,100" color="primary" />
       <DiagramEdge id="preview-core" d="M450,115 L450,170" color="primary" />
@@ -90,7 +90,7 @@ export function DualNetworkGlyph({ animated }: { animated: boolean }) {
       <AccessPointCard x={workshopAp.x} y={workshopAp.y} label="Workshop AP" detail="IoT coverage" animated={animated} />
 
       <line x1="660" y1="216" x2="660" y2="442" className="stroke-border" strokeWidth="1" strokeDasharray="3 6" />
-      <text x="678" y="238" className="fill-text-tertiary font-mono text-[10px] tracking-[0.14em] uppercase">Isolated boundary</text>
+      <text x="678" y="238" className="fill-text-tertiary font-mono text-[11px] tracking-[0.14em] uppercase">Isolated boundary</text>
       <DiagramNode x={lab.x} y={lab.y} size={9} tone="muted" label="Lab firewall" emphasis animated={animated} />
       <DeviceCard x={729} y={378} label="Lab hosts" zone="Separate domain" tone="muted" />
 

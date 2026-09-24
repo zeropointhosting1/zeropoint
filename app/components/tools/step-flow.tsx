@@ -35,11 +35,11 @@ export function ToolFlowSteps({ current }: { current: FlowStepId }) {
               href={href}
               aria-current={isCurrent ? "step" : undefined}
               className={cn(
-                "flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[10px] tracking-wider whitespace-nowrap uppercase transition-colors",
+                "flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-[11px] tracking-wider whitespace-nowrap uppercase transition-colors",
                 isCurrent ? "border-primary/40 bg-primary/10 text-primary" : "border-border text-text-tertiary hover:text-foreground"
               )}
             >
-              <span className={cn("flex size-4 items-center justify-center rounded-full text-[10px]", isCurrent ? "bg-primary text-primary-foreground" : "bg-surface-raised")}>{index + 1}</span>
+              <span className={cn("flex size-4 items-center justify-center rounded-full text-[11px]", isCurrent ? "bg-primary text-primary-foreground" : "bg-surface-raised")}>{index + 1}</span>
               {step.label}
             </Link>
           </React.Fragment>

@@ -26,7 +26,7 @@ export default function DocsIndexPage() {
       <div className="mt-14 space-y-12">
         {groups.map((group) => (
           <section key={group.category}>
-            <h2 className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
+            <h2 className="font-mono text-xs tracking-[0.14em] text-primary uppercase">
               {group.label}
             </h2>
             <ul className="mt-4 divide-y divide-border border-t border-border">

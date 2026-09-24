@@ -5,7 +5,6 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ContactForm } from "@/components/contact/contact-form"
-import { ToolFlowSteps } from "@/components/tools/step-flow"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { BOOKING_URL, RESPONSE_DAYS } from "@/lib/contact-config"
 import { pageMetadata } from "@/lib/metadata"
@@ -32,10 +31,10 @@ export default function ContactPage() {
           <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-16 text-center">
             <Eyebrow>Contact</Eyebrow>
             <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl">
-              Let&rsquo;s talk about your <span className="text-primary">network.</span>
+              Let&rsquo;s talk about your <span className="text-primary">project.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
-              Home Wi-Fi, a small business network, or a homelab build — send a message and I&rsquo;ll get back to you.
+              Home Wi-Fi, an office network, a website, or a home server — send a message and I&rsquo;ll get back to you.
               On-site work is available in {BUSINESS_INFO.areaServed}; remote work anywhere.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
@@ -50,11 +49,6 @@ export default function ContactPage() {
                 </a>
               )}
             </div>
-            <div className="mt-8 flex justify-center">
-              <Suspense fallback={null}>
-                <ToolFlowSteps current="contact" />
-              </Suspense>
-            </div>
           </div>
         </section>
 
@@ -68,7 +62,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">What happens next</p>
+                <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">What happens next</p>
                 <div className="mt-6 space-y-6">
                   {NEXT_STEPS.map(({ icon: Icon, title, copy }, index) => (
                     <div key={title} className="flex gap-4">

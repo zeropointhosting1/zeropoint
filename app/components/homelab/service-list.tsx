@@ -21,7 +21,7 @@ export function ServiceList({ services }: { services: Service[] }) {
                 <td className="px-5 py-4">
                   <span
                     className={cn(
-                      "inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase",
+                      "inline-flex items-center gap-1.5 font-mono text-[11px] tracking-wider uppercase",
                       running ? "text-success" : "text-text-tertiary"
                     )}
                   >

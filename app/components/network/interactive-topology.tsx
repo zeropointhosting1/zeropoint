@@ -79,7 +79,7 @@ export function InteractiveTopology() {
       </div>
 
       <div className="rounded-2xl border border-border bg-surface/85 p-6 shadow-[inset_0_1px_0_oklch(1_0_0/8%)]">
-        <p className="font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
+        <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
           {active.sublabel}
         </p>
         <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">{active.label}</h3>
@@ -91,7 +91,7 @@ export function InteractiveTopology() {
               key={n.id}
               onClick={() => setSelected(n.id)}
               className={cn(
-                "rounded-md border px-2 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors",
+                "rounded-md border px-2 py-1 font-mono text-[11px] tracking-wider uppercase transition-colors",
                 selected === n.id
                   ? "border-primary/40 text-primary"
                   : "border-border text-text-tertiary hover:text-foreground"

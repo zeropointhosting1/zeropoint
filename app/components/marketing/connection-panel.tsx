@@ -147,7 +147,7 @@ export function ConnectionPanel() {
           </motion.div>
           <motion.p
             variants={variants}
-            className="mb-4 font-mono text-xs tracking-[0.2em] text-primary uppercase"
+            className="mb-4 font-mono text-xs tracking-[0.14em] text-primary uppercase"
           >
             Live, not tracked
           </motion.p>
@@ -174,7 +174,7 @@ export function ConnectionPanel() {
           >
             <motion.p
               variants={variants}
-              className="mb-5 font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase"
+              className="mb-5 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase"
             >
               Your Connection
             </motion.p>
@@ -215,10 +215,10 @@ export function ConnectionPanel() {
             <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(ellipse_at_top,var(--accent-glow),transparent_70%)]" />
             <div className="relative flex items-start justify-between gap-4 border-b border-border px-6 py-5">
               <div>
-                <p className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Request / Response</p>
+                <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Request / Response</p>
                 <p className="mt-1.5 text-sm text-text-secondary">One secure round trip, visualized live.</p>
               </div>
-              <div className="flex shrink-0 items-center gap-2 rounded-full border border-success/20 bg-success/5 px-3 py-1.5 font-mono text-[10px] tracking-wider text-success uppercase">
+              <div className="flex shrink-0 items-center gap-2 rounded-full border border-success/20 bg-success/5 px-3 py-1.5 font-mono text-[11px] tracking-wider text-success uppercase">
                 <span className="relative flex size-2">
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-50" />
                   <span className="relative inline-flex size-2 rounded-full bg-success" />
@@ -233,21 +233,21 @@ export function ConnectionPanel() {
               <div className="flex items-center gap-2.5 border-r border-border px-4 py-3.5 sm:px-5">
                 <LockKeyhole className="size-3.5 shrink-0 text-primary" />
                 <div>
-                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Protocol</p>
+                  <p className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Protocol</p>
                   <p className="mt-0.5 text-xs font-medium">{detected?.isSecure ? "HTTPS" : "HTTP"}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 px-4 py-3.5 sm:border-r sm:border-border sm:px-5">
                 <Check className="size-3.5 shrink-0 text-success" />
                 <div>
-                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Status</p>
+                  <p className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Status</p>
                   <p className="mt-0.5 text-xs font-medium">200 OK</p>
                 </div>
               </div>
               <div className="col-span-2 flex items-center gap-2.5 border-t border-border px-4 py-3.5 sm:col-span-1 sm:border-t-0 sm:px-5">
                 <span className="size-3.5 shrink-0 rounded-full border border-primary/40 bg-primary/10 p-1"><span className="block size-full rounded-full bg-primary" /></span>
                 <div>
-                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Connection</p>
+                  <p className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Connection</p>
                   <p className="mt-0.5 text-xs font-medium">Active now</p>
                 </div>
               </div>
@@ -262,7 +262,7 @@ export function ConnectionPanel() {
           transition={{ duration: 0.2 }}
           className="mt-8"
         >
-          <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
+          <p className="mb-4 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
             Approximate Location
           </p>
           {locationVisible ? (

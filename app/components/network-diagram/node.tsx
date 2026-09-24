@@ -53,7 +53,7 @@ export function DiagramNode({
         <text
           y={size + 16}
           textAnchor="middle"
-          className="fill-foreground/80 font-mono text-[10px] font-medium tracking-wider uppercase"
+          className="fill-foreground/80 font-mono text-[11px] font-medium tracking-wider uppercase"
         >
           {label}
         </text>

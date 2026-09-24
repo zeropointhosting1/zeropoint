@@ -66,7 +66,7 @@ export default function ServicesPage() {
           <div className="relative mx-auto grid min-h-[650px] max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
             <div><Eyebrow>Small Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Straightforward technology<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Office Wi-Fi, guest and device separation, firewalls, backups, and account hygiene — set up once, documented properly, and yours to keep.</p></div>
             <div className="border-y border-border py-6">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Why hire ZeroPoint</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Why hire ZeroPoint</p>
               <div className="mt-5 divide-y divide-border">
                 {WHY.map(({ icon: Icon, title, copy }) => <div key={title} className="flex items-center gap-3 py-4 text-sm text-text-secondary"><span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span><div><span className="block font-medium text-foreground">{title}</span><span className="block text-xs">{copy}</span></div></div>)}
               </div>
@@ -92,7 +92,7 @@ export default function ServicesPage() {
               ))}
             </div>
             <div className="mt-8 grid gap-4 border-t border-border pt-6 sm:grid-cols-3">
-              {["Separate staff, guest, and device traffic", "Allow only the connections each system actually needs", "Document the rules so the network stays maintainable"].map((item, index) => <div key={item} className="flex gap-3 text-sm leading-relaxed text-text-secondary"><span className="font-mono text-[10px] text-primary">0{index + 1}</span>{item}</div>)}
+              {["Separate staff, guest, and device traffic", "Allow only the connections each system actually needs", "Document the rules so the network stays maintainable"].map((item, index) => <div key={item} className="flex gap-3 text-sm leading-relaxed text-text-secondary"><span className="font-mono text-[11px] text-primary">0{index + 1}</span>{item}</div>)}
             </div>
           </div>
         </section>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
                 const Icon = SERVICE_ICONS[service.id] ?? Network
                 return <article key={service.id} className="group relative overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-[0_14px_40px_-30px_var(--accent-glow)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_55px_-28px_var(--accent-glow)]">
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  <div className="flex items-start justify-between gap-4"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span><span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[10px] tracking-[0.14em] text-text-tertiary uppercase">{service.delivery}</span></div>
+                  <div className="flex items-start justify-between gap-4"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span><span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">{service.delivery}</span></div>
                   <h3 className="mt-6 text-xl font-semibold tracking-tight">{service.title}</h3>
                   <p className="mt-2 min-h-16 text-sm leading-relaxed text-text-secondary">{service.description}</p>
                   <div className="mt-5 border-t border-border" />
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         </section>
 
         <section className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><Eyebrow>How it works</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">No mystery between the idea and the handoff.</h2></div><div className="border-t border-border">{PROCESS.map((step) => <div key={step.n} className="grid grid-cols-[48px_1fr] gap-4 border-b border-border py-6"><span className="font-mono text-[10px] text-text-tertiary">{step.n}</span><div><h3 className="font-semibold">{step.title}</h3><p className="mt-1 text-sm leading-relaxed text-text-secondary">{step.copy}</p></div></div>)}</div></div></div>
+          <div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><Eyebrow>How it works</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">No mystery between the idea and the handoff.</h2></div><div className="border-t border-border">{PROCESS.map((step) => <div key={step.n} className="grid grid-cols-[48px_1fr] gap-4 border-b border-border py-6"><span className="font-mono text-[11px] text-text-tertiary">{step.n}</span><div><h3 className="font-semibold">{step.title}</h3><p className="mt-1 text-sm leading-relaxed text-text-secondary">{step.copy}</p></div></div>)}</div></div></div>
         </section>
 
         <section className="border-b border-border bg-surface">

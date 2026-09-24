@@ -65,10 +65,10 @@ export function DiscordChatMock({ className }: { className?: string }) {
           <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary"><Hash className="size-3.5" /></span>
           <div>
             <p className="text-xs font-semibold text-foreground">homelab-chat</p>
-            <p className="mt-0.5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Example conversation</p>
+            <p className="mt-0.5 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Example conversation</p>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase"><Users className="size-3" />Community</span>
+        <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-wider text-text-tertiary uppercase"><Users className="size-3" />Community</span>
       </div>
 
       <motion.div
@@ -90,7 +90,7 @@ export function DiscordChatMock({ className }: { className?: string }) {
       </motion.div>
 
       <div className="relative flex items-center gap-3 border-t border-border bg-surface-raised/45 px-5 py-3.5">
-        <span className="flex size-7 items-center justify-center rounded-full border border-primary/20 bg-primary/10 font-mono text-[10px] font-semibold text-primary">n</span>
+        <span className="flex size-7 items-center justify-center rounded-full border border-primary/20 bg-primary/10 font-mono text-[11px] font-semibold text-primary">n</span>
         <div className="flex flex-1 items-center justify-between rounded-lg border border-border bg-background/60 px-3 py-2">
           <span className="text-xs text-text-tertiary">net_newbie is typing</span>
           <TypingDots animate={!reduced} />

@@ -50,7 +50,7 @@ export function NetworkSection() {
           className="mt-14 flex items-center gap-2"
         >
           <h3 className="text-lg font-semibold text-foreground">Home Network</h3>
-          <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
+          <span className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
             ISP → UniFi
           </span>
         </motion.div>
@@ -95,7 +95,7 @@ export function NetworkSection() {
           className="mt-20 flex items-center gap-2"
         >
           <h3 className="text-lg font-semibold text-foreground">Cisco Lab</h3>
-          <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
+          <span className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
             Own routing domain · Enterprise gear
           </span>
         </motion.div>

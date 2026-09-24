@@ -73,13 +73,13 @@ export default async function CaseStudyPage({
             Work
           </Link>
 
-          <span className="mt-6 block font-mono text-xs tracking-[0.2em] text-primary uppercase">Case study</span>
+          <span className="mt-6 block font-mono text-xs tracking-[0.14em] text-primary uppercase">Case study</span>
           <h1 className="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">{frontmatter.title}</h1>
           <p className="mt-3 text-text-secondary">{frontmatter.summary}</p>
           {frontmatter.tags.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {frontmatter.tags.map((tag) => (
-                <span key={tag} className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{tag}</span>
+                <span key={tag} className="rounded-full border border-border px-2.5 py-1 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">{tag}</span>
               ))}
             </div>
           )}

@@ -67,19 +67,19 @@ const HYPERVISOR_ICONS: Record<string, React.ElementType> = {
 type CategoryMeta = { icon: React.ElementType; text: string; bg: string }
 
 const CATEGORY_META: Record<string, CategoryMeta> = {
-  Automation: { icon: Home, text: "text-chart-1", bg: "bg-chart-1/12" },
-  Photos: { icon: ImageIcon, text: "text-chart-2", bg: "bg-chart-2/12" },
-  Media: { icon: PlayCircle, text: "text-chart-3", bg: "bg-chart-3/12" },
-  Cloud: { icon: Cloud, text: "text-chart-4", bg: "bg-chart-4/12" },
-  Networking: { icon: Router, text: "text-chart-5", bg: "bg-chart-5/12" },
-  Security: { icon: KeyRound, text: "text-chart-3", bg: "bg-chart-3/12" },
-  Monitoring: { icon: Activity, text: "text-chart-2", bg: "bg-chart-2/12" },
-  Development: { icon: Code2, text: "text-chart-1", bg: "bg-chart-1/12" },
-  Documents: { icon: FileText, text: "text-chart-4", bg: "bg-chart-4/12" },
-  Storage: { icon: Database, text: "text-chart-5", bg: "bg-chart-5/12" },
-  Cameras: { icon: Camera, text: "text-chart-1", bg: "bg-chart-1/12" },
+  Automation: { icon: Home, text: "text-chart-1", bg: "bg-chart-1/8" },
+  Photos: { icon: ImageIcon, text: "text-chart-2", bg: "bg-chart-2/8" },
+  Media: { icon: PlayCircle, text: "text-chart-3", bg: "bg-chart-3/8" },
+  Cloud: { icon: Cloud, text: "text-chart-4", bg: "bg-chart-4/8" },
+  Networking: { icon: Router, text: "text-chart-5", bg: "bg-chart-5/8" },
+  Security: { icon: KeyRound, text: "text-chart-3", bg: "bg-chart-3/8" },
+  Monitoring: { icon: Activity, text: "text-chart-2", bg: "bg-chart-2/8" },
+  Development: { icon: Code2, text: "text-chart-1", bg: "bg-chart-1/8" },
+  Documents: { icon: FileText, text: "text-chart-4", bg: "bg-chart-4/8" },
+  Storage: { icon: Database, text: "text-chart-5", bg: "bg-chart-5/8" },
+  Cameras: { icon: Camera, text: "text-chart-1", bg: "bg-chart-1/8" },
 }
-const DEFAULT_CATEGORY_META: CategoryMeta = { icon: Layers, text: "text-chart-5", bg: "bg-chart-5/12" }
+const DEFAULT_CATEGORY_META: CategoryMeta = { icon: Layers, text: "text-chart-5", bg: "bg-chart-5/8" }
 
 function categoryMeta(category: string) {
   return CATEGORY_META[category] ?? DEFAULT_CATEGORY_META
@@ -243,7 +243,7 @@ export function VmSizingCalculator() {
     <div className="grid gap-8 pb-20 lg:grid-cols-[1fr_360px] lg:items-start lg:pb-0">
       <div>
         <div className="mb-8">
-          <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">Start from a preset</p>
+          <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">Start from a preset</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {SIZER_PRESETS.map((preset) => (
               <button key={preset.id} onClick={() => applyPreset(preset.appIds)} title={preset.description} className="rounded-full border border-border bg-surface-raised px-3.5 py-2 text-xs font-medium text-text-secondary transition-colors hover:border-primary/35 hover:text-foreground">
@@ -302,9 +302,9 @@ export function VmSizingCalculator() {
                       <span className="flex flex-wrap items-center justify-between gap-2">
                         <span className="flex items-center gap-2">
                           <strong className="text-sm text-foreground">{workload.name}</strong>
-                          <span className={cn("rounded-full px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase", meta.bg, meta.text)}>{workload.category}</span>
+                          <span className={cn("rounded-full px-2 py-0.5 font-mono text-[11px] tracking-wider uppercase", meta.bg, meta.text)}>{workload.category}</span>
                         </span>
-                        <span className="font-mono text-[10px] text-text-secondary">{req.cpu} vCPU · {req.ramGb} GB · {req.storageGb} GB</span>
+                        <span className="font-mono text-[11px] text-text-secondary">{req.cpu} vCPU · {req.ramGb} GB · {req.storageGb} GB</span>
                       </span>
                       <span className="mt-1 block text-sm text-text-secondary">{workload.description}</span>
                     </span>
@@ -350,7 +350,7 @@ export function VmSizingCalculator() {
 
           {hasTranscodeApp && (
             <div className="mt-5 rounded-xl border border-border bg-surface-raised p-5">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">Transcoding</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">Transcoding</p>
               <div className="mt-3 flex flex-wrap items-center gap-5">
                 <label className="flex items-center gap-2 text-sm text-text-secondary">
                   Simultaneous streams
@@ -385,7 +385,7 @@ export function VmSizingCalculator() {
                   </div>
                   <span className={cn("mt-3 block text-sm font-medium", active ? "text-primary" : "text-foreground")}>{hv.name}</span>
                   <span className="mt-1 block text-xs text-text-tertiary">{hv.description}</span>
-                  <span className="mt-2 block font-mono text-[10px] text-text-tertiary">
+                  <span className="mt-2 block font-mono text-[11px] text-text-tertiary">
                     {hv.overhead.cpu === 0 && hv.overhead.ramGb === 0 && hv.overhead.storageGb === 0
                       ? "No added overhead"
                       : `+${hv.overhead.cpu} vCPU · +${hv.overhead.ramGb} GB · +${hv.overhead.storageGb} GB`}
@@ -444,7 +444,7 @@ export function VmSizingCalculator() {
 
       <aside id="sizer-results" className="scroll-mt-24 sticky top-24 overflow-hidden rounded-2xl border border-primary/20 bg-surface-raised shadow-[0_0_40px_-24px_var(--accent-glow)]">
         <div className="border-b border-border px-6 py-5">
-          <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Suggested capacity</p>
+          <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Suggested capacity</p>
           <p className="mt-1 text-xs text-text-tertiary">{chosen.length} workload{chosen.length === 1 ? "" : "s"} · {PROFILE_LABELS[profile].label} · {hypervisor.name}</p>
         </div>
         {chosen.length ? (
@@ -456,14 +456,14 @@ export function VmSizingCalculator() {
             </div>
 
             <div className="border-t border-border px-6 py-5">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">Where the core count comes from</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">Where the core count comes from</p>
               <p className="mt-3 text-xs leading-relaxed text-text-secondary">
                 Summed vCPU across your apps ({perApp.reduce((s, p) => s + p.effective.cpu, 0)}) ÷ a 3.5x overcommit ratio — VMs rarely peak simultaneously, so physical cores don&rsquo;t need to match summed vCPU 1:1.{hypervisor.overhead.cpu > 0 ? ` Plus ${hypervisor.overhead.cpu} vCPU for ${hypervisor.name}.` : ""}
               </p>
             </div>
 
             <div className="border-t border-border px-6 py-5">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">RAM &amp; system disk</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">RAM &amp; system disk</p>
               <div className="mt-4 space-y-4">
                 <ResourceBar label="RAM" unit="GB" raw={ramRaw} withHeadroom={appTotal.ramGb} chosen={chosen} perApp={perApp} field="ramGb" />
                 <ResourceBar label="System disk" unit="GB" raw={sysStorageRaw} withHeadroom={appTotal.storageGb} chosen={chosen} perApp={perApp} field="storageGb" />
@@ -473,7 +473,7 @@ export function VmSizingCalculator() {
 
             {hwMatch && (
               <div className="border-t border-border px-6 py-5">
-                <p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Fits on</p>
+                <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Fits on</p>
                 <p className="mt-2 text-sm font-semibold text-foreground">{hwMatch.nodes > 1 ? `${hwMatch.nodes}× ` : "1× "}{hwMatch.tier.name}</p>
                 <p className="mt-1 text-xs leading-relaxed text-text-secondary">{hwMatch.tier.cpu} · up to {hwMatch.tier.maxRamGb} GB RAM · {hwMatch.tier.nvmeSlots} NVMe slot{hwMatch.tier.nvmeSlots === 1 ? "" : "s"} · {hwMatch.tier.quickSync} Quick Sync</p>
                 {hwMatch.tier.note && <p className="mt-2 text-xs font-medium text-primary">{hwMatch.tier.note}</p>}
@@ -481,7 +481,7 @@ export function VmSizingCalculator() {
             )}
 
             <div className="border-t border-border px-6 py-5">
-              <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">ZeroPoint lab actual usage</p>
+              <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">ZeroPoint lab actual usage</p>
               <p className="mt-2 text-xs leading-relaxed text-text-secondary">
                 pve01 + pve02 run <strong className="text-foreground">{labCores} cores</strong> and use <strong className="text-foreground">{labRamUsed.toFixed(1)} of {labRamTotal.toFixed(1)} GB RAM</strong> right now — updated by hand, see <Link href="/network" className="text-primary hover:underline">the Lab</Link>.
               </p>
@@ -546,15 +546,15 @@ export function VmSizingCalculator() {
 function StepLabel({ n, children }: { n: number; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/15 font-mono text-[10px] text-primary">{n}</span>
-      <p className="font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">{children}</p>
+      <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/15 font-mono text-[11px] text-primary">{n}</span>
+      <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">{children}</p>
     </div>
   )
 }
 
 function LegendChip({ colorClass, label }: { colorClass: string; label: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-text-tertiary">
+    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text-tertiary">
       <span className={cn("size-1.5 rounded-full", colorClass)} />
       {label}
     </span>
@@ -562,7 +562,7 @@ function LegendChip({ colorClass, label }: { colorClass: string; label: string }
 }
 
 function Result({ icon: Icon, value, unit }: { icon: React.ElementType; value: number; unit: string }) {
-  return <div className="px-2 py-5 text-center"><Icon className="mx-auto size-4 text-text-tertiary" /><p className="mt-3 font-mono text-2xl font-semibold text-foreground">{value}</p><p className="mt-1 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{unit}</p></div>
+  return <div className="px-2 py-5 text-center"><Icon className="mx-auto size-4 text-text-tertiary" /><p className="mt-3 font-mono text-2xl font-semibold text-foreground">{value}</p><p className="mt-1 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">{unit}</p></div>
 }
 
 function ResourceBar({
@@ -587,7 +587,7 @@ function ResourceBar({
     <div>
       <div className="flex items-baseline justify-between">
         <span className="text-xs text-text-secondary">{label}</span>
-        <span className="font-mono text-[10px] text-text-tertiary">{raw} {unit} apps + {headroomValue} {unit} headroom</span>
+        <span className="font-mono text-[11px] text-text-tertiary">{raw} {unit} apps + {headroomValue} {unit} headroom</span>
       </div>
       <div className="mt-1.5 flex h-2 w-full overflow-hidden rounded-full bg-surface">
         {perApp.map((p, index) => {

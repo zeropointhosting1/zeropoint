@@ -23,7 +23,7 @@ export function ProjectArt({
     return (
       <div className={cn("relative overflow-hidden rounded-xl border border-border bg-surface-raised", className)}>
         <Image src={withBasePath(photoSrc)} alt="" fill unoptimized className="object-cover" />
-        <span className="absolute top-4 left-4 rounded-full bg-background/80 px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-text-tertiary uppercase backdrop-blur-sm">
+        <span className="absolute top-4 left-4 rounded-full bg-background/80 px-2 py-1 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase backdrop-blur-sm">
           {label}
         </span>
       </div>
@@ -39,7 +39,7 @@ export function ProjectArt({
     >
       <div className="absolute inset-0 bg-radial-fade opacity-60" />
       <Icon className="absolute top-1/2 left-1/2 size-16 -translate-x-1/2 -translate-y-1/2 text-primary/10" />
-      <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] text-text-tertiary uppercase">
+      <span className="absolute top-4 left-4 font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
         {label}
       </span>
     </div>

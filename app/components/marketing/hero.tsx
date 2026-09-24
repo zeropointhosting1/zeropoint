@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
-import { Activity, ArrowRight, Boxes, Network, Server } from "lucide-react"
+import { ArrowRight, Building2, FlaskConical, HouseWifi, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AppMarquee } from "./app-marquee"
-import { LAST_UPDATED } from "@/lib/homelab-data"
 
 // Hidden state stays mostly visible (opacity 0.6, not 0) so the
 // server-rendered HTML never paints a blank hero before hydration —
@@ -15,11 +14,13 @@ const enter = {
   visible: (delay: number) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as const } }),
 }
 
-const LAB_SIGNALS = [
-  { icon: Server, label: "Compute", value: "Proxmox cluster" },
-  { icon: Network, label: "Network", value: "UniFi + Cisco lab" },
-  { icon: Boxes, label: "Services", value: "Self-hosted stack" },
-  { icon: Activity, label: "Approach", value: "Built and documented" },
+// Plain-language entry points — the first thing a visitor who doesn't know
+// the jargon needs is "which of these is me?"
+const HELP_WITH = [
+  { icon: HouseWifi, title: "Wi-Fi and networks at home", copy: "Dead zones, slow Wi-Fi, safer smart devices", href: "/home-networking" },
+  { icon: Building2, title: "Technology for my business", copy: "Office Wi-Fi, guest networks, backups", href: "/services" },
+  { icon: LayoutDashboard, title: "A website or dashboard", copy: "For restaurants and small businesses", href: "/websites" },
+  { icon: FlaskConical, title: "Building a home server", copy: "Homelabs, self-hosting, planning tools", href: "/lab" },
 ]
 
 export function Hero() {
@@ -29,27 +30,35 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
       <div className="relative mx-auto grid min-h-[760px] max-w-6xl items-center gap-16 px-6 pt-32 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-28">
         <div>
-          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">Homelabs · Home Networks · Business Tech · Websites</motion.p>
-          <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Build better<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">technology.</span></motion.h1>
-          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">From your first homelab to your home network, your office, and your business&rsquo;s website, ZeroPoint helps you plan, build, and understand the technology you rely on.</motion.p>
+          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Homes · Small businesses · Websites</motion.p>
+          <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Technology that<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">just works.</span></motion.h1>
+          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Reliable Wi-Fi, safer networks, and websites that bring in customers — for homes and small businesses. Set up properly, and explained in plain English.</motion.p>
           <motion.div custom={reduced ? 0 : 0.35} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
-            <Button size="lg" render={<Link href="/contact" />}>Book a free consult <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/websites" />}>Business websites</Button>
-            <Button size="lg" variant="ghost" render={<Link href="/lab" />}>Explore the lab</Button>
+            <Button size="lg" render={<Link href="/contact" />}>Get a free consult <ArrowRight className="size-4" /></Button>
+            <Button size="lg" variant="outline" render={<Link href="/pricing" />}>See pricing</Button>
           </motion.div>
-          <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
+          <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Free consult · Clear written quote · You own everything</motion.p>
         </div>
 
         <motion.div custom={reduced ? 0 : 0.18} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter}>
-          <div className="theme-dark overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_28px_90px_-42px_var(--accent-glow)]">
-            <div className="flex items-center justify-between border-b border-border px-6 py-5"><div><p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Inside ZeroPoint Lab</p><p className="mt-1 text-sm text-text-secondary">The infrastructure behind the brand</p></div><span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">As of {LAST_UPDATED}</span></div>
-            <div className="grid grid-cols-2 gap-px bg-border">{LAB_SIGNALS.map(({ icon: Icon, label, value }) => <div key={label} className="bg-surface p-5"><Icon className="size-4 text-primary" /><p className="mt-6 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{label}</p><p className="mt-1 text-sm font-medium text-foreground">{value}</p></div>)}</div>
-            <Link href="/network" className="group flex items-center justify-between px-6 py-4 text-sm text-text-secondary transition-colors hover:text-foreground"><span>View the working infrastructure</span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></Link>
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-[0_28px_90px_-42px_var(--accent-glow)]">
+            <p className="border-b border-border px-6 py-4 text-sm font-semibold">What do you need help with?</p>
+            <ul className="divide-y divide-border">
+              {HELP_WITH.map(({ icon: Icon, title, copy, href }) => (
+                <li key={href}>
+                  <Link href={href} className="group flex items-center gap-4 px-6 py-4 transition-colors hover:bg-primary/5">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span>
+                    <span className="flex-1"><span className="block font-medium text-foreground">{title}</span><span className="block text-sm text-text-secondary">{copy}</span></span>
+                    <ArrowRight className="size-4 shrink-0 text-text-tertiary transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </motion.div>
       </div>
 
-      <AppMarquee label="Platforms we work with" />
+      <AppMarquee label="Apps and equipment we set up" />
     </section>
   )
 }

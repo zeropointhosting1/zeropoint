@@ -46,7 +46,7 @@ export function RadialGauge({
           {Math.round(pct)}%
         </text>
       </svg>
-      <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
+      <span className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
         {label}
       </span>
     </div>

@@ -74,7 +74,7 @@ export default async function DocArticlePage({
 
       <div className="mt-6 grid gap-12 xl:grid-cols-[1fr_200px]">
         <div className="min-w-0">
-          <span className="font-mono text-xs tracking-[0.2em] text-primary uppercase">
+          <span className="font-mono text-xs tracking-[0.14em] text-primary uppercase">
             {categoryLabel(category)}
           </span>
           <h1 className="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">

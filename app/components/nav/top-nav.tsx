@@ -38,7 +38,7 @@ export function TopNav() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300",
           scrolled
-            ? "border-b border-primary/15 bg-background/85 shadow-[0_1px_24px_-8px_var(--accent-glow)] backdrop-blur-xl backdrop-saturate-150"
+            ? "border-b border-border bg-background/95 shadow-[0_1px_24px_-12px_var(--accent-glow)] backdrop-blur-xl"
             : "border-b border-transparent bg-transparent"
         )}
       >
@@ -47,7 +47,7 @@ export function TopNav() {
             <Wordmark />
           </Link>
 
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 xl:flex">
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 lg:flex">
             <li className="group relative">
               <DropdownMenu>
                 <DropdownMenuTrigger
@@ -101,7 +101,7 @@ export function TopNav() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 xl:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             {SOCIAL_LINKS.github && (
               <Button variant="ghost" size="icon" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}>
                 <GithubIcon className="size-4" />
@@ -120,7 +120,7 @@ export function TopNav() {
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="flex size-9 items-center justify-center rounded-md text-foreground xl:hidden"
+            className="flex size-9 items-center justify-center rounded-md text-foreground lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -136,7 +136,7 @@ export function TopNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-background xl:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background lg:hidden"
           >
             <div className="flex h-16 items-center justify-end px-6">
               <button
@@ -147,70 +147,54 @@ export function TopNav() {
                 <X className="size-5" />
               </button>
             </div>
-            <motion.ul
+            <motion.div
               initial="hidden"
               animate="visible"
-              variants={{
-                visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
-              }}
-              className="flex flex-col gap-1 px-6 pt-4"
+              variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } } }}
+              className="mx-auto max-w-xl px-6 pt-2 pb-10"
             >
-              <motion.li
-                variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
-              >
-                <p className="pt-3 pb-1 font-mono text-xs tracking-[0.16em] text-text-tertiary uppercase">Services</p>
-                <div className="flex flex-col">
-                  {SERVICES_MENU.map((item) => (
-                    <Link key={item.href} href={item.href} className="block py-2 text-2xl font-semibold tracking-tight text-foreground">
-                      {item.label}
+              <motion.p variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="text-xs font-semibold tracking-wide text-text-secondary uppercase">Services</motion.p>
+              <ul className="mt-3 grid gap-2">
+                {SERVICES_MENU.map((item) => (
+                  <motion.li key={item.href} variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}>
+                    <Link href={item.href} className={cn("flex items-center justify-between gap-4 rounded-xl border px-4 py-3.5 transition-colors", pathname.startsWith(item.href) ? "border-primary/40 bg-primary/8" : "border-border bg-surface-raised hover:border-primary/30")}>
+                      <span>
+                        <span className="block text-base font-semibold text-foreground">{item.label}</span>
+                        <span className="mt-0.5 block text-sm text-text-secondary">{item.description}</span>
+                      </span>
+                      <ArrowRight className="size-4 shrink-0 text-primary" />
                     </Link>
-                  ))}
-                </div>
-              </motion.li>
-              {NAV_LINKS.map((link) => (
-                <motion.li
-                  key={link.href}
-                  variants={{
-                    hidden: { opacity: 0, y: 16 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                >
-                  <Link
-                    href={link.href}
-                    className="block py-3 text-3xl font-semibold tracking-tight text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
-            </motion.ul>
-            <div className="mt-8 flex items-center justify-between border-t border-border px-6 py-6">
-              <div className="flex items-center gap-4">
-                {SOCIAL_LINKS.github && (
-                  <a
-                    href={SOCIAL_LINKS.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm text-text-secondary"
-                  >
-                    <GithubIcon className="size-4" />
-                    GitHub
+                  </motion.li>
+                ))}
+              </ul>
+              <motion.ul variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="mt-6 divide-y divide-border border-y border-border">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={cn("flex items-center justify-between py-3.5 text-base font-semibold", pathname.startsWith(link.href) ? "text-primary" : "text-foreground")}>
+                      {link.label}
+                      <ArrowRight className="size-4 text-text-tertiary" />
+                    </Link>
+                  </li>
+                ))}
+              </motion.ul>
+              <motion.div variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="mt-8 grid gap-3">
+                <Button size="lg" className="h-12 w-full text-base" render={<Link href="/contact" />}>
+                  Get a free consult <ArrowRight className="size-4" />
+                </Button>
+                <div className="flex items-center justify-center gap-6 pt-2">
+                  {SOCIAL_LINKS.github && (
+                    <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-text-secondary hover:text-foreground">
+                      <GithubIcon className="size-4" />
+                      GitHub
+                    </a>
+                  )}
+                  <a href={DISCORD_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-text-secondary hover:text-foreground">
+                    <DiscordIcon className="size-4" />
+                    Discord community
                   </a>
-                )}
-                <a
-                  href={DISCORD_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-2 text-sm text-text-secondary"
-                >
-                  <DiscordIcon className="size-4" />
-                  Discord
-                </a>
-              </div>
-              <Button size="sm" render={<Link href="/contact" />}>
-                Contact
-              </Button>
-            </div>
+                </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

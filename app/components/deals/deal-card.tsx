@@ -43,14 +43,14 @@ export function DealCard({ deal }: { deal: EnrichedDeal }) {
         {deal.isGoodPrice && (
           <span
             title="Priced well below other current listings with a similar CPU generation and RAM, shipping included"
-            className="absolute top-2 left-2 flex items-center gap-1 rounded-full border border-warning/30 bg-background/85 px-2 py-1 font-mono text-[10px] tracking-wider text-warning uppercase backdrop-blur-sm"
+            className="absolute top-2 left-2 flex items-center gap-1 rounded-full border border-warning/30 bg-background/85 px-2 py-1 font-mono text-[11px] tracking-wider text-warning uppercase backdrop-blur-sm"
           >
             <Flame className="size-3" />
             Good price
           </span>
         )}
         {deal.isBarebones && (
-          <span className="absolute top-2 right-2 rounded-full border border-border bg-background/85 px-2 py-1 font-mono text-[10px] tracking-wider text-text-tertiary uppercase backdrop-blur-sm">
+          <span className="absolute top-2 right-2 rounded-full border border-border bg-background/85 px-2 py-1 font-mono text-[11px] tracking-wider text-text-tertiary uppercase backdrop-blur-sm">
             Barebones
           </span>
         )}
@@ -66,7 +66,7 @@ export function DealCard({ deal }: { deal: EnrichedDeal }) {
         {chips.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {chips.map(({ icon: Icon, label }) => (
-              <span key={label} className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2 py-1 font-mono text-[10px] text-text-secondary">
+              <span key={label} className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2 py-1 font-mono text-[11px] text-text-secondary">
                 <Icon className="size-3 text-text-tertiary" />
                 {label}
               </span>
@@ -78,7 +78,7 @@ export function DealCard({ deal }: { deal: EnrichedDeal }) {
           <span className="font-mono text-lg font-semibold text-foreground">
             {new Intl.NumberFormat("en-US", { style: "currency", currency: deal.currency }).format(deal.price)}
           </span>
-          <span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
+          <span className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">
             {deal.condition}
           </span>
         </div>

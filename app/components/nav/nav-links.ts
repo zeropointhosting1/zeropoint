@@ -10,10 +10,10 @@ export const NAV_LINKS = [
 ]
 
 export const SERVICES_MENU = [
-  { label: "Home Networking", href: "/home-networking", description: "Wi-Fi, IoT and camera separation" },
+  { label: "Home Networking", href: "/home-networking", description: "Wi-Fi in every room, safer smart devices" },
   { label: "Small Business", href: "/services", description: "Office networks, guest Wi-Fi, backups" },
-  { label: "Websites & Dashboards", href: "/websites", description: "Restaurant and small-business sites" },
-  { label: "Homelab", href: "/lab", description: "Proxmox, self-hosting, planning tools" },
+  { label: "Websites & Dashboards", href: "/websites", description: "Sites for restaurants and small businesses" },
+  { label: "Homelab", href: "/lab", description: "Home servers, self-hosting, planning tools" },
 ]
 
 // Paths that should count as "Services" being the active nav item, since

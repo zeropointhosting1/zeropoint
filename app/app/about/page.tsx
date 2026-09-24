@@ -83,7 +83,7 @@ export default function AboutPage() {
 
             <div className="relative border-y border-border py-7">
               <div className="pointer-events-none absolute -top-20 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/8 blur-3xl" />
-              <p className="relative font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Current chapter</p>
+              <p className="relative font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Current chapter</p>
               <div className="relative mt-6 flex items-center gap-4">
                 {HAS_HEADSHOT ? (
                   <Image src={withBasePath("/about/headshot.jpg")} alt={BUSINESS_INFO.name} width={56} height={56} unoptimized className="size-14 shrink-0 rounded-2xl border border-primary/20 object-cover" />
@@ -119,7 +119,7 @@ export default function AboutPage() {
                 {STORY.map(({ n, icon: Icon, label, title, copy }) => (
                   <article key={n} className="grid gap-5 border-b border-border py-9 sm:grid-cols-[64px_1fr]">
                     <div><span className="font-mono text-xs text-text-tertiary">{n}</span><span className="mt-4 flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span></div>
-                    <div><p className="font-mono text-[10px] tracking-[0.16em] text-primary uppercase">{label}</p><h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{title}</h3><p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">{copy}</p></div>
+                    <div><p className="font-mono text-[11px] tracking-[0.12em] text-primary uppercase">{label}</p><h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground sm:text-2xl">{title}</h3><p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">{copy}</p></div>
                   </article>
                 ))}
               </div>
@@ -134,7 +134,7 @@ export default function AboutPage() {
               {PATHS.map(({ icon: Icon, eyebrow, title, copy, href }) => (
                 <Link key={href} href={href} className="group border-b border-border py-7 md:px-7 md:odd:border-r md:odd:pl-0 md:even:pr-0">
                   <div className="flex items-center justify-between"><span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span><ArrowUpRight className="size-4 text-text-tertiary transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" /></div>
-                  <p className="mt-6 font-mono text-[10px] tracking-[0.16em] text-text-tertiary uppercase">{eyebrow}</p><h3 className="mt-2 text-lg font-semibold transition-colors group-hover:text-primary">{title}</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">{copy}</p>
+                  <p className="mt-6 font-mono text-[11px] tracking-[0.12em] text-text-tertiary uppercase">{eyebrow}</p><h3 className="mt-2 text-lg font-semibold transition-colors group-hover:text-primary">{title}</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">{copy}</p>
                 </Link>
               ))}
             </div>

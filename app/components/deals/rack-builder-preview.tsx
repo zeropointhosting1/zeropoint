@@ -34,7 +34,7 @@ export function RackBuilderPreview() {
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Button variant="outline" render={<Link href="/sizer" />}>Start with VM sizing <ArrowRight className="size-4" /></Button>
-          <span className="font-mono text-[10px] tracking-wider text-warning uppercase">Visual designer · Planned</span>
+          <span className="font-mono text-[11px] tracking-wider text-warning uppercase">Visual designer · Planned</span>
         </div>
       </div>
     </section>

@@ -27,7 +27,7 @@ export function LiveTopologySection() {
           <div className="mb-3 flex justify-center"><SectionIndex n="03" /></div>
           <div className="flex items-center justify-center gap-2">
             <span className="relative flex size-1.5">{!reduced && <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />}<span className="relative inline-flex size-1.5 rounded-full bg-primary" /></span>
-            <p className="font-mono text-[11px] tracking-[0.2em] text-primary uppercase">The actual home network</p>
+            <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">The actual home network</p>
           </div>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Not a concept. The real topology.</h2>
           <p className="mt-3 text-text-secondary">A sanitized view of the hardware, workloads, and segmented networks running behind ZeroPoint.</p>
