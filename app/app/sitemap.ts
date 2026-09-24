@@ -17,6 +17,7 @@ const STATIC_ROUTES = [
   "/home-networking/",
   "/lab/",
   "/network/",
+  "/pricing/",
   "/privacy/",
   "/projects/",
   "/services/",

@@ -1,11 +1,10 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight, Check, FileText, Headset, KeyRound, MessageSquareText, Network, ShieldCheck, Users, Wifi, Building2 } from "lucide-react"
+import { Check, FileText, Headset, KeyRound, MessageSquareText, Network, ShieldCheck, Users, Wifi, Building2 } from "lucide-react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
-import { ServicePlanner } from "@/components/services/service-planner"
-import { formatServicePrice, offeringsFor } from "@/lib/services"
+import { ConsultCta, PricingLink } from "@/components/services/pricing-links"
+import { offeringsFor } from "@/lib/services"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { pageMetadata } from "@/lib/metadata"
 
@@ -103,7 +102,7 @@ export default function ServicesPage() {
           <div className="relative mx-auto max-w-6xl px-6 py-24">
             <div className="grid gap-6 lg:grid-cols-[1fr_0.7fr] lg:items-end">
               <div><Eyebrow>Services</Eyebrow><h2 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Start with the <span className="text-primary">outcome</span> you need.</h2></div>
-              <p className="max-w-lg text-base leading-relaxed text-text-secondary lg:justify-self-end">Choose a focused engagement or combine services into one documented project. Every option starts with a clear scope before work begins.</p>
+              <p className="max-w-lg text-base leading-relaxed text-text-secondary lg:justify-self-end">Choose a focused engagement or combine services into one documented project. Every project starts with a free consult and a written scope.</p>
             </div>
             <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {offerings.map((service) => {
@@ -113,13 +112,12 @@ export default function ServicesPage() {
                   <div className="flex items-start justify-between gap-4"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span><span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[10px] tracking-[0.14em] text-text-tertiary uppercase">{service.delivery}</span></div>
                   <h3 className="mt-6 text-xl font-semibold tracking-tight">{service.title}</h3>
                   <p className="mt-2 min-h-16 text-sm leading-relaxed text-text-secondary">{service.description}</p>
-                  <div className="mt-5 border-y border-border py-4"><span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Starting at</span><p className="mt-1 text-lg font-semibold text-primary">{formatServicePrice(service.pricing)}</p></div>
+                  <div className="mt-5 border-t border-border" />
                   <ul className="mt-5 space-y-2.5">{service.includes.map((item) => <li key={item} className="flex gap-2.5 text-xs leading-relaxed text-text-secondary"><Check className="mt-0.5 size-3.5 shrink-0 text-success" />{item}</li>)}</ul>
-                  <p className="mt-5 text-[11px] leading-relaxed text-text-tertiary">{service.pricing.note}</p>
                 </article>
               })}
             </div>
-            <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-primary/20 bg-primary/6 px-6 py-5 sm:flex-row sm:items-center"><div><p className="font-semibold">Not sure which service fits?</p><p className="mt-1 text-sm text-text-secondary">Build a quick project brief and see a starting estimate.</p></div><Link href="#project-planner" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5">Plan your project <ArrowRight className="size-4" /></Link></div>
+            <PricingLink audience="business" />
           </div>
         </section>
 
@@ -131,10 +129,7 @@ export default function ServicesPage() {
           <div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><Eyebrow>Questions</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Common questions.</h2></div><div className="border-t border-border">{FAQ.map(({ q, a }) => <div key={q} className="border-b border-border py-6"><h3 className="font-semibold text-foreground">{q}</h3><p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">{a}</p></div>)}</div></div></div>
         </section>
 
-        <section id="project-planner" className="relative scroll-mt-20 overflow-hidden border-b border-border bg-surface">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_50%_at_85%_20%,var(--accent-glow),transparent_75%)] opacity-70" />
-          <div className="relative mx-auto max-w-6xl px-6 py-24"><div className="mb-12 max-w-2xl"><Eyebrow>Project planner</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Turn the idea into a useful first brief.</h2><p className="mt-3 text-text-secondary">Select what you need and send a structured summary. Prices above are starting points — your actual quote depends on scope, and local install availability is confirmed per request.</p></div><ServicePlanner /></div>
-        </section>
+        <ConsultCta audience="business" />
       </main>
       <Footer />
     </>

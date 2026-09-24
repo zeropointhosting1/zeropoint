@@ -9,8 +9,8 @@ import { formatServicePrice, offeringsFor, PROJECT_GOALS, SERVICE_OFFERINGS, typ
 const AUDIENCE_GROUPS: { audience: ServiceAudience; label: string }[] = [
   { audience: "home", label: "Home" },
   { audience: "business", label: "Small business" },
-  { audience: "homelab", label: "Homelab" },
   { audience: "web", label: "Websites & dashboards" },
+  { audience: "homelab", label: "Homelab" },
 ]
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { submitForm, type SubmitResult } from "@/lib/submit-form"

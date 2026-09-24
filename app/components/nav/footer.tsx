@@ -11,6 +11,7 @@ const EXPLORE = [
   { label: "Home Networking", href: "/home-networking" },
   { label: "Business", href: "/services" },
   { label: "Websites", href: "/websites" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ]
 

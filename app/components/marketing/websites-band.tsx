@@ -59,7 +59,7 @@ export function WebsitesBand() {
           <ul className="mt-7 space-y-3">{POINTS.map((point) => <li key={point} className="flex gap-3 text-sm leading-relaxed text-text-secondary"><Check className="mt-0.5 size-4 shrink-0 text-success" />{point}</li>)}</ul>
           <div className="mt-9 flex flex-wrap gap-3">
             <Button size="lg" render={<Link href="/websites" />}>See websites &amp; dashboards <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/websites#project-planner" />}>Plan a site</Button>
+            <Button size="lg" variant="outline" render={<Link href="/contact" />}>Get a free consult</Button>
           </div>
         </div>
         <SiteMock />

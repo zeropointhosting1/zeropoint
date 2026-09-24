@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BookOpen, Boxes, Calculator, CircleHelp, ClipboardList, HardDrive, Network, PackageSearch, Radio, Search, Wrench } from "lucide-react"
+import { ArrowRight, ArrowUpRight, BookOpen, Check, Boxes, Calculator, CircleHelp, ClipboardList, HardDrive, Network, PackageSearch, Radio, Search, Wrench } from "lucide-react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Button } from "@/components/ui/button"
@@ -15,7 +15,7 @@ import { DiscordIcon } from "@/components/nav/brand-icons"
 import { DISCORD_URL } from "@/lib/site-config"
 import { PROJECTS } from "@/lib/projects"
 import { LAST_UPDATED } from "@/lib/homelab-data"
-import { formatServicePrice, offeringsFor } from "@/lib/services"
+import { offeringsFor } from "@/lib/services"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
@@ -26,8 +26,8 @@ export const metadata: Metadata = pageMetadata({
 
 const START_PATHS = [
   { icon: BookOpen, label: "I want to learn", title: "Learn it and build it yourself.", copy: "Free guides, field notes, planning tools, infrastructure diagrams, and a community that understands the project.", action: "Start learning", href: "/docs" },
-  { icon: ClipboardList, label: "Help me design it", title: "Turn the idea into a complete plan.", copy: "Work through goals, workloads, hardware, storage, networking, remote access, and the services the lab should run.", action: "Plan my lab", href: "/services#project-planner" },
-  { icon: Wrench, label: "Help me build it", title: "Get hands-on setup help.", copy: "Guided, scoped sessions on the environment, networking, Proxmox, and selected self-hosted services.", action: "Build my lab", href: "/services#project-planner" },
+  { icon: ClipboardList, label: "Help me design it", title: "Turn the idea into a complete plan.", copy: "Work through goals, workloads, hardware, storage, networking, remote access, and the services the lab should run.", action: "Plan my lab", href: "/contact" },
+  { icon: Wrench, label: "Help me build it", title: "Get hands-on setup help.", copy: "Guided, scoped sessions on the environment, networking, Proxmox, and selected self-hosted services.", action: "Build my lab", href: "/contact" },
 ]
 
 const JOURNEY = [
@@ -83,7 +83,7 @@ export default function LabPage() {
 
         <section className="theme-dark band-dark relative overflow-hidden"><div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-2 lg:items-center lg:gap-20"><div><Eyebrow>Learn + Community</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Free knowledge from builds that actually happened.</h2><p className="mt-4 text-lg leading-relaxed text-text-secondary">Read practical guides and field notes, follow build videos as they are published, and ask the Discord community when your result does not match the tutorial.</p><div className="mt-8 flex flex-wrap gap-3"><Button render={<Link href="/docs" />}>Explore Learn <BookOpen className="size-4" /></Button><Button variant="outline" render={<a href={DISCORD_URL} target="_blank" rel="noreferrer" />}><DiscordIcon className="size-4" />Join Discord</Button></div></div><DiscordChatMock /></div></section>
 
-        <section className="border-b border-border bg-surface"><div className="mx-auto max-w-6xl px-6 py-24"><div className="mx-auto max-w-3xl text-center"><Eyebrow>Homelab services</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">Use the free resources—or bring ZeroPoint into the build.</h2><p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">Paid help is focused and scoped — not a managed service or an emergency line.</p></div><div className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">{offeringsFor("homelab").map((service) => { const Icon = SERVICE_ICONS[service.id] ?? Wrench; return <article key={service.id} className="rounded-2xl border border-border bg-surface-raised p-6"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary"><Icon className="size-5" /></span><h3 className="mt-6 text-xl font-semibold">{service.title}</h3><p className="mt-3 text-sm leading-relaxed text-text-secondary">{service.description}</p><p className="mt-4 font-mono text-sm font-semibold text-primary">{formatServicePrice(service.pricing)}</p><p className="mt-1 text-xs leading-relaxed text-text-tertiary">{service.pricing.note}</p></article> })}</div><div className="mt-10 flex justify-center"><Button size="lg" render={<Link href="/services#project-planner" />}>Start a homelab project <ArrowRight className="size-4" /></Button></div></div></section>
+        <section className="border-b border-border bg-surface"><div className="mx-auto max-w-6xl px-6 py-24"><div className="mx-auto max-w-3xl text-center"><Eyebrow>Homelab services</Eyebrow><h2 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">Use the free resources—or bring ZeroPoint into the build.</h2><p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">Paid help is focused and scoped — not a managed service or an emergency line.</p></div><div className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">{offeringsFor("homelab").map((service) => { const Icon = SERVICE_ICONS[service.id] ?? Wrench; return <article key={service.id} className="rounded-2xl border border-border bg-surface-raised p-6"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary"><Icon className="size-5" /></span><h3 className="mt-6 text-xl font-semibold">{service.title}</h3><p className="mt-3 text-sm leading-relaxed text-text-secondary">{service.description}</p><ul className="mt-5 space-y-2 border-t border-border pt-5">{service.includes.map((item) => <li key={item} className="flex gap-2.5 text-xs leading-relaxed text-text-secondary"><Check className="mt-0.5 size-3.5 shrink-0 text-success" />{item}</li>)}</ul></article> })}</div><div className="mt-10 flex flex-wrap justify-center gap-3"><Button size="lg" render={<Link href="/contact" />}>Get a free consult <ArrowRight className="size-4" /></Button><Button size="lg" variant="outline" render={<Link href="/pricing#homelab" />}>See homelab pricing</Button></div></div></section>
       </main>
       <Footer />
     </>
