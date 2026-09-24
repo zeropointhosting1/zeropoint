@@ -16,7 +16,7 @@ export function NetworkTeaser() {
   const reduced = useReducedMotion()
 
   return (
-    <section className="theme-dark relative overflow-hidden border-b border-border bg-background">
+    <section className="theme-dark band-dark relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-topology-glow" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-28 md:grid-cols-2 md:items-center md:gap-16">
         <motion.div

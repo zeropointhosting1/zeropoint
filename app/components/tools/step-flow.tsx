@@ -39,7 +39,7 @@ export function ToolFlowSteps({ current }: { current: FlowStepId }) {
                 isCurrent ? "border-primary/40 bg-primary/10 text-primary" : "border-border text-text-tertiary hover:text-foreground"
               )}
             >
-              <span className={cn("flex size-4 items-center justify-center rounded-full text-[9px]", isCurrent ? "bg-primary text-primary-foreground" : "bg-surface-raised")}>{index + 1}</span>
+              <span className={cn("flex size-4 items-center justify-center rounded-full text-[10px]", isCurrent ? "bg-primary text-primary-foreground" : "bg-surface-raised")}>{index + 1}</span>
               {step.label}
             </Link>
           </React.Fragment>

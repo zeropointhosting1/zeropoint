@@ -134,7 +134,7 @@ export default function AboutPage() {
               {PATHS.map(({ icon: Icon, eyebrow, title, copy, href }) => (
                 <Link key={href} href={href} className="group border-b border-border py-7 md:px-7 md:odd:border-r md:odd:pl-0 md:even:pr-0">
                   <div className="flex items-center justify-between"><span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span><ArrowUpRight className="size-4 text-text-tertiary transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" /></div>
-                  <p className="mt-6 font-mono text-[9px] tracking-[0.16em] text-text-tertiary uppercase">{eyebrow}</p><h3 className="mt-2 text-lg font-semibold transition-colors group-hover:text-primary">{title}</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">{copy}</p>
+                  <p className="mt-6 font-mono text-[10px] tracking-[0.16em] text-text-tertiary uppercase">{eyebrow}</p><h3 className="mt-2 text-lg font-semibold transition-colors group-hover:text-primary">{title}</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">{copy}</p>
                 </Link>
               ))}
             </div>

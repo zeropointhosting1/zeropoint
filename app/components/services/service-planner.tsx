@@ -140,7 +140,7 @@ export function ServicePlanner() {
           <Summary label="Services" value={selectedServices.map((service) => `${service.title} — ${formatServicePrice(service.pricing)}`)} />
           <Summary label="Delivery" value={[delivery === "local" ? "On-site / local" : delivery === "remote" ? "Remote" : "Not sure yet"]} />
           <Summary label="Goals" value={goals} />
-          {notes.trim() && <div><p className="font-mono text-[8px] tracking-wider text-text-tertiary uppercase">Notes</p><p className="mt-2 whitespace-pre-wrap text-xs leading-relaxed text-text-secondary">{notes}</p></div>}
+          {notes.trim() && <div><p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Notes</p><p className="mt-2 whitespace-pre-wrap text-xs leading-relaxed text-text-secondary">{notes}</p></div>}
         </div>
         {pricedServices.length > 0 && (
           <div className="flex items-center justify-between border-t border-border px-6 py-4">
@@ -174,5 +174,5 @@ export function ServicePlanner() {
 }
 
 function Summary({ label, value }: { label: string; value: string[] }) {
-  return <div><p className="font-mono text-[8px] tracking-wider text-text-tertiary uppercase">{label}</p>{value.length ? <ul className="mt-2 space-y-1.5">{value.map((item) => <li key={item} className="flex gap-2 text-xs text-text-secondary"><span className="text-primary">·</span>{item}</li>)}</ul> : <p className="mt-2 text-xs text-text-tertiary">Nothing selected</p>}</div>
+  return <div><p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{label}</p>{value.length ? <ul className="mt-2 space-y-1.5">{value.map((item) => <li key={item} className="flex gap-2 text-xs text-text-secondary"><span className="text-primary">·</span>{item}</li>)}</ul> : <p className="mt-2 text-xs text-text-tertiary">Nothing selected</p>}</div>
 }

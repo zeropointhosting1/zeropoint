@@ -65,10 +65,10 @@ export function DiscordChatMock({ className }: { className?: string }) {
           <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary"><Hash className="size-3.5" /></span>
           <div>
             <p className="text-xs font-semibold text-foreground">homelab-chat</p>
-            <p className="mt-0.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase">Example conversation</p>
+            <p className="mt-0.5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Example conversation</p>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase"><Users className="size-3" />Community</span>
+        <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase"><Users className="size-3" />Community</span>
       </div>
 
       <motion.div

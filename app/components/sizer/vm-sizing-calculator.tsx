@@ -302,7 +302,7 @@ export function VmSizingCalculator() {
                       <span className="flex flex-wrap items-center justify-between gap-2">
                         <span className="flex items-center gap-2">
                           <strong className="text-sm text-foreground">{workload.name}</strong>
-                          <span className={cn("rounded-full px-2 py-0.5 font-mono text-[9px] tracking-wider uppercase", meta.bg, meta.text)}>{workload.category}</span>
+                          <span className={cn("rounded-full px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase", meta.bg, meta.text)}>{workload.category}</span>
                         </span>
                         <span className="font-mono text-[10px] text-text-secondary">{req.cpu} vCPU · {req.ramGb} GB · {req.storageGb} GB</span>
                       </span>
@@ -554,7 +554,7 @@ function StepLabel({ n, children }: { n: number; children: React.ReactNode }) {
 
 function LegendChip({ colorClass, label }: { colorClass: string; label: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 font-mono text-[9px] text-text-tertiary">
+    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-text-tertiary">
       <span className={cn("size-1.5 rounded-full", colorClass)} />
       {label}
     </span>
@@ -562,7 +562,7 @@ function LegendChip({ colorClass, label }: { colorClass: string; label: string }
 }
 
 function Result({ icon: Icon, value, unit }: { icon: React.ElementType; value: number; unit: string }) {
-  return <div className="px-2 py-5 text-center"><Icon className="mx-auto size-4 text-text-tertiary" /><p className="mt-3 font-mono text-2xl font-semibold text-foreground">{value}</p><p className="mt-1 font-mono text-[8px] tracking-wider text-text-tertiary uppercase">{unit}</p></div>
+  return <div className="px-2 py-5 text-center"><Icon className="mx-auto size-4 text-text-tertiary" /><p className="mt-3 font-mono text-2xl font-semibold text-foreground">{value}</p><p className="mt-1 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{unit}</p></div>
 }
 
 function ResourceBar({

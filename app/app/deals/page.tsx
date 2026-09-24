@@ -36,7 +36,7 @@ export default function DealsPage() {
               own search API and refreshed on every visit.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 border-t border-border pt-5 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">
+            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 border-t border-border pt-5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
               <span className="flex items-center gap-2"><span className="size-1.5 rounded-full bg-success" />Live eBay data</span>
               <span>Compute, networking &amp; rack gear</span>
               <span>No scraped inventory</span>

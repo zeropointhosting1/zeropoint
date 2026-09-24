@@ -26,7 +26,7 @@ export default function SizerPage() {
             <Eyebrow>Workload Sizer</Eyebrow>
             <h1 className="mt-4 max-w-3xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">Start with the workloads, not the shopping list.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary">Pick what you want to self-host and a hypervisor to run it on, and get a transparent starting point for compute, memory, and system storage. Every app and hypervisor links back to an official source, and every ZeroPoint assumption is labeled.</p>
-            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">
               <span>{WORKLOADS.length} curated apps</span><span>{HYPERVISORS.length} hypervisors</span><span>Sourced where possible</span><span>Updated Sep 23, 2026</span><span>Planning guidance—not a guarantee</span>
             </div>
             <div className="mt-8">

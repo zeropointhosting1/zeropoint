@@ -233,21 +233,21 @@ export function ConnectionPanel() {
               <div className="flex items-center gap-2.5 border-r border-border px-4 py-3.5 sm:px-5">
                 <LockKeyhole className="size-3.5 shrink-0 text-primary" />
                 <div>
-                  <p className="font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Protocol</p>
+                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Protocol</p>
                   <p className="mt-0.5 text-xs font-medium">{detected?.isSecure ? "HTTPS" : "HTTP"}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 px-4 py-3.5 sm:border-r sm:border-border sm:px-5">
                 <Check className="size-3.5 shrink-0 text-success" />
                 <div>
-                  <p className="font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Status</p>
+                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Status</p>
                   <p className="mt-0.5 text-xs font-medium">200 OK</p>
                 </div>
               </div>
               <div className="col-span-2 flex items-center gap-2.5 border-t border-border px-4 py-3.5 sm:col-span-1 sm:border-t-0 sm:px-5">
                 <span className="size-3.5 shrink-0 rounded-full border border-primary/40 bg-primary/10 p-1"><span className="block size-full rounded-full bg-primary" /></span>
                 <div>
-                  <p className="font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Connection</p>
+                  <p className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Connection</p>
                   <p className="mt-0.5 text-xs font-medium">Active now</p>
                 </div>
               </div>

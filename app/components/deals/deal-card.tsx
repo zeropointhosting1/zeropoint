@@ -50,7 +50,7 @@ export function DealCard({ deal }: { deal: EnrichedDeal }) {
           </span>
         )}
         {deal.isBarebones && (
-          <span className="absolute top-2 right-2 rounded-full border border-border bg-background/85 px-2 py-1 font-mono text-[9px] tracking-wider text-text-tertiary uppercase backdrop-blur-sm">
+          <span className="absolute top-2 right-2 rounded-full border border-border bg-background/85 px-2 py-1 font-mono text-[10px] tracking-wider text-text-tertiary uppercase backdrop-blur-sm">
             Barebones
           </span>
         )}
@@ -66,7 +66,7 @@ export function DealCard({ deal }: { deal: EnrichedDeal }) {
         {chips.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {chips.map(({ icon: Icon, label }) => (
-              <span key={label} className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2 py-1 font-mono text-[9px] text-text-secondary">
+              <span key={label} className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2 py-1 font-mono text-[10px] text-text-secondary">
                 <Icon className="size-3 text-text-tertiary" />
                 {label}
               </span>

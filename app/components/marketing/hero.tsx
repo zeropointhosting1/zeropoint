@@ -37,13 +37,13 @@ export function Hero() {
             <Button size="lg" variant="outline" render={<Link href="/websites" />}>Business websites</Button>
             <Button size="lg" variant="ghost" render={<Link href="/lab" />}>Explore the lab</Button>
           </motion.div>
-          <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
+          <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Built hands-on · Explained clearly · Documented properly</motion.p>
         </div>
 
         <motion.div custom={reduced ? 0 : 0.18} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter}>
           <div className="theme-dark overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_28px_90px_-42px_var(--accent-glow)]">
-            <div className="flex items-center justify-between border-b border-border px-6 py-5"><div><p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Inside ZeroPoint Lab</p><p className="mt-1 text-sm text-text-secondary">The infrastructure behind the brand</p></div><span className="font-mono text-[9px] tracking-wider text-text-tertiary uppercase">As of {LAST_UPDATED}</span></div>
-            <div className="grid grid-cols-2 gap-px bg-border">{LAB_SIGNALS.map(({ icon: Icon, label, value }) => <div key={label} className="bg-surface p-5"><Icon className="size-4 text-primary" /><p className="mt-6 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">{label}</p><p className="mt-1 text-sm font-medium text-foreground">{value}</p></div>)}</div>
+            <div className="flex items-center justify-between border-b border-border px-6 py-5"><div><p className="font-mono text-[10px] tracking-[0.18em] text-primary uppercase">Inside ZeroPoint Lab</p><p className="mt-1 text-sm text-text-secondary">The infrastructure behind the brand</p></div><span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">As of {LAST_UPDATED}</span></div>
+            <div className="grid grid-cols-2 gap-px bg-border">{LAB_SIGNALS.map(({ icon: Icon, label, value }) => <div key={label} className="bg-surface p-5"><Icon className="size-4 text-primary" /><p className="mt-6 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">{label}</p><p className="mt-1 text-sm font-medium text-foreground">{value}</p></div>)}</div>
             <Link href="/network" className="group flex items-center justify-between px-6 py-4 text-sm text-text-secondary transition-colors hover:text-foreground"><span>View the working infrastructure</span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></Link>
           </div>
         </motion.div>

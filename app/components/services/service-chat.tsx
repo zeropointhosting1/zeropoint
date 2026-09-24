@@ -91,7 +91,7 @@ export function SiteChat() {
       {open && (
         <section aria-label="ZeroPoint site chat" className="mb-3 flex h-[min(580px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_24px_80px_-24px_var(--accent-glow)]">
           <header className="flex items-center justify-between border-b border-border bg-surface-raised px-4 py-3.5">
-            <div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary"><Bot className="size-4.5" /></span><div><h2 className="text-sm font-semibold">ZeroPoint quick links</h2><p className="mt-0.5 flex items-center gap-1.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase"><span className="size-1.5 rounded-full bg-success" />Keyword-matched · No live agent</p></div></div>
+            <div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary"><Bot className="size-4.5" /></span><div><h2 className="text-sm font-semibold">ZeroPoint quick links</h2><p className="mt-0.5 flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-text-tertiary uppercase"><span className="size-1.5 rounded-full bg-success" />Keyword-matched · No live agent</p></div></div>
             <button onClick={() => setOpen(false)} aria-label="Close chat" className="flex size-8 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-surface hover:text-foreground"><X className="size-4" /></button>
           </header>
 
@@ -102,7 +102,7 @@ export function SiteChat() {
 
           <div className="border-t border-border bg-surface-raised/50 p-3">
             <form onSubmit={(event) => { event.preventDefault(); send(input) }} className="flex gap-2"><Input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Try an app name, or ask about a project..." aria-label="Chat message" autoComplete="off" /><Button type="submit" size="icon" disabled={!input.trim()}><Send className="size-4" /><span className="sr-only">Send</span></Button></form>
-            <div className="mt-2 flex items-center justify-between gap-3 px-1"><p className="text-[9px] text-text-tertiary">Runs locally · No messages sent</p><Link href="/services#project-planner" onClick={() => setOpen(false)} className="text-[10px] font-medium text-primary hover:underline">Plan a project</Link></div>
+            <div className="mt-2 flex items-center justify-between gap-3 px-1"><p className="text-[10px] text-text-tertiary">Runs locally · No messages sent</p><Link href="/services#project-planner" onClick={() => setOpen(false)} className="text-[10px] font-medium text-primary hover:underline">Plan a project</Link></div>
           </div>
         </section>
       )}

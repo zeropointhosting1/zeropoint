@@ -33,12 +33,12 @@ function SiteMock() {
             <div className="mt-3 flex flex-wrap gap-3 text-xs text-text-secondary"><span className="flex items-center gap-1.5"><Clock className="size-3.5 text-primary" />Open today 11a–10p</span><span className="flex items-center gap-1.5"><MapPin className="size-3.5 text-primary" />Directions</span></div>
             <span className="mt-4 inline-flex rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground">Order online</span>
           </div>
-          <p className="mt-6 font-mono text-[9px] tracking-[0.14em] text-text-tertiary uppercase">Menu</p>
+          <p className="mt-6 font-mono text-[10px] tracking-[0.14em] text-text-tertiary uppercase">Menu</p>
           <ul className="mt-2 divide-y divide-border">{MENU.map(({ name, price }) => <li key={name} className="flex justify-between py-2.5 text-sm"><span className="text-text-secondary">{name}</span><span className="font-medium">{price}</span></li>)}</ul>
         </div>
       </div>
       <div className="theme-dark absolute right-0 bottom-0 w-52 rounded-xl border border-primary/25 bg-background p-4 shadow-[0_20px_50px_-20px_var(--accent-glow)]">
-        <div className="flex items-center gap-2"><BarChart3 className="size-3.5 text-primary" /><p className="font-mono text-[9px] tracking-[0.14em] text-text-tertiary uppercase">Sales today</p></div>
+        <div className="flex items-center gap-2"><BarChart3 className="size-3.5 text-primary" /><p className="font-mono text-[10px] tracking-[0.14em] text-text-tertiary uppercase">Sales today</p></div>
         <p className="mt-2 text-2xl font-semibold tracking-tight text-foreground">$4,812</p>
         <div className="mt-3 flex h-10 items-end gap-1">{[30, 70, 55, 25, 45, 90, 100, 60].map((pct, index) => <div key={index} className="flex-1 rounded-t-sm bg-primary/80" style={{ height: `${pct}%` }} />)}</div>
         <p className="mt-2 text-[10px] text-text-tertiary">Example dashboard</p>

@@ -41,9 +41,9 @@ export default function NetworkPage() {
 
         <FullTopology />
 
-        <section className="theme-dark relative overflow-hidden border-b border-border bg-background">
+        <section className="theme-dark band-dark relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_65%_at_85%_30%,var(--accent-glow),transparent_72%)] opacity-60" />
-          <div className="relative mx-auto max-w-6xl px-6 py-20">
+          <div className="relative mx-auto max-w-6xl px-6 py-24">
             <Eyebrow>Centerpiece</Eyebrow>
             <h2 className="mt-4 max-w-xl text-3xl font-bold tracking-tight sm:text-4xl">
               Click any node for detail.

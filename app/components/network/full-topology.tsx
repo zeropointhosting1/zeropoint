@@ -12,9 +12,9 @@ export function FullTopology() {
   const reduced = useReducedMotion()
 
   return (
-    <section className="theme-dark relative overflow-hidden border-b border-border bg-background">
+    <section className="theme-dark band-dark relative overflow-hidden">
       <div className="bg-topology-glow pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="relative mx-auto max-w-6xl px-6 py-24">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}

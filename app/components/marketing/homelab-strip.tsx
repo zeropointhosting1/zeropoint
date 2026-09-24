@@ -60,7 +60,7 @@ export function HomelabStrip() {
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-text-secondary">
                 Real infrastructure behind ZeroPoint—from the network edge to the workloads running on it.
               </p>
-              <p className="mt-2 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
+              <p className="mt-2 font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
             </div>
             <Link
               href="/network"
@@ -76,7 +76,7 @@ export function HomelabStrip() {
           </div>
 
           <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-2">
-            <span className="mr-2 font-mono text-[9px] tracking-[0.18em] text-text-tertiary uppercase">Stack</span>
+            <span className="mr-2 font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">Stack</span>
             {TECH.map((tech) => (
               <span key={tech.label} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5">
                 <span className="size-1.5 rounded-full bg-primary" />

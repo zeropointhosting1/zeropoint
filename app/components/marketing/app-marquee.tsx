@@ -36,7 +36,7 @@ const MARQUEE_TRACK = Array.from({ length: MARQUEE_COPIES }, () => STACK).flat()
 
 export function AppMarquee({ label = "Popular self-hosted apps" }: { label?: string }) {
   return (
-    <div className="theme-dark relative border-t border-border bg-background py-6">
+    <div className="relative border-t border-border bg-surface/70 py-6">
       <p className="mx-auto max-w-6xl px-6 font-mono text-xs tracking-[0.16em] text-text-secondary uppercase">{label}</p>
       <div className="relative mt-4 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="flex w-max gap-3 animate-marquee">

@@ -75,7 +75,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="theme-dark relative overflow-hidden border-b border-border bg-background">
+        <section className="theme-dark band-dark relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_20%_35%,var(--accent-glow),transparent_72%)]" />
           <div className="pointer-events-none absolute right-0 bottom-0 size-[28rem] rounded-full bg-brand-cyan/8 blur-3xl" />
           <div className="relative mx-auto max-w-6xl px-6 py-24">
@@ -93,7 +93,7 @@ export default function ServicesPage() {
               ))}
             </div>
             <div className="mt-8 grid gap-4 border-t border-border pt-6 sm:grid-cols-3">
-              {["Separate staff, guest, and device traffic", "Allow only the connections each system actually needs", "Document the rules so the network stays maintainable"].map((item, index) => <div key={item} className="flex gap-3 text-sm leading-relaxed text-text-secondary"><span className="font-mono text-[9px] text-primary">0{index + 1}</span>{item}</div>)}
+              {["Separate staff, guest, and device traffic", "Allow only the connections each system actually needs", "Document the rules so the network stays maintainable"].map((item, index) => <div key={item} className="flex gap-3 text-sm leading-relaxed text-text-secondary"><span className="font-mono text-[10px] text-primary">0{index + 1}</span>{item}</div>)}
             </div>
           </div>
         </section>
@@ -110,10 +110,10 @@ export default function ServicesPage() {
                 const Icon = SERVICE_ICONS[service.id] ?? Network
                 return <article key={service.id} className="group relative overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-[0_14px_40px_-30px_var(--accent-glow)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_55px_-28px_var(--accent-glow)]">
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  <div className="flex items-start justify-between gap-4"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span><span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[8px] tracking-[0.14em] text-text-tertiary uppercase">{service.delivery}</span></div>
+                  <div className="flex items-start justify-between gap-4"><span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"><Icon className="size-5" /></span><span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[10px] tracking-[0.14em] text-text-tertiary uppercase">{service.delivery}</span></div>
                   <h3 className="mt-6 text-xl font-semibold tracking-tight">{service.title}</h3>
                   <p className="mt-2 min-h-16 text-sm leading-relaxed text-text-secondary">{service.description}</p>
-                  <div className="mt-5 border-y border-border py-4"><span className="font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Starting at</span><p className="mt-1 text-lg font-semibold text-primary">{formatServicePrice(service.pricing)}</p></div>
+                  <div className="mt-5 border-y border-border py-4"><span className="font-mono text-[10px] tracking-wider text-text-tertiary uppercase">Starting at</span><p className="mt-1 text-lg font-semibold text-primary">{formatServicePrice(service.pricing)}</p></div>
                   <ul className="mt-5 space-y-2.5">{service.includes.map((item) => <li key={item} className="flex gap-2.5 text-xs leading-relaxed text-text-secondary"><Check className="mt-0.5 size-3.5 shrink-0 text-success" />{item}</li>)}</ul>
                   <p className="mt-5 text-[11px] leading-relaxed text-text-tertiary">{service.pricing.note}</p>
                 </article>
@@ -131,7 +131,7 @@ export default function ServicesPage() {
           <div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><Eyebrow>Questions</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Common questions.</h2></div><div className="border-t border-border">{FAQ.map(({ q, a }) => <div key={q} className="border-b border-border py-6"><h3 className="font-semibold text-foreground">{q}</h3><p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">{a}</p></div>)}</div></div></div>
         </section>
 
-        <section id="project-planner" className="theme-dark relative scroll-mt-20 overflow-hidden border-b border-border bg-background">
+        <section id="project-planner" className="relative scroll-mt-20 overflow-hidden border-b border-border bg-surface">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_45%_50%_at_85%_20%,var(--accent-glow),transparent_75%)] opacity-70" />
           <div className="relative mx-auto max-w-6xl px-6 py-24"><div className="mb-12 max-w-2xl"><Eyebrow>Project planner</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Turn the idea into a useful first brief.</h2><p className="mt-3 text-text-secondary">Select what you need and send a structured summary. Prices above are starting points — your actual quote depends on scope, and local install availability is confirmed per request.</p></div><ServicePlanner /></div>
         </section>

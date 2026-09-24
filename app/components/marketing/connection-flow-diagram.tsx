@@ -41,10 +41,10 @@ export function ConnectionFlowDiagram({ animated, idPrefix = "connection" }: { a
       <path id={requestId} d="M99,100 C205,57 475,57 581,100" stroke={`url(#${requestGradientId})`} strokeWidth="1.5" />
       <path id={responseId} d="M581,144 C475,187 205,187 99,144" stroke={`url(#${responseGradientId})`} strokeWidth="1.5" />
 
-      <g className="fill-primary font-mono text-[9px] tracking-[0.16em]">
+      <g className="fill-primary font-mono text-[10px] tracking-[0.16em]">
         <text x="340" y="61" textAnchor="middle">REQUEST →</text>
       </g>
-      <g className="fill-text-tertiary font-mono text-[9px] tracking-[0.16em]">
+      <g className="fill-text-tertiary font-mono text-[10px] tracking-[0.16em]">
         <text x="340" y="192" textAnchor="middle">← RESPONSE</text>
       </g>
 
@@ -66,9 +66,9 @@ export function ConnectionFlowDiagram({ animated, idPrefix = "connection" }: { a
           )}
           <rect width={node.width} height="66" rx="12" className="fill-surface stroke-border" />
           <circle cx="17" cy="18" r="3" className={index === 1 ? "fill-text-tertiary" : "fill-primary"} />
-          <text x="28" y="21" className="fill-text-tertiary font-mono text-[8px] tracking-[0.14em]">{node.eyebrow}</text>
+          <text x="28" y="21" className="fill-text-tertiary font-mono text-[10px] tracking-[0.14em]">{node.eyebrow}</text>
           <text x="16" y="43" className="fill-foreground text-[12px] font-semibold">{node.label}</text>
-          <text x="16" y="57" className="fill-text-tertiary font-mono text-[8px]">{node.detail}</text>
+          <text x="16" y="57" className="fill-text-tertiary font-mono text-[10px]">{node.detail}</text>
         </g>
       ))}
     </DiagramCanvas>

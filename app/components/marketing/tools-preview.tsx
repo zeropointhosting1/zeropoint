@@ -45,7 +45,7 @@ export function ToolsPreview() {
             <div className="p-6 sm:p-7 md:border-r md:border-border">
               <div className="flex items-start justify-between gap-4">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary"><Calculator className="size-5" /></span>
-                <span className="rounded-full border border-success/20 bg-success/5 px-2.5 py-1 font-mono text-[8px] tracking-wider text-success uppercase">Available now</span>
+                <span className="rounded-full border border-success/20 bg-success/5 px-2.5 py-1 font-mono text-[10px] tracking-wider text-success uppercase">Available now</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold tracking-tight">Workload Sizer</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary">Choose the services you want to run and get a practical starting point for CPU, memory, and storage.</p>
@@ -57,14 +57,14 @@ export function ToolsPreview() {
                   </div>
                 ))}
               </div>
-              <p className="mt-4 font-mono text-[9px] leading-relaxed tracking-wide text-text-tertiary uppercase">Small, sourced app catalog first. Expanded as the data earns trust.</p>
+              <p className="mt-4 font-mono text-[10px] leading-relaxed tracking-wide text-text-tertiary uppercase">Small, sourced app catalog first. Expanded as the data earns trust.</p>
               <Link href="/sizer" className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">Size your workloads <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </div>
 
             <div className="border-t border-border p-6 sm:p-7 md:border-t-0">
               <div className="flex items-start justify-between gap-4">
                 <span className="flex size-10 items-center justify-center rounded-xl bg-success/10 text-success"><Search className="size-5" /></span>
-                <span className="flex items-center gap-1.5 rounded-full border border-success/20 bg-success/5 px-2.5 py-1 font-mono text-[8px] tracking-wider text-success uppercase"><span className="size-1 rounded-full bg-success" />Available now</span>
+                <span className="flex items-center gap-1.5 rounded-full border border-success/20 bg-success/5 px-2.5 py-1 font-mono text-[10px] tracking-wider text-success uppercase"><span className="size-1 rounded-full bg-success" />Available now</span>
               </div>
               <h3 className="mt-6 text-xl font-semibold tracking-tight">Hardware Deals</h3>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary">Current eBay listings for proven homelab hardware, filtered around machines and network gear worth considering.</p>
@@ -75,7 +75,7 @@ export function ToolsPreview() {
               </div>
               <Link href="/deals" className="group mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-primary">See current listings <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             </div>
-            <Link href="/deals#starter-builds" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServerCog className="size-5" /></span><span className="min-w-0 flex-1"><span className="flex items-center gap-2"><strong className="text-sm">Rack Planner</strong><span className="rounded-full border border-success/25 px-2 py-0.5 font-mono text-[8px] tracking-wider text-success uppercase">Available</span></span><span className="mt-1 block text-xs text-text-secondary">Three real starter builds with parts and pricing.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
+            <Link href="/deals#starter-builds" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><ServerCog className="size-5" /></span><span className="min-w-0 flex-1"><span className="flex items-center gap-2"><strong className="text-sm">Rack Planner</strong><span className="rounded-full border border-success/25 px-2 py-0.5 font-mono text-[10px] tracking-wider text-success uppercase">Available</span></span><span className="mt-1 block text-xs text-text-secondary">Three real starter builds with parts and pricing.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
             <Link href="/docs" className="group flex items-center gap-4 border-t border-border p-5 transition-colors hover:bg-surface-raised/60 sm:p-6 md:border-l"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-cyan/10 text-brand-cyan"><BookOpen className="size-5" /></span><span className="min-w-0 flex-1"><strong className="text-sm">Guides + Field Notes</strong><span className="mt-1 block text-xs text-text-secondary">Networking and infrastructure explained from real builds.</span></span><ArrowUpRight className="size-4 text-text-tertiary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
           </div>
         </motion.div>
