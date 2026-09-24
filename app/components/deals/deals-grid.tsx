@@ -5,7 +5,27 @@ import { useSearchParams } from "next/navigation"
 import { ArrowDownUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { DealCard } from "./deal-card"
-import { DEALS_ENDPOINT, DEAL_CATEGORIES, SUPABASE_ANON_KEY, isWeakListing, meetsMinRam, type Deal } from "@/lib/deals"
+import {
+  DEALS_ENDPOINT,
+  DEAL_CATEGORIES,
+  COMPUTE_CATEGORIES,
+  SUPABASE_ANON_KEY,
+  isWeakListing,
+  isLegacyCpu,
+  isDatacenterCiscoGear,
+  isHomelabFriendlyCisco,
+  isBarebonesListing,
+  meetsMinRam,
+  parseCpuLabel,
+  parseCpuGeneration,
+  parseStorageLabel,
+  parsePowerAdapter,
+  listingRamGb,
+  shippingCostUsd,
+  type Deal,
+} from "@/lib/deals"
+import { HARDWARE_TIERS } from "@/lib/hardware-tiers"
+import type { EnrichedDeal } from "./deal-card"
 
 const PAGE_SIZE = 12
 
@@ -33,15 +53,63 @@ function EmptyPanel({ title, body }: { title: string; body: string }) {
   )
 }
 
+function enrich(deal: Deal): EnrichedDeal {
+  return {
+    ...deal,
+    cpuLabel: parseCpuLabel(deal.title),
+    cpuGeneration: parseCpuGeneration(deal.title),
+    ramGb: listingRamGb(deal.title),
+    storageLabel: parseStorageLabel(deal.title),
+    powerAdapter: parsePowerAdapter(deal.title),
+    isBarebones: isBarebonesListing(deal.title),
+    totalCost: deal.price + shippingCostUsd(deal.shipping),
+    isGoodPrice: false,
+  }
+}
+
+function median(values: number[]): number {
+  const sorted = [...values].sort((a, b) => a - b)
+  const mid = Math.floor(sorted.length / 2)
+  return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid]
+}
+
+// Replaces the Edge Function's naive "median within this one keyword
+// search" flag with a same-config comparison: same category, same CPU
+// generation bucket, same rough RAM tier — priced-below-median only counts
+// as a good price against listings that are actually comparable, and
+// shipping is folded into the compared total. Never awarded to a barebones
+// listing, however cheap.
+function flagGoodPrices(deals: EnrichedDeal[]): EnrichedDeal[] {
+  const groups = new Map<string, EnrichedDeal[]>()
+  for (const deal of deals) {
+    const key = `${deal.category}|${deal.cpuGeneration ?? "?"}|${deal.ramGb ? Math.round(deal.ramGb / 4) * 4 : "?"}`
+    const group = groups.get(key) ?? []
+    group.push(deal)
+    groups.set(key, group)
+  }
+  return deals.map((deal) => {
+    if (deal.isBarebones) return deal
+    const key = `${deal.category}|${deal.cpuGeneration ?? "?"}|${deal.ramGb ? Math.round(deal.ramGb / 4) * 4 : "?"}`
+    const group = groups.get(key)!
+    if (group.length < 3) return deal
+    const typical = median(group.map((d) => d.totalCost))
+    return { ...deal, isGoodPrice: deal.totalCost <= typical * 0.8 }
+  })
+}
+
 export function DealsGrid() {
   const searchParams = useSearchParams()
+  // minRam here is per-node (the Sizer divides its total by the node count
+  // before linking here) — see components/sizer/vm-sizing-calculator.tsx.
   const minRam = Number(searchParams.get("minRam")) || null
+  const nodesNeeded = Number(searchParams.get("nodes")) || null
+  const modelTier = HARDWARE_TIERS.find((t) => t.id === searchParams.get("model")) ?? null
 
   const [state, setState] = React.useState<State>(
     DEALS_ENDPOINT ? { status: "loading" } : { status: "not-connected" }
   )
   const [sort, setSort] = React.useState<SortMode>("relevance")
-  const [category, setCategory] = React.useState<string>("All")
+  const [category, setCategory] = React.useState<string>(modelTier?.dealsCategory ?? "All")
   const [visibleCount, setVisibleCount] = React.useState(PAGE_SIZE)
 
   React.useEffect(() => {
@@ -110,14 +178,44 @@ export function DealsGrid() {
     )
   }
 
-  const strongListings = state.deals
+  // Quality floor: weak/bundled specs everywhere, legacy (pre-8th-gen
+  // Intel / pre-Ryzen-2000 AMD) CPUs in the compute categories only, and
+  // data-center-scale Cisco gear that isn't sized for a home closet.
+  const qualityFiltered = state.deals
     .filter((d) => !isWeakListing(d.title))
-    .filter((d) => (minRam ? meetsMinRam(d.title, minRam) : true))
-  const filtered = category === "All" ? strongListings : strongListings.filter((d) => d.category === category)
+    .filter((d) => !(COMPUTE_CATEGORIES.includes(d.category as (typeof COMPUTE_CATEGORIES)[number]) && isLegacyCpu(d.title)))
+    .filter((d) => !(d.category === "Cisco" && isDatacenterCiscoGear(d.title)))
+
+  // A compute-driven RAM filter (arriving from the Sizer) only makes sense
+  // against compute hardware, and only against listings whose RAM is
+  // actually known — see meetsMinRam's doc comment for why that changed.
+  const ramFiltered = minRam
+    ? qualityFiltered.filter((d) => COMPUTE_CATEGORIES.includes(d.category as (typeof COMPUTE_CATEGORIES)[number])).filter((d) => meetsMinRam(d.title, minRam))
+    : qualityFiltered
+
+  const enriched = flagGoodPrices(ramFiltered.map(enrich))
+  const availableCategories = DEAL_CATEGORIES.filter((c) => enriched.some((d) => d.category === c))
+
+  if (minRam && enriched.length === 0) {
+    return (
+      <EmptyPanel
+        title={`Nothing fits ${minRam} GB right now`}
+        body={
+          modelTier
+            ? `No current ${modelTier.name}-class listing covers ${minRam} GB RAM per unit. Check back later, or browse the full ${modelTier.dealsCategory} category for something close.`
+            : "No current listing in these compute categories covers that much RAM on its own. Consider a two-node cluster instead of a single higher-RAM machine, or check back later as listings refresh."
+        }
+      />
+    )
+  }
+
+  const filtered = category === "All" ? enriched : enriched.filter((d) => d.category === category)
   const sorted = [...filtered].sort((a, b) => {
-    if (sort === "price-asc") return a.price - b.price
-    if (sort === "price-desc") return b.price - a.price
-    return 0
+    if (sort === "price-asc") return a.totalCost - b.totalCost
+    if (sort === "price-desc") return b.totalCost - a.totalCost
+    const aPref = a.category === "Cisco" && isHomelabFriendlyCisco(a.title) ? 0 : 1
+    const bPref = b.category === "Cisco" && isHomelabFriendlyCisco(b.title) ? 0 : 1
+    return aPref - bPref
   })
   const visible = sorted.slice(0, visibleCount)
 
@@ -125,11 +223,17 @@ export function DealsGrid() {
     <div>
       {minRam && (
         <p className="mb-4 rounded-lg border border-primary/25 bg-primary/5 px-4 py-2.5 text-xs text-text-secondary">
-          Filtered to listings that fit {minRam} GB RAM or more, from your Workload Sizer results.
+          {modelTier && nodesNeeded ? (
+            <>
+              Your Sizer results fit <strong className="text-foreground">{nodesNeeded > 1 ? `${nodesNeeded}× ` : ""}{modelTier.name}</strong>-class hardware — you&rsquo;ll need {nodesNeeded} of these, each with at least {minRam} GB RAM. Networking and rack gear are hidden while this filter is active.
+            </>
+          ) : (
+            <>Filtered to compute hardware with at least {minRam} GB RAM, from your Workload Sizer results. Networking and rack gear are hidden while this filter is active.</>
+          )}
         </p>
       )}
       <div className="mb-5 flex flex-wrap items-center gap-2">
-        {["All", ...DEAL_CATEGORIES].map((c) => (
+        {["All", ...availableCategories].map((c) => (
           <button
             key={c}
             onClick={() => { setCategory(c); setVisibleCount(PAGE_SIZE) }}
@@ -144,6 +248,12 @@ export function DealsGrid() {
           </button>
         ))}
       </div>
+
+      {category === "Cisco" && (
+        <p className="mb-5 rounded-lg border border-warning/25 bg-warning/5 px-4 py-2.5 text-xs text-warning">
+          Rack-mount Cisco switches run fan-cooled and pull more power than homelab gear — fine in a garage or closet, less fine under a desk. Compact models (2960-C/CX, 3560-CX) sort first below.
+        </p>
+      )}
 
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <p className="font-mono text-[11px] tracking-wider text-text-tertiary uppercase">

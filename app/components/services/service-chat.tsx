@@ -2,18 +2,46 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Bot, MessageCircle, Send, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { parseSizerIntent, sizerUrlFor } from "@/lib/sizer-intent"
+import { WORKLOADS } from "@/lib/workload-catalog"
+import { HYPERVISORS } from "@/lib/hypervisor-catalog"
 
 type ChatMessage = { id: number; role: "assistant" | "user"; text: string; href?: string; action?: string }
 
 const QUICK_PROMPTS = ["Help me plan a homelab", "I need better home Wi-Fi", "Help with a business network", "Show me hardware deals"]
 
+function appName(id: string): string {
+  return WORKLOADS.find((w) => w.id === id)?.name ?? id
+}
+
+function hypervisorName(id: string): string {
+  return HYPERVISORS.find((h) => h.id === id)?.name ?? id
+}
+
 function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action"> {
   const text = input.toLowerCase()
+
+  // Checked first and takes priority over the generic keyword matches
+  // below: if the message actually names an app or hypervisor, deep-link
+  // into the Sizer with it preselected instead of a generic blurb.
+  const intent = parseSizerIntent(text)
+  if (intent && intent.appIds.length > 0) {
+    const apps = intent.appIds.map(appName).join(" + ")
+    const hv = intent.hypervisorId ? ` on ${hypervisorName(intent.hypervisorId)}` : ""
+    return {
+      text: `Here's the Workload Sizer with ${apps}${hv} already selected — the CPU, RAM, and storage estimate updates from there.`,
+      href: sizerUrlFor(intent),
+      action: "Open your preselected Sizer results",
+    }
+  }
+
   if (/deal|ebay|buy|hardware|elitedesk|mini pc/.test(text)) return { text: "The Deals page searches current eBay listings for proven homelab hardware, including EliteDesk Minis, network gear, and 10-inch rack parts.", href: "/deals", action: "Browse hardware deals" }
-  if (/sizer|size|cpu|ram|memory|workload|plex|immich|home assistant|nextcloud/.test(text)) return { text: "The Workload Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage.", href: "/sizer", action: "Open the Workload Sizer" }
+  if (/sizer|size|cpu|ram|memory|workload/.test(text)) return { text: "The Workload Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage. Name an app (Plex, Immich, Home Assistant...) and I'll preselect it for you.", href: "/sizer", action: "Open the Workload Sizer" }
   if (/discord|community|people|share|chat/.test(text)) return { text: "The ZeroPoint community is for sharing builds, troubleshooting problems, comparing hardware, and learning with other homelabbers.", href: "/community", action: "Visit the community" }
   if (/network|topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
   if (/home network|house|residential|wifi|wi-fi|signal|coverage|access point|dead zone|iot/.test(text)) return { text: "ZeroPoint Home covers Wi-Fi, UniFi, IoT separation, cameras, network racks, and troubleshooting for homes and recreational properties.", href: "/home-networking", action: "Explore home networking" }
@@ -28,10 +56,17 @@ function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action">
 }
 
 export function SiteChat() {
+  const pathname = usePathname()
+  // The Sizer shows its own fixed bottom summary bar on small/medium
+  // screens (lg:hidden — see components/sizer/vm-sizing-calculator.tsx)
+  // whenever at least one workload is selected. Lifting the launcher a
+  // little higher on that page avoids the two stacking/overlapping —
+  // matched to the same lg breakpoint the sizer bar itself uses.
+  const onSizer = pathname === "/sizer"
   const [open, setOpen] = React.useState(false)
   const [input, setInput] = React.useState("")
   const [messages, setMessages] = React.useState<ChatMessage[]>([
-    { id: 1, role: "assistant", text: "Hi—I’m the ZeroPoint guide. Tell me what you want to build, buy, or understand, and I’ll point you in the right direction." },
+    { id: 1, role: "assistant", text: "Hi — I match keywords to the right page, I'm not a live agent. Name an app or two (Plex, Immich, Home Assistant...) and I'll deep-link the Sizer with them preselected; otherwise ask what you want to build, buy, or understand." },
   ])
   const nextId = React.useRef(2)
   const logRef = React.useRef<HTMLDivElement>(null)
@@ -51,11 +86,11 @@ export function SiteChat() {
   }
 
   return (
-    <div className="fixed right-4 bottom-4 z-50 sm:right-6 sm:bottom-6">
+    <div className={cn("fixed right-4 z-50 sm:right-6", onSizer ? "bottom-20 lg:bottom-6" : "bottom-4 sm:bottom-6")}>
       {open && (
         <section aria-label="ZeroPoint site chat" className="mb-3 flex h-[min(580px,calc(100vh-7rem))] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-[0_24px_80px_-24px_var(--accent-glow)]">
           <header className="flex items-center justify-between border-b border-border bg-surface-raised px-4 py-3.5">
-            <div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary"><Bot className="size-4.5" /></span><div><h2 className="text-sm font-semibold">ZeroPoint guide</h2><p className="mt-0.5 flex items-center gap-1.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase"><span className="size-1.5 rounded-full bg-success" />Automated · No live agent</p></div></div>
+            <div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary"><Bot className="size-4.5" /></span><div><h2 className="text-sm font-semibold">ZeroPoint quick links</h2><p className="mt-0.5 flex items-center gap-1.5 font-mono text-[8px] tracking-wider text-text-tertiary uppercase"><span className="size-1.5 rounded-full bg-success" />Keyword-matched · No live agent</p></div></div>
             <button onClick={() => setOpen(false)} aria-label="Close chat" className="flex size-8 items-center justify-center rounded-lg text-text-tertiary transition-colors hover:bg-surface hover:text-foreground"><X className="size-4" /></button>
           </header>
 
@@ -65,7 +100,7 @@ export function SiteChat() {
           </div>
 
           <div className="border-t border-border bg-surface-raised/50 p-3">
-            <form onSubmit={(event) => { event.preventDefault(); send(input) }} className="flex gap-2"><Input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about a project..." aria-label="Chat message" autoComplete="off" /><Button type="submit" size="icon" disabled={!input.trim()}><Send className="size-4" /><span className="sr-only">Send</span></Button></form>
+            <form onSubmit={(event) => { event.preventDefault(); send(input) }} className="flex gap-2"><Input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Try an app name, or ask about a project..." aria-label="Chat message" autoComplete="off" /><Button type="submit" size="icon" disabled={!input.trim()}><Send className="size-4" /><span className="sr-only">Send</span></Button></form>
             <div className="mt-2 flex items-center justify-between gap-3 px-1"><p className="text-[9px] text-text-tertiary">Runs locally · No messages sent</p><Link href="/services#project-planner" onClick={() => setOpen(false)} className="text-[10px] font-medium text-primary hover:underline">Plan a project</Link></div>
           </div>
         </section>

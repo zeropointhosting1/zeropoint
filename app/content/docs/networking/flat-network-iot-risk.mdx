@@ -42,7 +42,7 @@ On a flat network, trust is all-or-nothing. If one device gets compromised, it d
 
 You can't fix this by buying "more secure" smart plugs — the economics of the category make that an unreliable bet at best. What you can control is what those devices are allowed to talk to.
 
-The practical fix is VLANs: put IoT devices on their own segment, separate from the devices you actually trust, and put firewall rules between the segments that default to deny. This is exactly the structure behind the [home network on this site](/homelab) — three segments, each with a specific, narrow purpose:
+The practical fix is VLANs: put IoT devices on their own segment, separate from the devices you actually trust, and put firewall rules between the segments that default to deny. This is exactly the structure behind [the home network on this site](/network) — three segments, each with a specific, narrow purpose:
 
 - **Trusted** — laptops, phones, the NAS. Full access to internal services.
 - **IoT** — smart devices. Internet access only, no path to Trusted, no path to each other where it can be avoided.
@@ -54,10 +54,14 @@ A conceptual OPNsense-style rule set for the IoT segment looks something like th
 # IoT VLAN — default deny, explicit allow only
 block  in  on IOT_IF from IOT_NET to TRUSTED_NET
 block  in  on IOT_IF from IOT_NET to GUEST_NET
-allow  in  on IOT_IF from IOT_NET to any port {80, 443}   # internet only
+allow  in  on IOT_IF from IOT_NET to GATEWAY_IP port 53    # DNS — resolved through the gateway, not the internet directly
+allow  in  on IOT_IF from IOT_NET to GATEWAY_IP port 123   # NTP — many IoT devices won't function until their clock is set
+allow  in  on IOT_IF from IOT_NET to any port {80, 443}    # internet only
 ```
 
-Three lines, and the entire risk model changes. A compromised smart plug can still phone home to whatever cloud service it was already talking to — but it has no route to the NAS, no route to a laptop, no route to anything worth taking.
+DNS and NTP have to be allowed explicitly, and before the general internet rule — without them, devices on the segment can't resolve a hostname or set their clock, which is the most common reason a freshly segmented IoT VLAN looks "broken" on day one even though the block/allow logic is correct.
+
+Five lines, and the entire risk model changes. A compromised smart plug can still phone home to whatever cloud service it was already talking to — but it has no route to the NAS, no route to a laptop, no route to anything worth taking.
 
 ## The takeaway
 

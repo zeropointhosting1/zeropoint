@@ -23,7 +23,7 @@ import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
   title: "Work — ZeroPoint",
-  description: "Real client projects, plus everything being built, broken, and documented in the ZeroPoint lab.",
+  description: "Lab projects: what's running in the ZeroPoint lab today, what's been built and broken along the way, and what's next.",
   path: "/projects",
 })
 
@@ -55,9 +55,9 @@ export default function ProjectsPage() {
               Work
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-text-secondary">
-              Real client projects, and the full scope of what&rsquo;s
-              actually running in the ZeroPoint lab today, plus what&rsquo;s
-              next.
+              Lab projects: what&rsquo;s actually running in the ZeroPoint
+              lab today, what&rsquo;s been built and broken along the way,
+              and what&rsquo;s next.
             </p>
           </div>
         </section>

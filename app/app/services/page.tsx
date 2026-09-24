@@ -51,7 +51,7 @@ const FAQ = [
   { q: "What happens after the project ends?", a: "You keep the configuration notes, a network plan, and ownership of every account and credential involved — nothing stays locked to a device only ZeroPoint can access." },
   { q: "How are my credentials handled during the project?", a: "Access is scoped to what the project actually needs and handed back at completion. You should change shared passwords once the work is done, same as with any contractor." },
   { q: "What's not included?", a: "Hardware purchases, ongoing monitoring outside of Monthly Support, and anything outside the agreed scope — those are called out before work starts, not after." },
-  { q: "How does payment work?", a: "{{TODO: deposit/invoice terms}} — confirmed in writing before work begins." },
+  { q: "How does payment work?", a: `${BUSINESS_INFO.paymentTerms} Confirmed in writing before work begins.` },
   { q: "What's your service area?", a: `On-site work is available in ${BUSINESS_INFO.areaServed}. Remote work is available anywhere.` },
 ]
 

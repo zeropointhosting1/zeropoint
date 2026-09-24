@@ -72,7 +72,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Cheap smart devices sitting on the same network as your work laptop", "You want cameras without exposing them to the internet", "You don't know what a device could reach if it were compromised"],
     includes: ["Separate IoT and camera network", "Least-access firewall rules", "Remote camera access without public exposure", "Configuration handoff"],
     delivery: "Local or remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}} — usually paired with Home Network Setup." },
+    pricing: { from: null, unit: "project", note: "Usually paired with Home Network Setup — priced after a quick scope review." },
   },
   // Small business
   {
@@ -84,7 +84,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Wi-Fi that's fine for five people and terrible for fifteen", "Dead zones in parts of the office or floor", "No one remembers how the network was set up"],
     includes: ["Coverage and hardware plan", "Gateway, switch, and AP setup", "Wired drops where needed", "Configuration handoff"],
     delivery: "Local or remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}} — scales with office size and device count." },
+    pricing: { from: null, unit: "project", note: "Scales with office size and device count — priced after a quick scope review." },
   },
   {
     id: "guest-device-separation",
@@ -95,7 +95,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Customers are on the same network as your POS system", "You don't have a separate guest network at all", "A compromised device could reach files or payment systems it shouldn't"],
     includes: ["Staff / guest / device network separation", "POS and camera isolation", "Guest network with no internal access", "Firewall rules between segments"],
     delivery: "Local or remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}}" },
+    pricing: { from: null, unit: "project", note: "Priced after a quick scope review." },
   },
   {
     id: "firewall-remote-access",
@@ -106,7 +106,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Something was port-forwarded years ago and no one remembers why", "Staff need remote access and are using something ad hoc", "You're not sure what's reachable from outside your network"],
     includes: ["Firewall rule review and cleanup", "VPN or remote-access setup", "Documented access list", "Configuration handoff"],
     delivery: "Local or remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}}" },
+    pricing: { from: null, unit: "project", note: "Priced after a quick scope review." },
   },
   {
     id: "backups",
@@ -117,7 +117,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Backups exist but no one has tested a restore", "Some machines are backed up and others aren't", "A single failed drive would set you back weeks"],
     includes: ["Backup scope and schedule", "Automated backup setup", "Restore test", "Documentation"],
     delivery: "Local or remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}}" },
+    pricing: { from: null, unit: "project", note: "Priced after a quick scope review." },
   },
   {
     id: "onboarding-offboarding",
@@ -128,7 +128,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["Former employees might still have access to something", "Setting up a new hire's accounts takes longer than it should", "No one is sure who owns which admin accounts"],
     includes: ["Account audit", "Onboarding / offboarding checklist", "Admin and ownership review", "Documentation"],
     delivery: "Remote",
-    pricing: { from: null, unit: "project", note: "{{TODO: starting price}}" },
+    pricing: { from: null, unit: "project", note: "Priced after a quick scope review." },
   },
   {
     id: "monthly-support",
@@ -139,7 +139,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["You'd rather have an ongoing arrangement than one-off projects", "Small issues come up often enough to justify a standing plan", "You want a known monthly cost instead of surprise invoices"],
     includes: ["Scoped monthly hours", "Priority scheduling", "Rollover terms defined upfront"],
     delivery: "Remote",
-    pricing: { from: null, unit: "month", note: "{{TODO: starting monthly price}} — optional, not required to work together." },
+    pricing: { from: null, unit: "month", note: "Optional — not required to work together. Priced after a quick scope review." },
   },
   // Homelab
   {
@@ -183,7 +183,7 @@ export function offeringsFor(audience: ServiceAudience): ServiceOffering[] {
 }
 
 export function formatServicePrice(pricing: ServicePricing): string {
-  if (pricing.from === null) return "{{TODO: starting price}}"
+  if (pricing.from === null) return "Quote on request"
   if (pricing.unit === "hour") return `From $${pricing.from}/hr`
   if (pricing.unit === "app") return `From $${pricing.from}/app`
   if (pricing.unit === "month") return `From $${pricing.from}/mo`

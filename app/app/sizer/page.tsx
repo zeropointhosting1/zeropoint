@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { VmSizingCalculator } from "@/components/sizer/vm-sizing-calculator"
+import { ToolFlowSteps } from "@/components/tools/step-flow"
 import { HYPERVISORS } from "@/lib/hypervisor-catalog"
 import { WORKLOADS } from "@/lib/workload-catalog"
 import { pageMetadata } from "@/lib/metadata"
@@ -25,12 +27,21 @@ export default function SizerPage() {
             <h1 className="mt-4 max-w-3xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">Start with the workloads, not the shopping list.</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary">Pick what you want to self-host and a hypervisor to run it on, and get a transparent starting point for compute, memory, and system storage. Every app and hypervisor links back to an official source, and every ZeroPoint assumption is labeled.</p>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">
-              <span>{WORKLOADS.length} curated apps</span><span>{HYPERVISORS.length} hypervisors</span><span>Official sources</span><span>Updated Sep 19, 2026</span><span>Planning guidance—not a guarantee</span>
+              <span>{WORKLOADS.length} curated apps</span><span>{HYPERVISORS.length} hypervisors</span><span>Sourced where possible</span><span>Updated Sep 23, 2026</span><span>Planning guidance—not a guarantee</span>
+            </div>
+            <div className="mt-8">
+              <Suspense fallback={null}>
+                <ToolFlowSteps current="sizer" />
+              </Suspense>
             </div>
           </div>
         </section>
         <section className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20"><VmSizingCalculator /></div>
+          <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+            <Suspense fallback={null}>
+              <VmSizingCalculator />
+            </Suspense>
+          </div>
         </section>
       </main>
       <Footer />

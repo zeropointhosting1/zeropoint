@@ -159,7 +159,9 @@ export const VLANS: VlanSegment[] = [
 
 export const HOMELAB_STATS = {
   nodes: NODES.length,
-  services: SERVICES.length,
+  // Only what's actually Running — matches what ServiceList (which also
+  // filters to Running) shows, so the stat and the list never disagree.
+  services: SERVICES.filter((s) => s.status === "Running").length,
   vlans: VLANS.length,
   clients: VLANS.reduce((sum, v) => sum + v.wired + v.wifi, 0),
 }

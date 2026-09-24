@@ -5,6 +5,7 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ReviewBanner } from "@/components/legal/review-banner"
 import { LegalProse } from "@/components/legal/legal-prose"
 import { BUSINESS_INFO } from "@/lib/business-info"
+import { FORM_SERVICE_NAME } from "@/lib/contact-config"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
@@ -22,7 +23,7 @@ export default function PrivacyPage() {
           <div className="mx-auto max-w-3xl px-6 pt-32 pb-24">
             <Eyebrow>Legal</Eyebrow>
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Privacy Policy</h1>
-            <p className="mt-4 text-sm text-text-tertiary">Last updated: {"{{TODO: date you publish this}}"}</p>
+            <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>
 
             <div className="mt-10">
               <ReviewBanner />
@@ -47,7 +48,7 @@ export default function PrivacyPage() {
               <p>
                 This site is a static export with no server of its own, so contact form and project
                 planner submissions are sent directly from your browser to a third-party form service
-                (currently {"{{TODO: name the form service you set up in lib/contact-config.ts, e.g. Formspree or Web3Forms}}"}).
+                (currently {FORM_SERVICE_NAME ?? "{{TODO: name the form service you set up in lib/contact-config.ts, e.g. Formspree or Web3Forms}}"}).
                 That service processes the submission and forwards it by email; its own privacy policy
                 governs how it handles that data in transit.
               </p>

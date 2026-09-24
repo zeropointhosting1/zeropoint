@@ -8,7 +8,7 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion"
 import { useCountUp } from "@/lib/use-count-up"
 import { Eyebrow } from "./eyebrow"
 import { SectionIndex } from "./section-index"
-import { HOMELAB_STATS } from "@/lib/homelab-data"
+import { HOMELAB_STATS, LAST_UPDATED } from "@/lib/homelab-data"
 
 const TECH = [
   { label: "UniFi", detail: "Network" },
@@ -30,12 +30,7 @@ function Stat({ label, value, start, icon: Icon }: { label: string; value: numbe
   const count = useCountUp(value, start)
   return (
     <div className="group relative p-5 sm:p-6">
-      <div className="flex items-center justify-between">
-        <Icon className="size-4 text-text-tertiary transition-colors group-hover:text-primary" />
-        <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-wider text-success uppercase">
-          <span className="size-1.5 rounded-full bg-success" /> Live
-        </span>
-      </div>
+      <Icon className="size-4 text-text-tertiary transition-colors group-hover:text-primary" />
       <div className="mt-5 font-mono text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">{count}</div>
       <div className="mt-1 text-sm text-text-secondary">{label}</div>
     </div>
@@ -65,6 +60,7 @@ export function HomelabStrip() {
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-text-secondary">
                 Real infrastructure behind ZeroPoint—from the network edge to the workloads running on it.
               </p>
+              <p className="mt-2 font-mono text-[9px] tracking-wider text-text-tertiary uppercase">Updated by hand · As of {LAST_UPDATED}</p>
             </div>
             <Link
               href="/network"

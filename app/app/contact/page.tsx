@@ -5,6 +5,7 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ContactForm } from "@/components/contact/contact-form"
+import { ToolFlowSteps } from "@/components/tools/step-flow"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { BOOKING_URL, RESPONSE_DAYS } from "@/lib/contact-config"
 import { pageMetadata } from "@/lib/metadata"
@@ -48,6 +49,11 @@ export default function ContactPage() {
                   Book a call
                 </a>
               )}
+            </div>
+            <div className="mt-8 flex justify-center">
+              <Suspense fallback={null}>
+                <ToolFlowSteps current="contact" />
+              </Suspense>
             </div>
           </div>
         </section>

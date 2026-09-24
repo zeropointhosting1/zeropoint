@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 const TOOLS = [
   { icon: Calculator, status: "Available", title: "Workload Sizer", copy: "Choose common self-hosted apps and get a transparent CPU, memory, and system-storage starting point backed by official requirements.", href: "/sizer", action: "Size your workloads" },
   { icon: Search, status: "Available", title: "Hardware Deals", copy: "Search current eBay listings for proven mini PCs, network gear, and compact rack components without wading through unrelated parts.", href: "/deals", action: "Browse current deals" },
-  { icon: ServerCog, status: "Planned", title: "Rack Planner", copy: "Turn workloads and hardware into a complete 10-inch rack layout with compatibility guidance and a full price breakdown.", href: "/deals#rack-concept", action: "See the rack concept" },
+  { icon: ServerCog, status: "Available", title: "Rack Planner", copy: "Three real 10-inch rack builds — parts list, estimated total, and idle power draw for each. A full visual designer is still planned.", href: "/deals#starter-builds", action: "See starter builds" },
 ]
 
 export default function ToolsPage() {

@@ -22,7 +22,7 @@ export default function TermsPage() {
           <div className="mx-auto max-w-3xl px-6 pt-32 pb-24">
             <Eyebrow>Legal</Eyebrow>
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Terms of Service</h1>
-            <p className="mt-4 text-sm text-text-tertiary">Last updated: {"{{TODO: date you publish this}}"}</p>
+            <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>
 
             <div className="mt-10">
               <ReviewBanner />
@@ -46,9 +46,7 @@ export default function TermsPage() {
               </p>
 
               <h2>Payment</h2>
-              <p>
-                {"{{TODO: deposit/invoice terms — e.g. \"A deposit is due before work begins, with the balance invoiced on completion.\"}}"}
-              </p>
+              <p>{BUSINESS_INFO.paymentTerms}</p>
 
               <h2>Your accounts and credentials</h2>
               <p>
@@ -67,9 +65,7 @@ export default function TermsPage() {
               </p>
 
               <h2>Liability</h2>
-              <p>
-                {"{{TODO: a liability limitation appropriate for your business — e.g. \"ZeroPoint's liability for any engagement is limited to the amount paid for that engagement.\" A lawyer should confirm this is appropriate for your situation.}}"}
-              </p>
+              <p>{BUSINESS_INFO.liabilityLimitation}</p>
 
               <h2>Service area</h2>
               <p>
@@ -84,7 +80,7 @@ export default function TermsPage() {
               </p>
 
               <h2>Governing law</h2>
-              <p>{"{{TODO: your state/jurisdiction, if you want to specify one}}"}</p>
+              <p>{BUSINESS_INFO.jurisdiction}</p>
 
               <h2>Contact</h2>
               <p>

@@ -61,9 +61,15 @@ const KEYWORDS: {
   { term: "UniFi Cloud Gateway", category: "UniFi", minPrice: 50, limit: 6 },
   { term: "UniFi Switch", category: "UniFi", minPrice: 20, limit: 6 },
   { term: "Cisco Catalyst Switch", category: "Cisco", minPrice: 30, limit: 8 },
-  { term: "10 Inch Server Rack", category: "10-inch Rack", minPrice: 30, limit: 8, omitExclusions: ["mount", "bracket"] },
-  { term: "10 Inch Rack Shelf", category: "10-inch Rack", minPrice: 10, limit: 8, omitExclusions: ["mount", "bracket"] },
-  { term: "10 Inch Patch Panel", category: "10-inch Rack", minPrice: 12, limit: 8, omitExclusions: ["mount", "faceplate"] },
+  // "case" and "cover" were still in the default exclusion list here even
+  // though 10-inch rack cabinets and shelves are routinely titled "rack
+  // case" or sold with a "dust cover" mention — that was excluding real,
+  // relevant listings and is the likely cause of this category returning
+  // zero results. "stand" is omitted too, since small racks are often
+  // literally sold as a "rack stand".
+  { term: "10 Inch Server Rack", category: "10-inch Rack", minPrice: 30, limit: 8, omitExclusions: ["mount", "bracket", "case", "cover", "stand"] },
+  { term: "10 Inch Rack Shelf", category: "10-inch Rack", minPrice: 10, limit: 8, omitExclusions: ["mount", "bracket", "case", "cover", "stand"] },
+  { term: "10 Inch Patch Panel", category: "10-inch Rack", minPrice: 12, limit: 8, omitExclusions: ["mount", "faceplate", "case", "cover"] },
 ]
 
 const CORS_HEADERS = {

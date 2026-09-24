@@ -42,7 +42,7 @@ const JOURNEY = [
 const TOOLS = [
   { icon: Calculator, status: "Available", title: "Workload Sizer", copy: "Estimate resources for common self-hosted workloads with visible assumptions.", href: "/sizer", action: "Size workloads" },
   { icon: Search, status: "Available", title: "Hardware Deals", copy: "Browse current listings for proven mini PCs, networking gear, and rack parts.", href: "/deals", action: "Find hardware" },
-  { icon: PackageSearch, status: "Planned", title: "Rack Planner", copy: "Turn compute, networking, shelves, patching, and power into one complete layout.", href: "/deals#rack-concept", action: "See the concept" },
+  { icon: PackageSearch, status: "Available", title: "Rack Planner", copy: "Three fixed 10-inch rack builds with parts, price, and power draw — a full visual designer is still planned.", href: "/deals#starter-builds", action: "See starter builds" },
 ]
 
 const SERVICE_ICONS: Record<string, React.ElementType> = {
