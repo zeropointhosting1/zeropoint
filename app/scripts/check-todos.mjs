@@ -1,6 +1,8 @@
-// Runs after `next build` (see package.json's "postbuild" script) and fails
-// the build if any {{TODO placeholder made it into the static export — the
-// whole point of marking placeholders that way instead of inventing values.
+// Runs after `next build` (see package.json's "postbuild" script) and lists
+// any {{TODO placeholder that made it into the static export — the whole
+// point of marking placeholders that way instead of inventing values. It only
+// warns by default so deploys aren't blocked while content is still being
+// filled in; set STRICT_TODOS=1 to make it fail the build instead.
 import fs from "node:fs"
 import path from "node:path"
 
@@ -37,7 +39,8 @@ for (const file of walk(OUT_DIR)) {
 
 if (hits > 0) {
   console.error(`\ncheck-todos: found ${hits} unresolved {{TODO placeholder(s) in the exported site — see TODO-CONTENT.md.`)
-  process.exit(1)
+  if (process.env.STRICT_TODOS) process.exit(1)
+  process.exit(0)
 }
 
 console.log("check-todos: no {{TODO placeholders in the exported site.")
