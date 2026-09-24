@@ -23,6 +23,7 @@ const STATIC_ROUTES = [
   "/sizer/",
   "/terms/",
   "/tools/",
+  "/websites/",
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

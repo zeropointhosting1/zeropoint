@@ -10,6 +10,7 @@ const AUDIENCE_GROUPS: { audience: ServiceAudience; label: string }[] = [
   { audience: "home", label: "Home" },
   { audience: "business", label: "Small business" },
   { audience: "homelab", label: "Homelab" },
+  { audience: "web", label: "Websites & dashboards" },
 ]
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { submitForm, type SubmitResult } from "@/lib/submit-form"

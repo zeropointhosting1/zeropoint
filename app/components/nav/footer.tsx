@@ -10,6 +10,7 @@ const EXPLORE = [
   { label: "Homelab", href: "/lab" },
   { label: "Home Networking", href: "/home-networking" },
   { label: "Business", href: "/services" },
+  { label: "Websites", href: "/websites" },
   { label: "Contact", href: "/contact" },
 ]
 

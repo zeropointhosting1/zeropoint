@@ -11,8 +11,12 @@ export type ServiceId =
   | "homelab-build"
   | "self-hosted-apps"
   | "remote-help"
+  | "business-website"
+  | "restaurant-website"
+  | "business-dashboard"
+  | "website-care"
 
-export type ServiceAudience = "home" | "business" | "homelab"
+export type ServiceAudience = "home" | "business" | "homelab" | "web"
 
 export type PricingUnit = "project" | "hour" | "app" | "month"
 
@@ -176,6 +180,51 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     delivery: "Remote",
     pricing: { from: 100, unit: "hour", note: "Most sessions run about an hour." },
   },
+  // Websites & dashboards
+  {
+    id: "restaurant-website",
+    audience: "web",
+    title: "Restaurant Website",
+    short: "Menu, hours, location, and ordering links",
+    description: "A fast, mobile-first site built around what diners actually look for: the menu, today's hours, where you are, and how to order or book.",
+    signs: ["Your menu is a blurry PDF or a photo of the printed one", "Hours on Google, Yelp, and your site don't match", "Most visitors are on a phone and the site is hard to use on one"],
+    includes: ["Menu page that's easy to update", "Hours, location, and map", "Online ordering and reservation links", "Domain, hosting, and Google Business Profile setup"],
+    delivery: "Remote",
+    pricing: { from: null, unit: "project", note: "Scales with page count and menu size — priced after a quick scope review." },
+  },
+  {
+    id: "business-website",
+    audience: "web",
+    title: "Small Business Website",
+    short: "A clean, fast site you actually own",
+    description: "A straightforward site that explains what you do, where you are, and how to reach you — on a domain and hosting account in your name.",
+    signs: ["You don't have a website, or it's years out of date", "The person who built it is gone and no one can log in", "Customers can't find your hours, services, or contact info"],
+    includes: ["Page structure and copy help", "Mobile-first design", "Contact form or booking link", "Domain and hosting in your name"],
+    delivery: "Remote",
+    pricing: { from: null, unit: "project", note: "Scales with page count — priced after a quick scope review." },
+  },
+  {
+    id: "business-dashboard",
+    audience: "web",
+    title: "Business Dashboard",
+    short: "Sales, labor, and inventory at a glance",
+    description: "One screen that pulls the numbers you check every day out of your POS, spreadsheets, or other systems, so you're not piecing them together by hand.",
+    signs: ["You export reports from three places to answer one question", "End-of-day numbers live in a spreadsheet someone updates manually", "You want to see today's sales or labor without logging into the POS"],
+    includes: ["Data source review (POS, spreadsheets, etc.)", "Dashboard for owners and managers", "Access controls per person", "Documentation of where every number comes from"],
+    delivery: "Remote",
+    pricing: { from: null, unit: "project", note: "Depends on which systems the data comes from — priced after a quick scope review." },
+  },
+  {
+    id: "website-care",
+    audience: "web",
+    title: "Website Care",
+    short: "Menu changes, updates, and renewals handled",
+    description: "An optional monthly arrangement for keeping the site current — menu and hours changes, updates, and making sure the domain never lapses.",
+    signs: ["Menu or hours change often and updating the site is a chore", "You're worried the domain or hosting will quietly expire", "You'd rather send a text than log into a website editor"],
+    includes: ["Menu, hours, and content updates", "Domain and hosting renewals tracked", "Uptime checks", "Dashboard tweaks as needs change"],
+    delivery: "Remote",
+    pricing: { from: null, unit: "month", note: "Optional — the site and dashboard are yours either way. Priced after a quick scope review." },
+  },
 ]
 
 export function offeringsFor(audience: ServiceAudience): ServiceOffering[] {
@@ -198,4 +247,6 @@ export const PROJECT_GOALS = [
   "Deploy self-hosted apps",
   "Clean up an existing network",
   "Plan hardware before buying",
+  "Launch or replace a website",
+  "See business numbers in one dashboard",
 ] as const
