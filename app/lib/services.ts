@@ -1,3 +1,5 @@
+import { SUPPORT_PLANS, SUPPORT_TERMS } from "./support-plans"
+
 export type ServiceId =
   | "home-network-setup"
   | "wifi-planning"
@@ -8,20 +10,18 @@ export type ServiceId =
   | "backups"
   | "onboarding-offboarding"
   | "monthly-support"
-  | "homelab-build"
-  | "self-hosted-apps"
   | "remote-help"
   | "business-website"
   | "restaurant-website"
   | "business-dashboard"
   | "website-care"
 
-export type ServiceAudience = "home" | "business" | "homelab" | "web"
+export type ServiceAudience = "home" | "business" | "web"
 
 export type PricingUnit = "project" | "hour" | "app" | "month"
 
 export type ServicePricing = {
-  // null means a starting price hasn't been set yet — render as a TODO,
+  // null means a starting price has not been set — show Quote on request,
   // never invent a number. See TODO-CONTENT.md.
   from: number | null
   unit: PricingUnit
@@ -42,7 +42,7 @@ export type ServiceOffering = {
 
 // Starting prices, not final quotes — actual scope (device count, property
 // size, app count) moves the number. Shown as "From $X" everywhere, or a
-// TODO placeholder where a starting price hasn't been set yet.
+// Quote on request where a starting price has not been set yet.
 export const SERVICE_OFFERINGS: ServiceOffering[] = [
   // Home
   {
@@ -139,34 +139,11 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     audience: "business",
     title: "Monthly Support",
     short: "Ongoing help, billed monthly",
-    description: "An optional standing arrangement for businesses that want ongoing access to help instead of booking a new project every time.",
+    description: "Monthly managed IT support for small businesses: monitoring, maintenance, and help from a local team.",
     signs: ["You'd rather have an ongoing arrangement than one-off projects", "Small issues come up often enough to justify a standing plan", "You want a known monthly cost instead of surprise invoices"],
-    includes: ["Scoped monthly hours", "Priority scheduling", "Rollover terms defined upfront"],
+    includes: [...SUPPORT_PLANS[0].features],
     delivery: "Remote",
-    pricing: { from: null, unit: "month", note: "Optional — not required to work together. Priced after a quick scope review." },
-  },
-  // Homelab
-  {
-    id: "homelab-build",
-    audience: "homelab",
-    title: "Homelab Build",
-    short: "Mini PCs, racks, Proxmox, and networking",
-    description: "Turn a list of goals into a documented, maintainable lab that has room to grow.",
-    signs: ["Hardware sitting around still unconfigured", "You want to self-host but don't know where to start", "Your \"server\" is a laptop under a desk with no backup plan"],
-    includes: ["Workload and hardware plan", "Rack and network layout", "Proxmox installation", "Build documentation"],
-    delivery: "Local or remote",
-    pricing: { from: 500, unit: "project", note: "Typical build runs 5–12 hours depending on scope." },
-  },
-  {
-    id: "self-hosted-apps",
-    audience: "homelab",
-    title: "Self-Hosted Apps",
-    short: "Deploy services without losing ownership",
-    description: "Install common self-hosted services with sensible storage, access, update, and backup foundations.",
-    signs: ["You want to run Immich, Nextcloud, or similar without fighting Docker all day", "You're not sure your VM is sized correctly", "You have no update or backup plan for what you're already running"],
-    includes: ["Workload sizing", "Container or VM deployment", "Access and update plan", "Backup recommendations"],
-    delivery: "Remote",
-    pricing: { from: 75, unit: "app", note: "Per service deployed; bundles of 3+ apps cost less per app." },
+    pricing: { from: SUPPORT_PLANS[0].price, unit: "month", note: "See Monthly Support Plans above for all three tiers." },
   },
   // General
   {
@@ -178,7 +155,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
     signs: ["You're stuck mid-project and need a second opinion", "You want a sanity check before buying hardware", "Something broke and you're not sure why"],
     includes: ["Pre-call project review", "Focused working session", "Written next steps", "Parts or topology notes"],
     delivery: "Remote",
-    pricing: { from: 100, unit: "hour", note: "Most sessions run about an hour." },
+    pricing: { from: SUPPORT_TERMS.additionalHourlyRate, unit: "hour", note: "Most sessions run about an hour." },
   },
   // Websites & dashboards
   {
@@ -206,7 +183,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
   {
     id: "business-dashboard",
     audience: "web",
-    title: "Business Dashboard",
+    title: "Business Dashboard add-on",
     short: "Sales, labor, and inventory at a glance",
     description: "One screen that pulls the numbers you check every day out of your POS, spreadsheets, or other systems, so you're not piecing them together by hand.",
     signs: ["You export reports from three places to answer one question", "End-of-day numbers live in a spreadsheet someone updates manually", "You want to see today's sales or labor without logging into the POS"],
@@ -238,15 +215,3 @@ export function formatServicePrice(pricing: ServicePricing): string {
   if (pricing.unit === "month") return `From $${pricing.from}/mo`
   return `From $${pricing.from}`
 }
-
-export const PROJECT_GOALS = [
-  "Better Wi-Fi coverage",
-  "Secure guest and IoT networks",
-  "Build a Proxmox server",
-  "Create a 10-inch mini rack",
-  "Deploy self-hosted apps",
-  "Clean up an existing network",
-  "Plan hardware before buying",
-  "Launch or replace a website",
-  "See business numbers in one dashboard",
-] as const

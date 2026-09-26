@@ -64,9 +64,11 @@ export default function DealsPage() {
           </div>
         </section>
 
-        <Suspense fallback={null}>
-          <StarterBuilds />
-        </Suspense>
+        <div id="starter-builds" className="scroll-mt-20">
+          <Suspense fallback={null}>
+            <StarterBuilds />
+          </Suspense>
+        </div>
 
         <WhyThisModel />
 

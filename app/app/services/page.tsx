@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import { Check, FileText, Headset, KeyRound, MessageSquareText, Network, ShieldCheck, Users, Wifi, Building2 } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
@@ -64,7 +66,7 @@ export default function ServicesPage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
           <div className="relative mx-auto grid min-h-[650px] max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-            <div><Eyebrow>Small Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Straightforward technology<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Office Wi-Fi, guest and device separation, firewalls, backups, and account hygiene — set up once, documented properly, and yours to keep.</p></div>
+            <div><Eyebrow>Small Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Local IT support<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Your local IT team in Boca Raton: reliable office networks and Wi-Fi, monthly monitoring and maintenance, and help when your business needs it.</p><div className="mt-8"><Button render={<Link href="/pricing/#plans" />}>See monthly plans</Button></div></div>
             <div className="border-y border-border py-6">
               <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Why hire ZeroPoint</p>
               <div className="mt-5 divide-y divide-border">
@@ -74,7 +76,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="theme-dark band-dark relative overflow-hidden">
+        <section id="office-networks" className="scroll-mt-24 theme-dark band-dark relative overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_20%_35%,var(--accent-glow),transparent_72%)]" />
           <div className="pointer-events-none absolute right-0 bottom-0 size-[28rem] rounded-full bg-brand-cyan/8 blur-3xl" />
           <div className="relative mx-auto max-w-6xl px-6 py-24">

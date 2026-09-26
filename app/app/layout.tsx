@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata({
-    title: "ZeroPoint — Homelabs, Home Networking, Business Technology, and Websites",
+    title: "ZeroPoint — IT Support, Networking, and Websites for Small Businesses and Homes in Boca Raton",
     description:
-      "Hands-on homelab knowledge, better home networking, straightforward technology setup for small businesses, and websites and dashboards for restaurants and small businesses.",
+      "Local IT support in Boca Raton, FL: monthly managed support, office networks and Wi-Fi, websites for small businesses and restaurants, and home networking.",
     path: "/",
   }),
 };

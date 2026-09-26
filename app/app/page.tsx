@@ -2,19 +2,18 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Hero } from "@/components/marketing/hero"
 import { LabShowcase } from "@/components/marketing/lab-showcase"
-import { WebsitesBand } from "@/components/marketing/websites-band"
+import { WhyUs } from "@/components/marketing/why-us"
 import { CaseStudiesSlot } from "@/components/marketing/case-studies-slot"
 import { HowItWorks } from "@/components/marketing/how-it-works"
 import { Testimonials } from "@/components/marketing/testimonials"
 import { ServicesCta } from "@/components/marketing/services-cta"
 import { JsonLd } from "@/components/seo/json-ld"
-import { SITE_URL } from "@/lib/site-config"
+import { SupportPlans } from "@/components/marketing/support-plans"
+import { MeetOwner } from "@/components/marketing/meet-owner"
+import { SHOW_CLIENT_WORK, SHOW_TESTIMONIALS, SITE_URL } from "@/lib/site-config"
 import { BUSINESS_INFO } from "@/lib/business-info"
 
-// Hero (with the "what do you need help with?" picker) -> websites &
-// dashboards -> proof (the lab, plus case studies once any exist) -> how it works -> testimonials (hidden while
-// empty) -> contact CTA. Discord stays off the homepage — it's on /lab
-// and /community only.
+// Business-first homepage; client proof stays hidden until approved content exists.
 export default function HomePage() {
   return (
     <>
@@ -22,7 +21,7 @@ export default function HomePage() {
         data={{
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
-          name: BUSINESS_INFO.name,
+          name: "ZeroPoint",
           url: SITE_URL,
           email: BUSINESS_INFO.email,
           telephone: BUSINESS_INFO.telephone,
@@ -33,11 +32,13 @@ export default function HomePage() {
       <TopNav />
       <main>
         <Hero />
-        <WebsitesBand />
-        <LabShowcase />
-        <CaseStudiesSlot />
+        <SupportPlans preview />
+        <WhyUs />
         <HowItWorks />
-        <Testimonials />
+        {SHOW_CLIENT_WORK && <CaseStudiesSlot />}
+        {SHOW_TESTIMONIALS && <Testimonials />}
+        <MeetOwner />
+        <LabShowcase />
         <ServicesCta />
       </main>
       <Footer />

@@ -1,28 +1,17 @@
 import Image from "next/image"
-import { WORKLOADS } from "@/lib/workload-catalog"
 import { withBasePath } from "@/lib/base-path"
 
-// Logo files live in /public/logos, sourced from each project's own brand
-// assets (or simple-icons for the plain single-color marks).
-const WORKLOAD_LOGOS: Record<string, string> = {
-  "home-assistant": "home-assistant",
-  immich: "immich",
-  plex: "plex",
-  nextcloud: "nextcloud",
-  jellyfin: "jellyfin",
-  pihole: "pihole",
-  vaultwarden: "vaultwarden",
-  grafana: "grafana",
-  gitea: "gitea",
-}
-
-// The Sizer's app catalog, plus the network platforms Services covers that
-// aren't self-hosted apps — not a claim that the lab runs all of these at
-// once, just what ZeroPoint has hands-on experience setting up.
-const STACK = [
-  ...WORKLOADS.filter((workload) => WORKLOAD_LOGOS[workload.id]).map((workload) => ({ name: workload.name, logo: WORKLOAD_LOGOS[workload.id] })),
+// Logo files live in /public/logos: svgl.app for Microsoft and Google,
+// simple-icons for Square, and the bread icon from Toast's own
+// public-domain logo on Wikimedia Commons. A pill without a logo falls
+// back to a letter badge.
+const STACK: { name: string; logo?: string }[] = [
   { name: "UniFi", logo: "ubiquiti" },
   { name: "Cisco", logo: "cisco" },
+  { name: "Microsoft 365", logo: "microsoft-365" },
+  { name: "Google Workspace", logo: "google-workspace" },
+  { name: "Square", logo: "square" },
+  { name: "Toast", logo: "toast" },
 ]
 
 // One copy of STACK renders far narrower than the full-bleed marquee
@@ -34,7 +23,7 @@ const STACK = [
 const MARQUEE_COPIES = 5
 const MARQUEE_TRACK = Array.from({ length: MARQUEE_COPIES }, () => STACK).flat()
 
-export function AppMarquee({ label = "Popular self-hosted apps" }: { label?: string }) {
+export function AppMarquee({ label = "Apps and equipment we work with" }: { label?: string }) {
   return (
     <div className="relative border-t border-border bg-surface/70 py-6">
       <p className="mx-auto max-w-6xl px-6 font-mono text-xs tracking-[0.12em] text-text-secondary uppercase">{label}</p>
@@ -47,10 +36,10 @@ export function AppMarquee({ label = "Popular self-hosted apps" }: { label?: str
   )
 }
 
-function StackPill({ name, logo, duplicate }: { name: string; logo: string; duplicate?: boolean }) {
+function StackPill({ name, logo, duplicate }: { name: string; logo?: string; duplicate?: boolean }) {
   return (
     <span aria-hidden={duplicate} className="flex shrink-0 items-center gap-3 rounded-full border border-border bg-surface-raised py-2 pr-4 pl-2 text-sm font-medium text-foreground shadow-[inset_0_1px_0_oklch(1_0_0/6%)]">
-      <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
+      {logo ? <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-black/5">
         <Image
           src={withBasePath(`/logos/${logo}.svg`)}
           alt={`${name} logo`}
@@ -59,7 +48,7 @@ function StackPill({ name, logo, duplicate }: { name: string; logo: string; dupl
           unoptimized
           className="size-[22px] object-contain"
         />
-      </span>
+      </span> : <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs text-primary">{name.slice(0, 1)}</span>}
       {name}
     </span>
   )

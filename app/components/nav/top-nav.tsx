@@ -10,9 +10,9 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { cn } from "@/lib/utils"
 import { Wordmark } from "./wordmark"
 import { NAV_LINKS, SERVICES_MENU, SERVICES_ACTIVE_PATHS } from "./nav-links"
-import { GithubIcon, DiscordIcon } from "./brand-icons"
+import { GithubIcon } from "./brand-icons"
 import { ScrollProgress } from "./scroll-progress"
-import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { SOCIAL_LINKS } from "@/lib/site-config"
 
 export function TopNav() {
   const [scrolled, setScrolled] = React.useState(false)
@@ -108,12 +108,8 @@ export function TopNav() {
                 <span className="sr-only">GitHub</span>
               </Button>
             )}
-            <Button variant="ghost" size="icon" render={<a href={DISCORD_URL} target="_blank" rel="noreferrer" />}>
-              <DiscordIcon className="size-4" />
-              <span className="sr-only">Discord</span>
-            </Button>
-            <Button size="sm" render={<Link href="/contact" />}>
-              Contact
+            <Button size="sm" render={<Link href="/estimate" />}>
+              Get an estimate
               <ArrowRight className="size-3.5" />
             </Button>
           </div>
@@ -178,8 +174,8 @@ export function TopNav() {
                 ))}
               </motion.ul>
               <motion.div variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="mt-8 grid gap-3">
-                <Button size="lg" className="h-12 w-full text-base" render={<Link href="/contact" />}>
-                  Get a free consult <ArrowRight className="size-4" />
+                <Button size="lg" className="h-12 w-full text-base" render={<Link href="/estimate" />}>
+                  Get an estimate <ArrowRight className="size-4" />
                 </Button>
                 <div className="flex items-center justify-center gap-6 pt-2">
                   {SOCIAL_LINKS.github && (
@@ -188,10 +184,7 @@ export function TopNav() {
                       GitHub
                     </a>
                   )}
-                  <a href={DISCORD_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-text-secondary hover:text-foreground">
-                    <DiscordIcon className="size-4" />
-                    Discord community
-                  </a>
+
                 </div>
               </motion.div>
             </motion.div>

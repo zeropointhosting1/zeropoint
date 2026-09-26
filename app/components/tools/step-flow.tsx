@@ -6,13 +6,13 @@ import { useSearchParams } from "next/navigation"
 import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export type FlowStepId = "sizer" | "deals" | "builds" | "contact"
+export type FlowStepId = "sizer" | "deals" | "builds" | "community"
 
 const STEPS: { id: FlowStepId; label: string; href: string }[] = [
   { id: "sizer", label: "Workloads", href: "/sizer" },
   { id: "deals", label: "Hardware", href: "/deals" },
   { id: "builds", label: "Full build", href: "/deals#starter-builds" },
-  { id: "contact", label: "Send a brief", href: "/contact" },
+  { id: "community", label: "Compare notes", href: "/community" },
 ]
 
 // Carries the current page's query string (Sizer's apps/tier/hv, Deals'
@@ -27,7 +27,7 @@ export function ToolFlowSteps({ current }: { current: FlowStepId }) {
       {STEPS.map((step, index) => {
         const isCurrent = step.id === current
         const [path, hash] = step.href.split("#")
-        const href = query && step.id !== "contact" ? `${path}?${query}${hash ? `#${hash}` : ""}` : step.href
+        const href = query && step.id !== "community" ? `${path}?${query}${hash ? `#${hash}` : ""}` : step.href
         return (
           <React.Fragment key={step.id}>
             {index > 0 && <ChevronRight className="size-3.5 shrink-0 text-text-tertiary" />}

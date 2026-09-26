@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { CalendarClock, Mail, MessageSquareText, FileCheck2 } from "lucide-react"
+import Link from "next/link"
+import { CalendarClock, Mail, Phone, MessageSquareText, FileCheck2 } from "lucide-react"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
@@ -11,13 +12,13 @@ import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact — ZeroPoint",
-  description: "Get in touch about a home network, small business technology, or a homelab build.",
+  description: "Talk to ZeroPoint about monthly business IT support, office Wi-Fi, a website, or home networking in Boca Raton.",
   path: "/contact",
 })
 
 const NEXT_STEPS = [
-  { icon: Mail, title: `Reply within ${RESPONSE_DAYS} business days`, copy: "I read every message myself — no ticket queue." },
-  { icon: CalendarClock, title: "A free 15-minute scoping call", copy: "We talk through what you need before anything is scoped or priced." },
+  { icon: Mail, title: `Reply within ${RESPONSE_DAYS} business days`, copy: "Tell us what you need help with and we will discuss next steps." },
+  { icon: CalendarClock, title: "A free scoping call", copy: "We talk through what you need before anything is scoped or priced." },
   { icon: FileCheck2, title: "A written quote", copy: "A clear scope and price before any work begins." },
 ]
 
@@ -34,7 +35,7 @@ export default function ContactPage() {
               Let&rsquo;s talk about your <span className="text-primary">project.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
-              Home Wi-Fi, an office network, a website, or a home server — send a message and I&rsquo;ll get back to you.
+              Monthly IT support, an office network, a website, or home Wi-Fi — send a message and I&rsquo;ll get back to you.
               On-site work is available in {BUSINESS_INFO.areaServed}; remote work anywhere.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
@@ -42,6 +43,7 @@ export default function ContactPage() {
                 <Mail className="size-4 text-primary" />
                 {BUSINESS_INFO.email}
               </a>
+              <span className="inline-flex items-center gap-2 text-text-secondary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</span>
               {BOOKING_URL && (
                 <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-text-secondary transition-colors hover:text-foreground">
                   <CalendarClock className="size-4 text-primary" />
@@ -83,7 +85,7 @@ export default function ContactPage() {
                 <div className="mt-10 flex items-start gap-3 rounded-xl border border-border bg-background p-5">
                   <MessageSquareText className="mt-0.5 size-4 shrink-0 text-primary" />
                   <p className="text-sm leading-relaxed text-text-secondary">
-                    Already have a project brief from the planner? Use its &ldquo;Send brief&rdquo; button — it comes straight here.
+                    Want a price? <Link href="/estimate" className="font-medium text-primary hover:underline">Get an estimate</Link> instead — it asks a few quick questions so we can quote faster.
                   </p>
                 </div>
               </div>

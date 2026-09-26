@@ -227,7 +227,7 @@ export function VmSizingCalculator() {
         hwMatch ? `Suggested hardware: ${hwMatch.nodes > 1 ? `${hwMatch.nodes}x ` : ""}${hwMatch.tier.name}` : null,
         transcodeNote ? `Transcoding note: ${transcodeNote}` : null,
         "",
-        "I'd like help turning this into a build: ",
+        "Questions for the community: ",
       ]
         .filter((line) => line !== null)
         .join("\n")
@@ -516,9 +516,9 @@ export function VmSizingCalculator() {
                 <Search className="size-4" />
                 Find hardware that fits
               </Button>
-              <Button className="w-full" render={<Link href={`/contact?message=${encodeURIComponent(sizingSummary)}`} />}>
+              <Button className="w-full" render={<Link href="/community/" />}>
                 <Send className="size-4" />
-                Bring this to a project
+                Discuss with the community
               </Button>
               <button onClick={copySummary} className="flex w-full items-center justify-center gap-2 rounded-lg py-1.5 text-xs font-medium text-text-tertiary transition-colors hover:text-foreground">
                 {copied ? <Check className="size-3.5" /> : <Boxes className="size-3.5" />}

@@ -8,8 +8,8 @@ import { offeringsFor } from "@/lib/services"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
-  title: "Websites and Dashboards for Restaurants and Small Businesses — ZeroPoint",
-  description: "Mobile-first websites for restaurants and small businesses, plus dashboards that put sales, labor, and inventory on one screen.",
+  title: "Websites for Small Businesses and Restaurants — ZeroPoint",
+  description: "Websites for small businesses and restaurants, offered alongside ZeroPoint monthly IT support. Optional dashboard add-ons.",
   path: "/websites",
 })
 
@@ -17,7 +17,7 @@ const WHY = [
   { icon: KeyRound, title: "You own everything", copy: "Domain, hosting, and every login are in your name — not locked to a builder or agency account." },
   { icon: Smartphone, title: "Built for phones first", copy: "Most diners and customers find you on a phone, so that's where the design starts." },
   { icon: RefreshCw, title: "Easy to keep current", copy: "Menu, hours, and specials can change without rebuilding anything." },
-  { icon: MessageSquareText, title: "Plain-language handoff", copy: "You leave knowing how the site and dashboard work and where every number comes from." },
+  { icon: MessageSquareText, title: "Plain-language handoff", copy: "You leave knowing how to update your site, with every login and a written guide." },
 ]
 
 const DINER_NEEDS = [
@@ -35,9 +35,9 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
 
 const PROCESS = [
   { n: "01", title: "Plan", copy: "Go over what customers need to find, what you check every day, and which systems (POS, spreadsheets, ordering) already hold the data." },
-  { n: "02", title: "Build", copy: "Design the site and dashboard, with previews along the way so there are no surprises at launch." },
+  { n: "02", title: "Build", copy: "Design the site, with previews along the way so there are no surprises at launch." },
   { n: "03", title: "Launch", copy: "Connect the domain, set up Google Business Profile links, and confirm everything works on real phones." },
-  { n: "04", title: "Hand off", copy: "Walk through updating the menu and reading the dashboard, and hand over every login and a short written guide." },
+  { n: "04", title: "Hand off", copy: "Walk through updating the site, and hand over every login and a short written guide." },
 ]
 
 const FAQ = [
@@ -124,10 +124,10 @@ export default function WebsitesPage() {
           <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
           <div className="relative mx-auto grid min-h-[650px] max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
             <div>
-              <Eyebrow>Websites &amp; Dashboards</Eyebrow>
-              <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Websites and dashboards<br /><span className="text-primary">for restaurants and small businesses.</span></h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">A site that shows customers the menu, hours, and how to order in seconds, plus a dashboard that puts your sales, labor, and top items on one screen.</p>
-              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-secondary"><span className="size-1.5 rounded-full bg-success" />Currently building a website and dashboard for a local restaurant</p>
+              <Eyebrow>Websites</Eyebrow>
+              <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Websites<br /><span className="text-primary">for restaurants and small businesses.</span></h1>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">A website that helps customers find your services, menu, hours, and how to get in touch. Add it to your IT support relationship so one team looks after both.</p>
+              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-secondary"><span className="size-1.5 rounded-full bg-success" />Available as an add-on for monthly support clients</p>
             </div>
             <div className="border-y border-border py-6">
               <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">What you get</p>
@@ -161,25 +161,15 @@ export default function WebsitesPage() {
           </div>
         </section>
 
-        <section className="border-b border-border">
-          <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-20">
-              <div><Eyebrow>Dashboards</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Your numbers, <span className="text-primary">on one screen.</span></h2></div>
-              <div><p className="text-lg leading-relaxed text-text-secondary">Instead of exporting reports from the POS, the scheduling app, and a spreadsheet to answer &ldquo;how did tonight go?&rdquo;, a dashboard pulls them together and keeps them current.</p><p className="mt-4 text-sm leading-relaxed text-text-tertiary">What it shows depends on the questions you ask every day. The example below is how a restaurant might look at a single night.</p></div>
-            </div>
-            <DashboardPreview />
-          </div>
-        </section>
-
         <section className="relative overflow-hidden border-b border-border bg-surface">
           <div className="pointer-events-none absolute -top-40 left-1/2 size-[34rem] -translate-x-1/2 rounded-full bg-primary/8 blur-3xl" />
           <div className="relative mx-auto max-w-6xl px-6 py-24">
             <div className="grid gap-6 lg:grid-cols-[1fr_0.7fr] lg:items-end">
               <div><Eyebrow>Services</Eyebrow><h2 className="mt-4 max-w-2xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">Pick what you need, or <span className="text-primary">combine them.</span></h2></div>
-              <p className="max-w-lg text-base leading-relaxed text-text-secondary lg:justify-self-end">A website and a dashboard work well as one project, but each can be done on its own. Every option starts with a clear scope before work begins.</p>
+              <p className="max-w-lg text-base leading-relaxed text-text-secondary lg:justify-self-end">Start with your business or restaurant website. Website care and a business dashboard are optional add-ons, scoped around what you need.</p>
             </div>
             <div className="mt-12 grid gap-4 md:grid-cols-2">
-              {offerings.map((service) => {
+              {offerings.filter((service) => service.id !== "business-dashboard").map((service) => {
                 const Icon = SERVICE_ICONS[service.id] ?? Globe
                 return <article key={service.id} className="group relative overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-[0_14px_40px_-30px_var(--accent-glow)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_22px_55px_-28px_var(--accent-glow)]">
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
@@ -191,6 +181,11 @@ export default function WebsitesPage() {
                 </article>
               })}
             </div>
+            <details className="mt-8 rounded-2xl border border-border bg-surface-raised p-6">
+              <summary className="cursor-pointer text-lg font-semibold">Optional add-on: Business Dashboard</summary>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-text-secondary">Add a view of sales, labor, or inventory to your website project. We check what your systems can share and agree on scope before quoting. The example below uses illustrative data, not client results.</p>
+              <div className="mt-6"><DashboardPreview /></div>
+            </details>
             <PricingLink audience="web" />
           </div>
         </section>

@@ -4,7 +4,7 @@ const PROCESS = [
   { n: "01", title: "Assess", copy: "A free call to understand your home or business, what you already have, what you want, and your budget." },
   { n: "02", title: "Design", copy: "A written plan and price — including a parts list if you need equipment — before anything changes." },
   { n: "03", title: "Build", copy: "Set up in person, or together over a video call." },
-  { n: "04", title: "Document", copy: "A walkthrough of what was done, plus the notes and every password, so it&rsquo;s fully yours." },
+  { n: "04", title: "Document", copy: "A walkthrough of what was done, plus the notes and every password, so it’s fully yours." },
 ]
 
 export function HowItWorks() {

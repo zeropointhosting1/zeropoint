@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
-import { ArrowRight, Building2, FlaskConical, HouseWifi, LayoutDashboard } from "lucide-react"
+import { ArrowRight, Building2, Globe, HouseWifi, Network } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { AppMarquee } from "./app-marquee"
 
@@ -17,10 +17,10 @@ const enter = {
 // Plain-language entry points — the first thing a visitor who doesn't know
 // the jargon needs is "which of these is me?"
 const HELP_WITH = [
-  { icon: HouseWifi, title: "Wi-Fi and networks at home", copy: "Dead zones, slow Wi-Fi, safer smart devices", href: "/home-networking" },
-  { icon: Building2, title: "Technology for my business", copy: "Office Wi-Fi, guest networks, backups", href: "/services" },
-  { icon: LayoutDashboard, title: "A website or dashboard", copy: "For restaurants and small businesses", href: "/websites" },
-  { icon: FlaskConical, title: "Building a home server", copy: "Homelabs, self-hosting, planning tools", href: "/lab" },
+  { icon: Building2, title: "Business IT & Support", copy: "Monthly monitoring, maintenance, and help", href: "/services/" },
+  { icon: Network, title: "Office Networks & Wi-Fi", copy: "Reliable connections for staff and customers", href: "/services/#office-networks" },
+  { icon: Globe, title: "Websites", copy: "An add-on for your business or restaurant", href: "/websites/" },
+  { icon: HouseWifi, title: "Home Wi-Fi & Networking", copy: "Better coverage and safer smart devices", href: "/home-networking/" },
 ]
 
 export function Hero() {
@@ -28,21 +28,21 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
-      <div className="relative mx-auto grid min-h-[760px] max-w-6xl items-center gap-16 px-6 pt-32 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-28">
+      <div className="relative mx-auto grid min-h-[680px] max-w-6xl items-center gap-16 px-6 pt-32 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24 lg:pt-28">
         <div>
-          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Homes · Small businesses · Websites</motion.p>
-          <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Technology that<br /><span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">just works.</span></motion.h1>
-          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Reliable Wi-Fi, safer networks, and websites that bring in customers — for homes and small businesses. Set up properly, and explained in plain English.</motion.p>
+          <motion.p custom={0.04} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Boca Raton, FL · Small businesses &amp; homes</motion.p>
+          <motion.h1 custom={reduced ? 0 : 0.1} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Your local IT team for <span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">small businesses and homes.</span></motion.h1>
+          <motion.p custom={reduced ? 0 : 0.24} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Reliable networks, monthly IT support, and websites for small businesses — plus better Wi-Fi at home. You get a clear price up front and everything explained in plain English.</motion.p>
           <motion.div custom={reduced ? 0 : 0.35} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-9 flex flex-wrap gap-3">
             <Button size="lg" render={<Link href="/contact" />}>Get a free consult <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/pricing" />}>See pricing</Button>
+            <Button size="lg" variant="outline" render={<Link href="/pricing/#plans" />}>See monthly plans</Button>
           </motion.div>
           <motion.p custom={reduced ? 0 : 0.44} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter} className="mt-6 font-mono text-[11px] tracking-wider text-text-tertiary uppercase">Free consult · Clear written quote · You own everything</motion.p>
         </div>
 
         <motion.div custom={reduced ? 0 : 0.18} initial={reduced ? "visible" : "hidden"} animate="visible" variants={enter}>
           <div className="overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-[0_28px_90px_-42px_var(--accent-glow)]">
-            <p className="border-b border-border px-6 py-4 text-sm font-semibold">What do you need help with?</p>
+            <p className="border-b border-border px-6 py-4 text-sm font-semibold">What do you need help with? <span className="font-normal text-text-secondary">Pick one to learn more.</span></p>
             <ul className="divide-y divide-border">
               {HELP_WITH.map(({ icon: Icon, title, copy, href }) => (
                 <li key={href}>
@@ -57,8 +57,7 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
-
-      <AppMarquee label="Apps and equipment we set up" />
+      <AppMarquee label="Apps and equipment we work with" />
     </section>
   )
 }

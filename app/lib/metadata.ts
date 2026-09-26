@@ -6,7 +6,7 @@ const SITE_NAME = "ZeroPoint"
 // rather than a generated opengraph-image route, since GitHub Pages doesn't
 // reliably set a Content-Type for the extensionless files that route
 // convention produces.
-const OG_IMAGE = { url: "/og-image.png", width: 1200, height: 630, alt: "ZeroPoint — homelabs, home networking, and small business technology" }
+const OG_IMAGE = { url: "/og-image.png", width: 1200, height: 630, alt: "ZeroPoint — IT support, networking, and websites in Boca Raton" }
 
 // Wraps a page's title/description with the Open Graph and Twitter Card
 // fields social previews and messaging apps read.

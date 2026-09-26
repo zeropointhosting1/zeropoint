@@ -1,4 +1,5 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc"
+import Link from "next/link"
 import { MdxPre } from "./mdx-pre"
 import { Callout } from "./callout"
 
@@ -35,8 +36,12 @@ export const mdxComponents: MdxComponents = {
       {children}
     </li>
   ),
-  a: ({ children, ...props }) => (
-    <a className="text-primary underline-offset-4 hover:underline" {...props}>
+  a: ({ children, href, ...props }) => href?.startsWith("/") && !href.startsWith("//") ? (
+    <Link href={href} className="text-primary underline-offset-4 hover:underline" {...props}>
+      {children}
+    </Link>
+  ) : (
+    <a href={href} className="text-primary underline-offset-4 hover:underline" {...props}>
       {children}
     </a>
   ),

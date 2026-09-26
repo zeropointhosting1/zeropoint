@@ -132,27 +132,10 @@
   --chart-5: oklch(0.8 0.13 75);
 }
 
-/* Full-width dark bands fade in from and back out to the light page instead
-   of starting on a hard edge, so scrolling between light and dark sections
-   reads as one continuous page. The fade sits inside the section's own
-   vertical padding (py-24+), so no content ever lands on the light end. */
+/* Shared dark sections use clean boundaries on every page. */
 .band-dark {
-  background: linear-gradient(
-    to bottom in oklch,
-    var(--band-top, oklch(0.985 0.008 285)) 0,
-    oklch(0.16 0.035 282) 5rem,
-    oklch(0.16 0.035 282) calc(100% - 5rem),
-    var(--band-bottom, oklch(0.985 0.008 285)) 100%
-  );
-}
-
-/* Two dark bands back to back stay dark across the seam instead of fading
-   out to light and straight back in. */
-.band-dark + .band-dark {
-  --band-top: oklch(0.16 0.035 282);
-}
-.band-dark:has(+ .band-dark) {
-  --band-bottom: oklch(0.16 0.035 282);
+  background-color: var(--background);
+  border-block: 1px solid var(--border);
 }
 
 @layer base {

@@ -8,8 +8,8 @@ import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
 import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
-import { GithubIcon, LinkedinIcon, DiscordIcon } from "@/components/nav/brand-icons"
-import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { GithubIcon, LinkedinIcon } from "@/components/nav/brand-icons"
+import { SOCIAL_LINKS, OWNER } from "@/lib/site-config"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { withBasePath } from "@/lib/base-path"
 import { pageMetadata } from "@/lib/metadata"
@@ -21,46 +21,22 @@ const HAS_HEADSHOT = fs.existsSync(path.join(process.cwd(), "public/about/headsh
 
 export const metadata: Metadata = pageMetadata({
   title: "About — ZeroPoint",
-  description: "Why ZeroPoint exists — practical technology services backed by hands-on learning, documentation, and a community that shares the work.",
+  description: "Meet the person behind ZeroPoint, a local IT support business in Boca Raton helping small businesses and homes.",
   path: "/about",
 })
 
 const STORY = [
-  {
-    n: "01",
-    icon: BriefcaseBusiness,
-    label: "Where it started",
-    title: "From the help desk to the home lab.",
-    copy: "I work in IT support and wanted a deeper, practical understanding of networking. Homelabbing gave me somewhere to work with infrastructure and enterprise technology beyond tickets, textbooks, and tutorials.",
-  },
-  {
-    n: "02",
-    icon: Wrench,
-    label: "How I learn",
-    title: "Build it. Break it. Fix it properly.",
-    copy: "Nothing worked perfectly the first time—and that is the point. Troubleshooting routing, virtualization, services, and security is where the concepts stop being abstract and start becoming real skills.",
-  },
-  {
-    n: "03",
-    icon: Share2,
-    label: "Why I wanted a community",
-    title: "Homelabbing is better when we share the work.",
-    copy: "ZeroPoint began as my own technical notes, but I wanted a place where people could share their labs, compare ideas, troubleshoot together, and learn from both successful builds and frustrating mistakes.",
-  },
-  {
-    n: "04",
-    icon: ShieldCheck,
-    label: "Why services matter",
-    title: "A home network should be convenient and secure.",
-    copy: "Homes now contain cameras, speakers, appliances, and other IoT devices that may not deserve access to everything else on the network. I want ZeroPoint to help people install and segment their networks properly, understand what they own, and leave with documentation they can actually use.",
-  },
+  { n: "01", icon: BriefcaseBusiness, label: "Small business", title: "Your local IT team.", copy: "Monthly support keeps networking, updates, and everyday technology help in one place. Start with a clear plan that fits your business." },
+  { n: "02", icon: ShieldCheck, label: "Clear scope", title: "Know what you are paying for.", copy: "We explain the work in plain English and confirm the price up front. Your accounts, equipment, and documentation stay yours." },
+  { n: "03", icon: Wrench, label: "Websites", title: "One team for your IT and your website.", copy: "Add a practical website for your small business or restaurant to the support relationship you already have." },
+  { n: "04", icon: Share2, label: "At home", title: "Reliable Wi-Fi beyond the office.", copy: "Home networking gets the same careful setup, straightforward explanations, and documented handoff." },
 ]
 
 const PATHS = [
-  { icon: Users, eyebrow: "Community", title: "Build alongside us", copy: "Join people sharing setups, solving problems, and learning the same technology.", href: "/community" },
-  { icon: Search, eyebrow: "Hardware", title: "Know what to buy", copy: "Find real listings for useful homelab gear and learn what belongs in a practical build.", href: "/deals" },
-  { icon: ShieldCheck, eyebrow: "Services", title: "Get help setting it up", copy: "Plan a safer home network, UniFi deployment, homelab, or self-hosted environment.", href: "/services" },
-  { icon: Network, eyebrow: "Infrastructure", title: "See a working example", copy: "Explore a sanitized topology with real workloads, hardware, and segmented VLANs.", href: "/network" },
+  { icon: ShieldCheck, eyebrow: "Business IT", title: "Support for your business", copy: "Office networks, Wi-Fi, and monthly managed support.", href: "/services" },
+  { icon: Search, eyebrow: "Pricing", title: "See monthly plans", copy: "Compare inclusions and choose the support you need.", href: "/pricing/#plans" },
+  { icon: Network, eyebrow: "The Lab", title: "See the work behind the work", copy: "Documented builds, experiments, and lessons shared openly.", href: "/lab" },
+  { icon: Users, eyebrow: "Contact", title: "Talk to ZeroPoint", copy: "Start with a free consult and a clear scope.", href: "/contact" },
 ]
 
 export default function AboutPage() {
@@ -74,23 +50,23 @@ export default function AboutPage() {
             <div>
               <Eyebrow>About ZeroPoint</Eyebrow>
               <h1 className="mt-5 max-w-3xl text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">
-                Built in the lab.<br /><span className="text-primary">Applied in the real world.</span>
+                Local IT support.<br /><span className="text-primary">A person you can talk to.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-                I&rsquo;m {BUSINESS_INFO.name}, based in {BUSINESS_INFO.city}. ZeroPoint grew from hands-on homelabbing into a larger mission: help property owners and small businesses build reliable, secure technology—and share what I learn with the community.
+                I&rsquo;m {OWNER.name}, based in {BUSINESS_INFO.city}. {OWNER.bio}
               </p>
             </div>
 
             <div className="relative border-y border-border py-7">
               <div className="pointer-events-none absolute -top-20 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/8 blur-3xl" />
-              <p className="relative font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Current chapter</p>
+              <p className="relative font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Behind ZeroPoint</p>
               <div className="relative mt-6 flex items-center gap-4">
                 {HAS_HEADSHOT ? (
-                  <Image src={withBasePath("/about/headshot.jpg")} alt={BUSINESS_INFO.name} width={56} height={56} unoptimized className="size-14 shrink-0 rounded-2xl border border-primary/20 object-cover" />
+                  <Image src={withBasePath("/about/headshot.jpg")} alt={OWNER.name} width={56} height={56} unoptimized className="size-14 shrink-0 rounded-2xl border border-primary/20 object-cover" />
                 ) : (
                   <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-xl font-semibold text-primary">ZP</span>
                 )}
-                <div><p className="font-semibold text-foreground">{BUSINESS_INFO.credentialLine}</p><p className="mt-1 text-sm text-text-secondary">Still learning, out loud, in public</p></div>
+                <div><p className="font-semibold text-foreground">{BUSINESS_INFO.credentialLine}</p><p className="mt-1 text-sm text-text-secondary">Small-business IT, websites, and home networking</p></div>
               </div>
               <dl className="relative mt-7 divide-y divide-border border-t border-border">
                 <ProfileRow label="Based in" value={BUSINESS_INFO.city} />
@@ -101,7 +77,7 @@ export default function AboutPage() {
                 )}
               </dl>
               <p className="relative mt-6 border-l border-primary/50 pl-4 text-sm leading-relaxed text-text-secondary">
-                “The failures are not edited out. They are usually where the best documentation begins.”
+                Clear scope, plain-English explanations, and technology you own.
               </p>
             </div>
           </div>
@@ -112,8 +88,8 @@ export default function AboutPage() {
             <div className="grid gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:gap-24">
               <div className="lg:sticky lg:top-28 lg:self-start">
                 <Eyebrow>The story</Eyebrow>
-                <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">Why I started building.</h2>
-                <p className="mt-4 text-text-secondary">A lab is a safe place to be curious, make mistakes, and understand the systems behind the screen.</p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">How ZeroPoint helps.</h2>
+                <p className="mt-4 text-text-secondary">Reliable day-to-day support for your business, with websites and home networking when you need them.</p>
               </div>
               <div className="border-t border-border">
                 {STORY.map(({ n, icon: Icon, label, title, copy }) => (
@@ -129,7 +105,7 @@ export default function AboutPage() {
 
         <section className="border-b border-border bg-surface">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>Go deeper</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">See what ZeroPoint is becoming.</h2></div><p className="max-w-sm text-sm leading-relaxed text-text-secondary">One working lab, the lessons it produces, and a community built around learning in public.</p></div>
+            <div className="mb-12 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>Go deeper</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Find the help you need.</h2></div><p className="max-w-sm text-sm leading-relaxed text-text-secondary">Business IT is the core. The Lab is where we test ideas and share what we learn.</p></div>
             <div className="grid border-t border-border md:grid-cols-2">
               {PATHS.map(({ icon: Icon, eyebrow, title, copy, href }) => (
                 <Link key={href} href={href} className="group border-b border-border py-7 md:px-7 md:odd:border-r md:odd:pl-0 md:even:pr-0">
@@ -145,10 +121,10 @@ export default function AboutPage() {
           <div className="pointer-events-none absolute inset-0 bg-radial-fade opacity-60" />
           <div className="relative mx-auto max-w-4xl px-6 py-24 text-center sm:py-28">
             <Eyebrow>Connect</Eyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Build something. Share what you learn.</h2>
-            <p className="mx-auto mt-4 max-w-lg text-text-secondary">Join the Discord, follow the code, or connect with me professionally.</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Let’s talk about your business.</h2>
+            <p className="mx-auto mt-4 max-w-lg text-text-secondary">Tell us what is working, what is not, and where you need support.</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button size="lg" className="shadow-[0_0_32px_-8px_var(--accent-glow)]" render={<a href={DISCORD_URL} target="_blank" rel="noreferrer" />}><DiscordIcon className="size-4" />Join the Discord</Button>
+              <Button size="lg" render={<Link href="/contact/" />}>Get a free consult <ArrowRight className="size-4" /></Button>
               {SOCIAL_LINKS.github && (
                 <Button size="lg" variant="outline" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}><GithubIcon className="size-4" />GitHub</Button>
               )}

@@ -6,20 +6,7 @@ import { Send, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ToolFlowSteps } from "@/components/tools/step-flow"
-import { STARTER_BUILDS, buildTotalUsd, buildIdleWatts, suggestBuildForRamGb, type StarterBuild } from "@/lib/starter-builds"
-
-function briefFor(build: StarterBuild): string {
-  return [
-    `Starter build brief: ${build.name} (${build.targetPriceLabel})`,
-    "",
-    "Parts:",
-    ...build.parts.map((p) => `- ${p.role}: ${p.item} (~$${p.priceUsd})`),
-    "",
-    `Estimated total: ~$${buildTotalUsd(build)} · Idle draw: ~${buildIdleWatts(build)}W`,
-    "",
-    "I'd like help turning this into a build: ",
-  ].join("\n")
-}
+import { STARTER_BUILDS, buildTotalUsd, buildIdleWatts, suggestBuildForRamGb } from "@/lib/starter-builds"
 
 export function StarterBuilds() {
   const searchParams = useSearchParams()
@@ -27,7 +14,7 @@ export function StarterBuilds() {
   const recommendedId = minRam ? suggestBuildForRamGb(minRam).id : null
 
   return (
-    <section id="starter-builds" className="scroll-mt-20 border-b border-border">
+    <section className="border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -79,9 +66,9 @@ export function StarterBuilds() {
                   ))}
                 </div>
 
-                <Button size="sm" className="mt-6 w-full" render={<Link href={`/contact?message=${encodeURIComponent(briefFor(build))}`} />}>
+                <Button size="sm" className="mt-6 w-full" render={<Link href="/community/" />}>
                   <Send className="size-3.5" />
-                  Send this build as a brief
+                  Discuss with the community
                 </Button>
               </article>
             )

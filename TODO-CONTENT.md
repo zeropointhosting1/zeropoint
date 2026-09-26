@@ -1,48 +1,63 @@
-# TODO — content still needed from you
+# Content and launch checklist
 
-Nothing below is invented. Placeholders are marked `{{TODO: ...}}` in code (mostly in `app/lib/business-info.ts` and `app/lib/site-config.ts`) and collected here so you have one list to work through.
+All business, contact, and social settings live in `app/lib/site-config.ts`. The old business-info and contact-config modules re-export these values for existing consumers. Existing personal-detail edits made in the shared workspace during this task were preserved; no personal details were invented by this change.
 
-## Phase 1 — Technical fixes
+## Remaining placeholders
 
-- [ ] **Site URL** (`app/lib/site-config.ts` `SITE_URL`): currently defaults to the real GitHub Pages URL (`https://zeropointhosting1.github.io/zeropoint`). If you get a custom domain, set `NEXT_PUBLIC_SITE_URL` in the deploy workflow to override it.
-- [ ] **Business info for JSON-LD / structured data** (`app/lib/business-info.ts`):
-  - [ ] Your name or business name
-  - [ ] Contact email
-  - [ ] Phone (optional — leave blank to omit from JSON-LD)
-  - [ ] City/region
-  - [ ] On-site service area
-- [ ] **Social links** (`app/lib/site-config.ts` `SOCIAL_LINKS`): GitHub profile URL, LinkedIn profile URL. Icons stay hidden in the nav/footer/About page until these are set.
+The table lists every complete TODO token in source content, including optional settings and the unpublished case-study template. Generated HTML repeats these values across pages; its warning count is not the number of unique tasks. The scanner script's literal TODO search strings are not content placeholders.
 
-## Phase 2 — Contact
+| Source location | Placeholder |
+| --- | --- |
+| [app/lib/site-config.ts:17](app/lib/site-config.ts#L17) | `{{TODO: GitHub profile URL}}` |
+| [app/lib/site-config.ts:18](app/lib/site-config.ts#L18) | `{{TODO: LinkedIn profile URL}}` |
+| [app/lib/site-config.ts:25](app/lib/site-config.ts#L25) | `{{TODO: your name or business name}}` |
+| [app/lib/site-config.ts:26](app/lib/site-config.ts#L26) | `{{TODO: contact email}}` |
+| [app/lib/site-config.ts:27](app/lib/site-config.ts#L27) | `{{TODO: contact phone number}}` |
+| [app/lib/site-config.ts:29](app/lib/site-config.ts#L29) | `{{TODO: on-site service area — e.g. "Boca Raton and X miles" or a list of counties}}` |
+| [app/lib/site-config.ts:32](app/lib/site-config.ts#L32) | `{{TODO: certifications, if any — leave empty to omit the row}}` |
+| [app/lib/site-config.ts:34](app/lib/site-config.ts#L34) | `{{TODO: deposit/invoice terms, e.g. "A deposit is due before work begins, with the balance invoiced on completion."}}` |
+| [app/lib/site-config.ts:35](app/lib/site-config.ts#L35) | `{{TODO: a liability limitation appropriate for your business — e.g. "ZeroPoint's liability for any engagement is limited to the amount paid for that engagement." A lawyer should confirm this is appropriate for your situation.}}` |
+| [app/lib/site-config.ts:36](app/lib/site-config.ts#L36) | `{{TODO: your state/jurisdiction, if you want to specify one}}` |
+| [app/lib/site-config.ts:37](app/lib/site-config.ts#L37) | `{{TODO: date you publish the Privacy/Terms pages}}` |
+| [app/lib/site-config.ts:45](app/lib/site-config.ts#L45) | `{{TODO: Formspree/Web3Forms endpoint URL}}` |
+| [app/lib/site-config.ts:50](app/lib/site-config.ts#L50) | `{{TODO: form service name, e.g. Formspree or Web3Forms}}` |
+| [app/lib/site-config.ts:54](app/lib/site-config.ts#L54) | `{{TODO: booking link, e.g. Cal.com}}` |
+| [app/lib/site-config.ts:58](app/lib/site-config.ts#L58) | `{{TODO: reply time in business days, e.g. 1-2}}` |
+| [app/lib/site-config.ts:67](app/lib/site-config.ts#L67) | `{{TODO: add your photo at public/about/headshot.jpg}}` |
+| [app/lib/site-config.ts:70](app/lib/site-config.ts#L70) | `{{TODO: TikTok handle}}` |
+| [app/lib/site-config.ts:71](app/lib/site-config.ts#L71) | `{{TODO: TikTok profile URL}}` |
+| [app/content/work/_TEMPLATE.mdx:2](app/content/work/_TEMPLATE.mdx#L2) | `{{TODO: project title, e.g. "Office Network Rebuild for a 12-Person Studio"}}` |
+| [app/content/work/_TEMPLATE.mdx:3](app/content/work/_TEMPLATE.mdx#L3) | `{{TODO: one sentence — what this project was and the outcome}}` |
+| [app/content/work/_TEMPLATE.mdx:4](app/content/work/_TEMPLATE.mdx#L4) | `{{TODO: YYYY-MM-DD}}` |
+| [app/content/work/_TEMPLATE.mdx:5](app/content/work/_TEMPLATE.mdx#L5) | `{{TODO: e.g. UniFi}}` |
+| [app/content/work/_TEMPLATE.mdx:5](app/content/work/_TEMPLATE.mdx#L5) | `{{TODO: e.g. Small Business}}` |
+| [app/content/work/_TEMPLATE.mdx:23](app/content/work/_TEMPLATE.mdx#L23) | `{{TODO: What wasn't working, in the client's own words if you can. What was actually happening — dead zones, an unreliable network, guest devices with too much access, whatever the real starting point was.}}` |
+| [app/content/work/_TEMPLATE.mdx:27](app/content/work/_TEMPLATE.mdx#L27) | `{{TODO: What you proposed and why — the tradeoffs you considered, what you ruled out, and what the plan actually was before any hardware went in.}}` |
+| [app/content/work/_TEMPLATE.mdx:31](app/content/work/_TEMPLATE.mdx#L31) | `{{TODO: What actually happened during the install/deployment. Real constraints you hit, anything that didn't go according to plan, and how it was handled.}}` |
+| [app/content/work/_TEMPLATE.mdx:35](app/content/work/_TEMPLATE.mdx#L35) | `{{TODO: What changed. Be specific and honest — real numbers or outcomes if you have them, not vague claims.}}` |
 
-- [ ] **Form endpoint** (`app/lib/contact-config.ts` `FORM_ENDPOINT`): sign up for [Formspree](https://formspree.io) or [Web3Forms](https://web3forms.com) (both free-tier, static-export friendly), create a form, and paste its endpoint URL here. Until this is set, the Contact page and both planners show a "not connected yet — email me directly" message instead of silently failing.
-- [ ] **Booking link** (`app/lib/contact-config.ts` `BOOKING_URL`): optional. A Cal.com (or similar) scheduling link. Leave `null` to keep it hidden.
-- [ ] **Response time** (`app/lib/contact-config.ts` `RESPONSE_DAYS`): how many business days you commit to replying within.
+## Editing and publishing content
 
-## Phase 4 — Page restructure
+- Plan prices, features, and shared terms: `app/lib/support-plans.ts`. Essentials $149/mo; Business $349/mo; Priority from $699/mo. Additional time $100/hr. Existing one-off prices remain in `app/lib/services.ts`; unset project prices show “Quote on request”.
+- Client Work: copy `app/content/work/_TEMPLATE.mdx` to a new file without the leading underscore, replace every placeholder, and use real outcomes only. The template remains unpublished. Set `SHOW_CLIENT_WORK=true` in site config to expose navigation and the homepage case-study section. `/projects/` remains accessible while hidden.
+- Testimonials: add real, approved entries to `app/lib/testimonials.ts` and set `SHOW_TESTIMONIALS=true`. Empty collections still render nothing. No testimonials were invented.
+- Owner photo: `app/public/about/headshot.jpg` is present and is picked up at build time on Home and About. The config's photo placeholder is a fallback if the file is removed. Confirm the photo is the one you want before publishing.
+- TikTok: enter a real handle and profile URL in site config. Until then, Home and The Lab show the handle placeholder as text, not a broken or invented profile link.
+- Optional GitHub/LinkedIn and booking links remain hidden until configured. The existing Discord invite is retained on the Lab, Community, and other resource surfaces, but removed from the header.
+- Contact and estimate forms need a real form endpoint and processor name. Nothing was submitted during validation. Contact email and phone remain placeholders.
+- Set `NEXT_PUBLIC_SITE_URL` if using a custom domain. GitHub Pages builds use the repository `BASE_PATH` and retain every existing route.
+- Optional lab photos: `app/public/lab/projects/{id}.jpg` for IDs in `app/lib/projects.ts`; `app/public/lab/hardware/{id}.jpg` for hardware. Existing icon treatments remain valid fallbacks.
+- Existing affiliate-link note: no affiliate program was configured in the previous implementation; review disclosures if an affiliate program is added.
 
-- [ ] **About page** (`app/lib/business-info.ts`):
-  - [ ] `yearsInIt` — years of IT/networking experience
-  - [ ] `credentialLine` — a confident one-line credential for the About hero (current role, years of experience, or what you've built)
-  - [ ] `certifications` — array of certifications, if any (leave empty to omit that row)
-  - [ ] Headshot: add a photo at `app/public/about/headshot.jpg` — the page falls back to an initials badge until it exists
-- [ ] **New business service prices** (`app/lib/services.ts`, `SERVICE_OFFERINGS`) — starting prices weren't set for the new business-specific services, so each shows `{{TODO: starting price}}` until you set one: Office Network & Wi-Fi, Guest & Device Separation, Firewall & Remote Access, Backups, Onboarding/Offboarding & Account Hygiene, Monthly Support.
-- [ ] **IoT & Camera Separation** (home, same file) — also needs a starting price.
-- [ ] **Payment terms** (`app/services/page.tsx`, FAQ) — deposit/invoice terms for the "How does payment work?" answer.
+## Details still to define
 
-## Phase 5 — Photos, and a finding on affiliate links
+The supplied plan inclusions and response promises are used exactly as requested. Device/user limits, support hours, unused-hour rollover, software-license charges, website build versus ongoing care scope, and the on-site service boundary were not supplied and were not invented. Confirm those details when preparing the service agreement. General contact reply time and payment terms remain placeholders.
 
-- [ ] **Photos** (optional — falls back to the existing icon treatment until added): project/hardware cards now check for a real photo and use it automatically once present.
-  - `app/public/lab/projects/{id}.jpg` — one per project in `app/lib/projects.ts` (ids: `home-network`, `proxmox-cluster`, `enterprise-network-lab`, `zeropoint-website`, `sso`, `remote-access`, `internal-dashboard`, `vaultwarden`, `siem`, `windows-lab`)
-  - `app/public/lab/hardware/{id}.jpg` — `gateway`, `switch`, `ap`
-  - `app/public/about/headshot.jpg` (listed above too)
-- [ ] **Affiliate disclosure — not needed, confirmed no affiliate program is wired up.** I checked `supabase/functions/ebay-deals/index.ts`: it uses eBay's Browse API and passes through `itemWebUrl` as-is — no campaign/partner/affiliate query params (no eBay Partner Network campaign ID, etc.) are appended anywhere. Since the links aren't actually affiliate links, I didn't add a disclosure — adding one would misrepresent the relationship. If you sign up for the eBay Partner Network later, the link-builder in that function is the one place to add the campaign ID, and a disclosure should go in at the same time.
-- [ ] **Case studies** — the Work page and homepage both hide the case-study section until at least one exists. To add one: copy `app/content/work/_TEMPLATE.mdx` to a new file in that same folder without the leading underscore, fill in the frontmatter and the problem/design/build/result sections, and it'll appear automatically (and get its own `/work/<slug>/` page).
+## Validation for this change
 
-## Phase 6 — Legal & QA
-
-- [ ] **Review `/privacy` and `/terms` before publishing.** Both pages are accurate to how the site actually works today (no analytics/tracking cookies, form submissions go to a third-party processor, etc.) but are starter text, not legal advice — have someone review them, especially the payment-terms, liability, and governing-law placeholders.
-- [ ] **QA — what I could and couldn't verify:**
-  - ✅ Automated: production build, typecheck, and lint all pass clean.
-  - ✅ Automated: scanned all 20 built pages — zero broken internal links, zero `<img>` missing `alt`, and exactly one `<h1>` per real content page (the two exceptions are expected: `/property-technology/` is an intentional redirect stub with no content, and `/work/_none/` is an unlinked, noindexed placeholder route required by Next's static export for a dynamic segment with zero real entries yet).
-  - ⚠️ Not verified — needs a real browser: no horizontal overflow at 1440px/390px, no console errors, and color contrast on the dark sections. I don't have browser access in this session. Focus states are handled consistently through the shared Button/Input/Select components (Base UI + Tailwind `focus-visible` utilities), but you should still click through the site with a keyboard to confirm.
+- Normal production export and GitHub Pages-style export with `BASE_PATH=/Zeropoint` passed, including TypeScript.
+- Repository lint and all 47 existing tests passed.
+- Export audit checked all 24 HTML files, including route links, anchors, script/image/CSS assets, and repository-path handling. No broken internal destinations remain.
+- Content checks verified homepage order, pricing order and amounts, all ten lab projects, hidden Client Work navigation, empty client-work state, existing routes, and aria-hidden marquee duplicates.
+- No browser was available in this session, so rendered mobile/desktop appearance and live form submission were not verified.
+- Nothing was committed, pushed, or deployed. Existing working-tree changes were preserved on `reposition/local-msp`.

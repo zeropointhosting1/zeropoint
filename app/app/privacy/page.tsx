@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ReviewBanner } from "@/components/legal/review-banner"
 import { LegalProse } from "@/components/legal/legal-prose"
 import { BUSINESS_INFO } from "@/lib/business-info"
-import { FORM_SERVICE_NAME } from "@/lib/contact-config"
+import { FORM_SERVICE_NAME, FORM_SERVICE_PLACEHOLDER } from "@/lib/site-config"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
@@ -33,8 +33,8 @@ export default function PrivacyPage() {
               <h2>What this site collects</h2>
               <p>
                 ZeroPoint (&ldquo;this site&rdquo;) collects information only when you choose to give it —
-                by submitting the contact form or a project planner. That includes your name, email
-                address, and whatever you write in the message or brief. Nothing is collected just from
+                by submitting the contact form or the estimate form. That includes your name, email
+                address, and whatever you write in the message or request. Nothing is collected just from
                 browsing the site.
               </p>
 
@@ -46,9 +46,9 @@ export default function PrivacyPage() {
 
               <h2>Third-party form processor</h2>
               <p>
-                This site is a static export with no server of its own, so contact form and project
-                planner submissions are sent directly from your browser to a third-party form service
-                (currently {FORM_SERVICE_NAME ?? "{{TODO: name the form service you set up in lib/contact-config.ts, e.g. Formspree or Web3Forms}}"}).
+                This site is a static export with no server of its own, so contact and estimate form
+                submissions are sent directly from your browser to a third-party form service
+                (currently {FORM_SERVICE_NAME ?? FORM_SERVICE_PLACEHOLDER}).
                 That service processes the submission and forwards it by email; its own privacy policy
                 governs how it handles that data in transit.
               </p>

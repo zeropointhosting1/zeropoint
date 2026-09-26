@@ -1,22 +1,17 @@
-// Flat top-level links. "Services" is a separate dropdown (SERVICES_MENU
-// below) rendered alongside these in the nav — kept apart because it needs
-// its own trigger/content markup, not a plain <Link>.
+import { SHOW_CLIENT_WORK } from "@/lib/site-config"
+
 export const NAV_LINKS = [
-  { label: "Work", href: "/projects" },
-  { label: "Learn", href: "/docs" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Tools", href: "/tools" },
+  ...(SHOW_CLIENT_WORK ? [{ label: "Client Work", href: "/projects" }] : []),
+  { label: "The Lab", href: "/lab" },
+  { label: "Learn", href: "/docs" },
   { label: "About", href: "/about" },
 ]
 
 export const SERVICES_MENU = [
+  { label: "Business IT & Support", href: "/services", description: "Office networks, Wi-Fi, and monthly support" },
+  { label: "Websites", href: "/websites", description: "An add-on for businesses and restaurants" },
   { label: "Home Networking", href: "/home-networking", description: "Wi-Fi in every room, safer smart devices" },
-  { label: "Small Business", href: "/services", description: "Office networks, guest Wi-Fi, backups" },
-  { label: "Websites & Dashboards", href: "/websites", description: "Sites for restaurants and small businesses" },
-  { label: "Homelab", href: "/lab", description: "Home servers, self-hosting, planning tools" },
 ]
 
-// Paths that should count as "Services" being the active nav item, since
-// its own pages (and the utility pages that hang off Homelab) aren't
-// literally under /services.
-export const SERVICES_ACTIVE_PATHS = ["/services", "/home-networking", "/websites", "/lab", "/network", "/community", "/deals", "/sizer"]
+export const SERVICES_ACTIVE_PATHS = ["/services", "/home-networking", "/websites"]

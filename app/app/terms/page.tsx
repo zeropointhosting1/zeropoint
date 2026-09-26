@@ -34,7 +34,7 @@ export default function TermsPage() {
                 Any paid engagement with ZeroPoint is scoped in writing before work begins — the service
                 pages describe starting prices and what&rsquo;s typically included, but the actual scope,
                 timeline, and final price for a specific project are confirmed with you directly, usually
-                through the project planner or a follow-up conversation.
+                through the estimate form or a follow-up conversation.
               </p>
 
               <h2>What&rsquo;s not included</h2>

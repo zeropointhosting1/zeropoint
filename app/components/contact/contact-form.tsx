@@ -9,9 +9,10 @@ import { RESPONSE_DAYS } from "@/lib/contact-config"
 import { submitForm, type SubmitResult } from "@/lib/submit-form"
 
 const HELP_OPTIONS = [
+  { value: "business", label: "Business IT & support" },
+  { value: "office", label: "Office network / Wi-Fi" },
+  { value: "web", label: "Website" },
   { value: "home", label: "Home network" },
-  { value: "business", label: "Small business" },
-  { value: "homelab", label: "Homelab" },
   { value: "other", label: "Other" },
 ]
 

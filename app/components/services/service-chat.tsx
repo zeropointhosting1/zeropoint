@@ -13,7 +13,7 @@ import { HYPERVISORS } from "@/lib/hypervisor-catalog"
 
 type ChatMessage = { id: number; role: "assistant" | "user"; text: string; href?: string; action?: string }
 
-const QUICK_PROMPTS = ["Help me plan a homelab", "I need better home Wi-Fi", "Help with a business network", "Show me hardware deals"]
+const QUICK_PROMPTS = ["Show me monthly support plans", "Help with office Wi-Fi", "I need a business website", "I need better home Wi-Fi"]
 
 function appName(id: string): string {
   return WORKLOADS.find((w) => w.id === id)?.name ?? id
@@ -40,20 +40,21 @@ function answerFor(input: string): Pick<ChatMessage, "text" | "href" | "action">
     }
   }
 
+  if (/monthly|managed|support plan/.test(text)) return { text: "Compare Essentials, Business, and Priority monthly IT support plans. All plans are month-to-month, with clear inclusions and no hardware markup.", href: "/pricing/#plans", action: "See monthly plans" }
   if (/deal|ebay|buy|hardware|elitedesk|mini pc/.test(text)) return { text: "The Deals page searches current eBay listings for proven homelab hardware, including EliteDesk Minis, network gear, and 10-inch rack parts.", href: "/deals", action: "Browse hardware deals" }
   if (/sizer|size|cpu|ram|memory|workload/.test(text)) return { text: "The Workload Sizer combines sourced requirements for common self-hosted apps and adds clearly labeled planning headroom for CPU, memory, and system storage. Name an app (Plex, Immich, Home Assistant...) and I'll preselect it for you.", href: "/sizer", action: "Open the Workload Sizer" }
   if (/discord|community|people|share|chat/.test(text)) return { text: "The ZeroPoint community is for sharing builds, troubleshooting problems, comparing hardware, and learning with other homelabbers.", href: "/community", action: "Visit the community" }
-  if (/network|topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
-  if (/home network|house|residential|wifi|wi-fi|signal|coverage|access point|dead zone|iot/.test(text)) return { text: "ZeroPoint Home covers Wi-Fi, UniFi, IoT separation, cameras, network racks, and troubleshooting for homes and recreational properties.", href: "/home-networking", action: "Explore home networking" }
-  if (/website|web site|restaurant|menu|dashboard|analytics|reporting/.test(text)) return { text: "ZeroPoint builds mobile-first websites for restaurants and small businesses — menu, hours, location, and ordering links — plus dashboards that put sales, labor, and top items on one screen.", href: "/websites", action: "Explore websites & dashboards" }
   if (/business|office|employee|guest network|workstation/.test(text)) return { text: "ZeroPoint Business focuses on straightforward Wi-Fi, UniFi networks, switching, employee and guest networks, device setup, and documentation for small businesses.", href: "/services", action: "Explore business services" }
+  if (/topology|vlan|infrastructure|what.*running/.test(text)) return { text: "The Network page shows the full sanitized topology, hypervisors, workloads, VLANs, and the separation between the home network and lab.", href: "/network", action: "Explore the network" }
+  if (/home network|house|residential|wifi|wi-fi|signal|coverage|access point|dead zone|iot/.test(text)) return { text: "ZeroPoint Home covers Wi-Fi, UniFi, IoT separation, cameras, network racks, and troubleshooting for homes and recreational properties.", href: "/home-networking", action: "Explore home networking" }
+  if (/website|web site|restaurant|menu|dashboard|analytics|reporting/.test(text)) return { text: "ZeroPoint builds mobile-first websites for restaurants and small businesses — menu, hours, location, and ordering links — with optional dashboard add-ons for support clients.", href: "/websites", action: "Explore websites" }
   if (/unifi|ubiquiti|gateway|dream machine|switch|camera/.test(text)) return { text: "UniFi Setup covers gateways, switches, access points, cameras, adoption, and network segmentation. Remote planning is available; physical installation depends on future service-area availability.", href: "/contact", action: "Plan a UniFi project" }
-  if (/homelab|proxmox|rack|server|virtual machine|\bvm\b/.test(text)) return { text: "ZeroPoint Lab brings together homelab builds, planning tools, hardware deals, the community, and the documented infrastructure behind ZeroPoint.", href: "/lab", action: "Explore the homelab" }
+  if (/homelab|proxmox|rack|server|virtual machine|\bvm\b/.test(text)) return { text: "The Lab is a free content and learning space with documented builds, planning tools, and the community. Homelab builds are not a paid service.", href: "/lab", action: "Explore The Lab" }
   if (/remote|location|local|travel|area|where/.test(text)) return { text: "Planning, troubleshooting, UniFi configuration, and guided deployments can be handled remotely. Physical installation will only be offered within a defined service area once availability is finalized.", href: "/services", action: "View services" }
   if (/price|pricing|cost|quote|rate|budget/.test(text)) return { text: "Starting prices for every service are on the Pricing page. Pricing is labor only, and every project starts with a free consult and a written quote.", href: "/pricing", action: "See pricing" }
   if (/learn|guide|docs|documentation/.test(text)) return { text: "Learn contains practical guides and field notes written while building networks, infrastructure, and homelabs.", href: "/docs", action: "Browse Learn" }
-  if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint is an enthusiast-driven technology brand with four areas: homelabs, home networking, straightforward technology setup for small businesses, and websites and dashboards for restaurants and small businesses.", href: "/about", action: "About ZeroPoint" }
-  return { text: "I can guide you to ZeroPoint Lab, home networking, small-business services, Learn, projects, hardware deals, or the Workload Sizer. What are you trying to build?" }
+  if (/about|who|why|zeropoint/.test(text)) return { text: "ZeroPoint provides local IT support in Boca Raton: monthly managed support and office networks, websites as an add-on, and home networking. The Lab shares experiments and learning.", href: "/about", action: "About ZeroPoint" }
+  return { text: "I can help you find monthly IT support, office networking, websites, or home Wi-Fi services. You can also explore The Lab and its free tools. What do you need help with?" }
 }
 
 export function SiteChat() {
@@ -67,7 +68,7 @@ export function SiteChat() {
   const [open, setOpen] = React.useState(false)
   const [input, setInput] = React.useState("")
   const [messages, setMessages] = React.useState<ChatMessage[]>([
-    { id: 1, role: "assistant", text: "Hi — I match keywords to the right page, I'm not a live agent. Name an app or two (Plex, Immich, Home Assistant...) and I'll deep-link the Sizer with them preselected; otherwise ask what you want to build, buy, or understand." },
+    { id: 1, role: "assistant", text: "Hi — I can point you to monthly IT support, office Wi-Fi, websites, home networking, or The Lab. I match keywords to pages; I am not a live support agent." },
   ])
   const nextId = React.useRef(2)
   const logRef = React.useRef<HTMLDivElement>(null)

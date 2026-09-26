@@ -1,15 +1,14 @@
 import Link from "next/link"
-import { Mail } from "lucide-react"
+import { Mail, Phone } from "lucide-react"
 import { Wordmark } from "./wordmark"
 import { GithubIcon, LinkedinIcon, DiscordIcon } from "./brand-icons"
-import { DISCORD_URL, SOCIAL_LINKS } from "@/lib/site-config"
+import { DISCORD_URL, SOCIAL_LINKS, SHOW_CLIENT_WORK } from "@/lib/site-config"
 import { BUSINESS_INFO } from "@/lib/business-info"
 import { BOOKING_URL } from "@/lib/contact-config"
 
 const EXPLORE = [
-  { label: "Homelab", href: "/lab" },
   { label: "Home Networking", href: "/home-networking" },
-  { label: "Business", href: "/services" },
+  { label: "Business IT & Support", href: "/services" },
   { label: "Websites", href: "/websites" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
@@ -22,7 +21,8 @@ const LEGAL = [
 
 const RESOURCES = [
   { label: "Learn", href: "/docs" },
-  { label: "Projects", href: "/projects" },
+  { label: "The Lab", href: "/lab" },
+  ...(SHOW_CLIENT_WORK ? [{ label: "Client Work", href: "/projects" }] : []),
   { label: "Community", href: "/community" },
   { label: "Tools & Deals", href: "/tools" },
   { label: "About", href: "/about" },
@@ -36,10 +36,10 @@ export function Footer() {
           <div>
             <Wordmark />
             <p className="mt-4 max-w-xs text-sm text-text-secondary">
-              Tech help for homes and small businesses — reliable Wi-Fi, safer networks, websites, and home servers, explained in plain English.</p>
+              Local IT support in Boca Raton — monthly managed support, reliable networks, websites, and home Wi-Fi, explained in plain English.</p>
           </div>
 
-          <FooterColumn title="Explore" links={EXPLORE} />
+          <FooterColumn title="Services" links={EXPLORE} />
           <FooterColumn title="Resources" links={RESOURCES} />
 
           <div>
@@ -50,6 +50,7 @@ export function Footer() {
               <Mail className="size-4 text-primary" />
               {BUSINESS_INFO.email}
             </a>
+            <p className="mt-3 flex items-center gap-2 text-sm text-text-secondary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</p>
             {BOOKING_URL && (
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="mt-2 block text-sm text-text-secondary transition-colors hover:text-foreground">
                 Book a call
