@@ -35,9 +35,7 @@ jobs:
       - name: Build static export
         working-directory: app
         env:
-          # Project Pages serve under /<repo-name>/ — leave unset instead if
-          # deploying to a custom domain or a <user>.github.io root site.
-          BASE_PATH: /${{ github.event.repository.name }}
+          # BASE_PATH is left unset: the site is served from the root of zeropointhosting.com (custom domain).
           # NEXT_PUBLIC_* vars are inlined into the client bundle at build
           # time, not read at runtime — a static export has no server to
           # read them later. Without these set here, the Deals page's
