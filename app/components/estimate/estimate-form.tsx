@@ -2,20 +2,21 @@
 
 import * as React from "react"
 import { useSearchParams } from "next/navigation"
-import { Building2, Check, CheckCircle2, Clipboard, HouseWifi, LayoutDashboard, Loader2, Send, TriangleAlert } from "lucide-react"
+import { Building2, Check, CheckCircle2, Clipboard, HouseWifi, Laptop, LayoutDashboard, Loader2, Send, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { BUSINESS_INFO } from "@/lib/business-info"
-import { RESPONSE_DAYS } from "@/lib/contact-config"
-import { submitForm, type SubmitResult } from "@/lib/submit-form"
+import { SUPABASE_CONFIGURED } from "@/lib/supabase/client"
+import { submitLead, type SubmitLeadResult } from "@/lib/leads"
 import { formatServicePrice, offeringsFor, SERVICE_OFFERINGS, type ServiceAudience, type ServiceId } from "@/lib/services"
 
 // The one estimate form on the site. Service pages link here with
 // ?for=<audience> so the right category is already picked.
 
 const CATEGORIES: { audience: ServiceAudience; icon: React.ElementType; label: string; copy: string; placeholder: string }[] = [
+  { audience: "support", icon: Laptop, label: "Tech help", copy: "Computer, printer, email, or device", placeholder: "What device is involved? What happens when you try to use it?" },
   { audience: "home", icon: HouseWifi, label: "My home", copy: "Wi-Fi, dead zones, smart devices", placeholder: "How big is the home? Where does the Wi-Fi drop? Any cameras or smart devices?" },
-  { audience: "business", icon: Building2, label: "My business", copy: "Office Wi-Fi, guest network, backups", placeholder: "What kind of business? How many staff and devices? What's not working?" },
+  { audience: "business", icon: Building2, label: "My business", copy: "Staff, guest, POS, and device networks", placeholder: "What kind of business? How many staff and devices? What's not working?" },
   { audience: "web", icon: LayoutDashboard, label: "A website", copy: "For restaurants and small businesses", placeholder: "What's the business? Do you have a site today? What should customers be able to do?" },
 ]
 
@@ -26,7 +27,7 @@ const DELIVERY = [
 ] as const
 
 type Delivery = (typeof DELIVERY)[number]["id"]
-type Status = "idle" | "sending" | SubmitResult
+type Status = "idle" | "sending" | SubmitLeadResult
 
 const inputClass = "mt-2 w-full rounded-xl border border-input bg-surface-raised px-4 py-3 text-base text-foreground outline-none placeholder:text-text-tertiary focus:border-primary/60 focus:ring-3 focus:ring-primary/10"
 
@@ -87,7 +88,19 @@ export function EstimateForm() {
     // Honeypot: real visitors never see or fill this field.
     if (honeypot.trim()) return setStatus("sent")
     setStatus("sending")
-    setStatus(await submitForm({ name, email, message: brief, _subject: "New estimate request from zeropoint.dev" }))
+    setStatus(await submitLead({
+      source: "estimate",
+      name,
+      email,
+      message: brief,
+      help: categoryLabels.join(", "),
+      details: {
+        categories,
+        services: selectedServices.map((s) => s.id),
+        delivery,
+        location: location.trim(),
+      },
+    }))
   }
 
   if (status === "sent") {
@@ -95,13 +108,13 @@ export function EstimateForm() {
       <div role="status" className="mx-auto flex max-w-xl flex-col items-center gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-6 py-16 text-center">
         <CheckCircle2 className="size-8 text-primary" />
         <p className="text-lg font-semibold text-foreground">Request sent.</p>
-        <p className="max-w-sm text-sm text-text-secondary">Thanks! We&rsquo;ll reply within {RESPONSE_DAYS} business days to set up a free call.</p>
+        <p className="max-w-sm text-sm text-text-secondary">Thanks! Harrison will get back to you to discuss the next step and availability.</p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={send} noValidate className="grid gap-10 lg:grid-cols-[1fr_340px] lg:items-start">
+    <form onSubmit={send} className="grid gap-10 lg:grid-cols-[1fr_340px] lg:items-start">
       <div className="space-y-10">
         <Step n={1} title="What do you need help with?" hint="Pick one or more.">
           <div className="grid gap-3 sm:grid-cols-2">
@@ -189,9 +202,9 @@ export function EstimateForm() {
           </div>
         )}
         <div className="space-y-3 border-t border-border px-6 py-5">
-          {status === "error" && <Notice tone="error">Couldn&rsquo;t send that. Try again, or email {BUSINESS_INFO.email} directly.</Notice>}
-          {status === "not-configured" && <Notice tone="warn">Sending isn&rsquo;t connected yet. Copy your request and email it to {BUSINESS_INFO.email}.</Notice>}
-          <Button type="submit" className="w-full" disabled={!canSend || status === "sending"}>
+          {status === "error" && <Notice tone="error">Couldn’t send that. Please try again.{BUSINESS_INFO.email && <> Or email {BUSINESS_INFO.email}.</>}</Notice>}
+          {(!SUPABASE_CONFIGURED || status === "not-configured") && <Notice tone="warn">Online requests are currently unavailable. You can copy your request for later.{BUSINESS_INFO.email && <> Email it to {BUSINESS_INFO.email}.</>}</Notice>}
+          <Button type="submit" className="w-full" disabled={!SUPABASE_CONFIGURED || !canSend || status === "sending"}>
             {status === "sending" ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
             {status === "sending" ? "Sending…" : "Send request"}
           </Button>

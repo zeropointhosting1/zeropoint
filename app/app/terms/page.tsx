@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
@@ -22,7 +23,7 @@ export default function TermsPage() {
           <div className="mx-auto max-w-3xl px-6 pt-32 pb-24">
             <Eyebrow>Legal</Eyebrow>
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Terms of Service</h1>
-            <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>
+            {BUSINESS_INFO.legalPublishDate && <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>}
 
             <div className="mt-10">
               <ReviewBanner />
@@ -64,12 +65,11 @@ export default function TermsPage() {
                 for a scoped, paid engagement when the stakes are higher than a home lab experiment.
               </p>
 
-              <h2>Liability</h2>
-              <p>{BUSINESS_INFO.liabilityLimitation}</p>
+              {BUSINESS_INFO.liabilityLimitation && <><h2>Liability</h2><p>{BUSINESS_INFO.liabilityLimitation}</p></>}
 
               <h2>Service area</h2>
               <p>
-                On-site work is available in {BUSINESS_INFO.areaServed}. Remote work is available anywhere.
+                On-site work is available in {BUSINESS_INFO.areaServed}. Remote help is available when the issue can be handled without a visit.
               </p>
 
               <h2>Affiliate and partner links</h2>
@@ -79,12 +79,11 @@ export default function TermsPage() {
                 themselves.
               </p>
 
-              <h2>Governing law</h2>
-              <p>{BUSINESS_INFO.jurisdiction}</p>
+              {BUSINESS_INFO.jurisdiction && <><h2>Governing law</h2><p>{BUSINESS_INFO.jurisdiction}</p></>}
 
               <h2>Contact</h2>
               <p>
-                Questions about these terms: <a href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a>.
+                Questions about these terms: {BUSINESS_INFO.email ? <a href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a> : <Link href="/contact/">see contact options</Link>}.
               </p>
             </LegalProse>
           </div>

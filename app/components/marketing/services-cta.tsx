@@ -8,11 +8,11 @@ export function ServicesCta() {
     <section className="relative overflow-hidden border-b border-border bg-surface">
       <div className="pointer-events-none absolute inset-0 bg-radial-fade opacity-70" />
       <div className="relative mx-auto max-w-3xl px-6 py-28 text-center">
-        <Eyebrow>Get started</Eyebrow>
+        <Eyebrow>Boca Raton &amp; nearby South Florida</Eyebrow>
         <h2 className="mt-4 text-4xl font-bold tracking-tight text-balance sm:text-5xl">Not sure what you need?</h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">Tell us what&rsquo;s bugging you. We&rsquo;ll talk it through on a free call and tell you what we&rsquo;d do and what it would cost.</p>
+        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-secondary">From a stubborn printer to a whole-home Wi-Fi upgrade, tell us what’s happening. We’ll recommend the next step and confirm the cost before work begins.</p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <Button size="lg" render={<Link href="/contact" />}>Get a free consult <ArrowRight className="size-4" /></Button>
+          <Button size="lg" render={<Link href="/contact" />}>Get Tech Help <ArrowRight className="size-4" /></Button>
           <Button size="lg" variant="outline" render={<Link href="/pricing" />}>See pricing</Button>
         </div>
       </div>

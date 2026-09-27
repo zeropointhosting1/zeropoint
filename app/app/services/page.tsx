@@ -11,8 +11,8 @@ import { BUSINESS_INFO } from "@/lib/business-info"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
-  title: "Small Business Networking and Technology — ZeroPoint",
-  description: "Office Wi-Fi, guest and device separation, firewalls, backups, and account hygiene for small businesses.",
+  title: "Small Business Networking in Boca Raton — ZeroPoint",
+  description: "UniFi network design and installation for Boca Raton small businesses. Staff, guest, POS, and camera networks with clear quotes and documented handoffs.",
   path: "/services",
 })
 
@@ -33,7 +33,7 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
 }
 
 const WHY = [
-  { icon: KeyRound, title: "Labor-only pricing", copy: "Hardware is never marked up — you buy it, you own it." },
+  { icon: KeyRound, title: "Transparent hardware pricing", copy: "Equipment costs are listed separately and clearly — you own what is installed." },
   { icon: ShieldCheck, title: "You keep every account", copy: "Every login and credential stays yours, with nothing locked to a device only ZeroPoint can access." },
   { icon: FileText, title: "Everything documented", copy: "Configuration notes and a network plan, handed over at the end of every project." },
   { icon: MessageSquareText, title: "Plain-language explanations", copy: "You leave understanding what was built and why, not just that it works." },
@@ -48,16 +48,16 @@ const BUSINESS_ZONES = [
 const FAQ = [
   { q: "Do I need to know networking already?", a: "No. Most people booking a project don't. Explaining the tradeoffs in plain language is part of the job — you leave understanding what was built and why." },
   { q: "I'm not near you — can this still work?", a: "Yes, for most services. Network configuration, Wi-Fi planning, and account/backup work can all be done remotely over screen share. Physical installation depends on service-area availability." },
-  { q: "Do you sell hardware?", a: "No. Pricing is labor only. Bring your own hardware or use the Hardware Deals page to find gear, then bring the plan to a project." },
+  { q: "Do you sell hardware?", a: "Equipment is recommended for your setup and itemized separately from labor. We confirm the hardware and its cost before you buy." },
   { q: "What happens after the project ends?", a: "You keep the configuration notes, a network plan, and ownership of every account and credential involved — nothing stays locked to a device only ZeroPoint can access." },
   { q: "How are my credentials handled during the project?", a: "Access is scoped to what the project actually needs and handed back at completion. You should change shared passwords once the work is done, same as with any contractor." },
-  { q: "What's not included?", a: "Hardware purchases, ongoing monitoring outside of Monthly Support, and anything outside the agreed scope — those are called out before work starts, not after." },
+  { q: "What's not included?", a: "Hardware purchases, ongoing monitoring outside the agreed Network Care scope, and anything outside the agreed scope — those are called out before work starts, not after." },
   { q: "How does payment work?", a: `${BUSINESS_INFO.paymentTerms} Confirmed in writing before work begins.` },
-  { q: "What's your service area?", a: `On-site work is available in ${BUSINESS_INFO.areaServed}. Remote work is available anywhere.` },
+  { q: "What's your service area?", a: `On-site work is available in ${BUSINESS_INFO.areaServed}. Remote troubleshooting is available when the issue can be handled without a visit.` },
 ]
 
 export default function ServicesPage() {
-  const offerings = offeringsFor("business")
+  const offerings = offeringsFor("business").filter((service) => ["office-wifi", "guest-device-separation", "firewall-remote-access"].includes(service.id))
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
           <div className="relative mx-auto grid min-h-[650px] max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-            <div><Eyebrow>Small Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Local IT support<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Your local IT team in Boca Raton: reliable office networks and Wi-Fi, monthly monitoring and maintenance, and help when your business needs it.</p><div className="mt-8"><Button render={<Link href="/pricing/#plans" />}>See monthly plans</Button></div></div>
+            <div><Eyebrow>Small Business</Eyebrow><h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Networks built<br /><span className="text-primary">for small business.</span></h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Reliable Wi-Fi and wired networks for Boca Raton small businesses. We plan and install UniFi gateways, switches, and access points around your staff, guests, POS systems, cameras, and devices.</p><div className="mt-8"><Button render={<Link href="/estimate?for=business" />}>Plan My Network</Button></div></div>
             <div className="border-y border-border py-6">
               <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">Why hire ZeroPoint</p>
               <div className="mt-5 divide-y divide-border">
@@ -82,7 +82,7 @@ export default function ServicesPage() {
           <div className="relative mx-auto max-w-6xl px-6 py-24">
             <div className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-20">
               <div><Eyebrow>Network separation</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Customers, staff, and payment systems shouldn&rsquo;t share a network.</h2></div>
-              <div><p className="text-lg leading-relaxed text-text-secondary">On a flat network, guest laptops, staff computers, point-of-sale terminals, and cameras can all reach one another. A compromised guest device or an unpatched camera becomes a path to the systems that actually matter.</p><p className="mt-4 text-sm leading-relaxed text-text-tertiary">Separate networks for staff, guests, and devices mean a guest network problem stays a guest network problem — it never reaches your POS system or staff files.</p></div>
+              <div><p className="text-lg leading-relaxed text-text-secondary">On a flat network, guest laptops, staff computers, point-of-sale terminals, and cameras can all reach one another. A compromised guest device or an unpatched camera becomes a path to the systems that actually matter.</p><p className="mt-4 text-sm leading-relaxed text-text-tertiary">Separate networks for staff, guests, and devices mean a guest network problem stays a guest network problem — access to your POS system and staff files can be restricted.</p></div>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               {BUSINESS_ZONES.map(({ icon: Icon, name, detail }) => (

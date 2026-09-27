@@ -8,7 +8,9 @@ import { BOOKING_URL } from "@/lib/contact-config"
 
 const EXPLORE = [
   { label: "Home Networking", href: "/home-networking" },
-  { label: "Business IT & Support", href: "/services" },
+  { label: "Business Networking", href: "/services" },
+  { label: "Tech Support", href: "/tech-support" },
+  { label: "Network Care", href: "/network-care" },
   { label: "Websites", href: "/websites" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
@@ -36,7 +38,7 @@ export function Footer() {
           <div>
             <Wordmark />
             <p className="mt-4 max-w-xs text-sm text-text-secondary">
-              Local IT support in Boca Raton — monthly managed support, reliable networks, websites, and home Wi-Fi, explained in plain English.</p>
+              Wi-Fi, networking, and everyday tech help for homes and small businesses in Boca Raton and nearby South Florida communities. Owner-operated. Clearly explained.</p>
           </div>
 
           <FooterColumn title="Services" links={EXPLORE} />
@@ -46,11 +48,12 @@ export function Footer() {
             <p className="font-mono text-[11px] tracking-[0.14em] text-text-tertiary uppercase">
               Connect
             </p>
-            <a href={`mailto:${BUSINESS_INFO.email}`} className="mt-4 flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-foreground">
+            {BUSINESS_INFO.email && <a href={`mailto:${BUSINESS_INFO.email}`} className="mt-4 flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-foreground">
               <Mail className="size-4 text-primary" />
               {BUSINESS_INFO.email}
-            </a>
-            <p className="mt-3 flex items-center gap-2 text-sm text-text-secondary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</p>
+            </a>}
+            {BUSINESS_INFO.telephone && <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^+\d]/g, "")}`} className="mt-3 flex items-center gap-2 text-sm text-text-secondary hover:text-primary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</a>}
+            <Link href="/contact" className="mt-4 inline-block text-sm font-medium text-primary hover:underline">Get Tech Help →</Link>
             {BOOKING_URL && (
               <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="mt-2 block text-sm text-text-secondary transition-colors hover:text-foreground">
                 Book a call
@@ -102,7 +105,7 @@ export function Footer() {
             ))}
           </div>
           <p className="font-mono tracking-wider uppercase">
-            Built with Next.js · Hosted on GitHub Pages
+            Local support · You own your setup
           </p>
         </div>
       </div>

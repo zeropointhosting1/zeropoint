@@ -1,17 +1,14 @@
-import { SHOW_CLIENT_WORK } from "@/lib/site-config"
-
 export const NAV_LINKS = [
-  { label: "Pricing", href: "/pricing" },
-  ...(SHOW_CLIENT_WORK ? [{ label: "Client Work", href: "/projects" }] : []),
+  { label: "Network Care", href: "/network-care" },
   { label: "The Lab", href: "/lab" },
-  { label: "Learn", href: "/docs" },
   { label: "About", href: "/about" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact" },
 ]
-
 export const SERVICES_MENU = [
-  { label: "Business IT & Support", href: "/services", description: "Office networks, Wi-Fi, and monthly support" },
-  { label: "Websites", href: "/websites", description: "An add-on for businesses and restaurants" },
-  { label: "Home Networking", href: "/home-networking", description: "Wi-Fi in every room, safer smart devices" },
+  { label: "Wi-Fi & Networking", href: "/home-networking", description: "Better home Wi-Fi and UniFi installations" },
+  { label: "Tech Support", href: "/tech-support", description: "Computer and device help, on-site or remote" },
+  { label: "Business Networking", href: "/services", description: "Staff, guest, POS, and device networks" },
+  { label: "Websites", href: "/websites", description: "Websites, hosting, and updates" },
 ]
-
-export const SERVICES_ACTIVE_PATHS = ["/services", "/home-networking", "/websites"]
+export const SERVICES_ACTIVE_PATHS = SERVICES_MENU.map((item) => item.href)

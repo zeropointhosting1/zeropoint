@@ -21,20 +21,20 @@ const HAS_HEADSHOT = fs.existsSync(path.join(process.cwd(), "public/about/headsh
 
 export const metadata: Metadata = pageMetadata({
   title: "About — ZeroPoint",
-  description: "Meet the person behind ZeroPoint, a local IT support business in Boca Raton helping small businesses and homes.",
+  description: "Meet the person behind ZeroPoint, an owner-operated technology service in Boca Raton helping small businesses and homes.",
   path: "/about",
 })
 
 const STORY = [
-  { n: "01", icon: BriefcaseBusiness, label: "Small business", title: "Your local IT team.", copy: "Monthly support keeps networking, updates, and everyday technology help in one place. Start with a clear plan that fits your business." },
+  { n: "01", icon: BriefcaseBusiness, label: "Small business", title: "Technology help, close to home.", copy: "ZeroPoint helps Boca Raton homes and small businesses with Wi-Fi, networking, computers, and everyday technology. You work directly with the person doing the work." },
   { n: "02", icon: ShieldCheck, label: "Clear scope", title: "Know what you are paying for.", copy: "We explain the work in plain English and confirm the price up front. Your accounts, equipment, and documentation stay yours." },
-  { n: "03", icon: Wrench, label: "Websites", title: "One team for your IT and your website.", copy: "Add a practical website for your small business or restaurant to the support relationship you already have." },
+  { n: "03", icon: Wrench, label: "Websites", title: "A better website when you need one.", copy: "Websites are an additional service for local businesses and restaurants, with hosting and ongoing updates available." },
   { n: "04", icon: Share2, label: "At home", title: "Reliable Wi-Fi beyond the office.", copy: "Home networking gets the same careful setup, straightforward explanations, and documented handoff." },
 ]
 
 const PATHS = [
-  { icon: ShieldCheck, eyebrow: "Business IT", title: "Support for your business", copy: "Office networks, Wi-Fi, and monthly managed support.", href: "/services" },
-  { icon: Search, eyebrow: "Pricing", title: "See monthly plans", copy: "Compare inclusions and choose the support you need.", href: "/pricing/#plans" },
+  { icon: ShieldCheck, eyebrow: "Business networking", title: "Support for your business", copy: "UniFi networks, staff and guest Wi-Fi, and clean installations.", href: "/services" },
+  { icon: Search, eyebrow: "Pricing", title: "See straightforward pricing", copy: "Hourly help, Wi-Fi assessments, and custom project quotes.", href: "/pricing" },
   { icon: Network, eyebrow: "The Lab", title: "See the work behind the work", copy: "Documented builds, experiments, and lessons shared openly.", href: "/lab" },
   { icon: Users, eyebrow: "Contact", title: "Talk to ZeroPoint", copy: "Start with a free consult and a clear scope.", href: "/contact" },
 ]
@@ -50,10 +50,10 @@ export default function AboutPage() {
             <div>
               <Eyebrow>About ZeroPoint</Eyebrow>
               <h1 className="mt-5 max-w-3xl text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">
-                Local IT support.<br /><span className="text-primary">A person you can talk to.</span>
+                Local technology help.<br /><span className="text-primary">A person you can talk to.</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-                I&rsquo;m {OWNER.name}, based in {BUSINESS_INFO.city}. {OWNER.bio}
+                {OWNER.bio}
               </p>
             </div>
 
@@ -66,11 +66,11 @@ export default function AboutPage() {
                 ) : (
                   <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-xl font-semibold text-primary">ZP</span>
                 )}
-                <div><p className="font-semibold text-foreground">{BUSINESS_INFO.credentialLine}</p><p className="mt-1 text-sm text-text-secondary">Small-business IT, websites, and home networking</p></div>
+                <div><p className="font-semibold text-foreground">{BUSINESS_INFO.credentialLine}</p><p className="mt-1 text-sm text-text-secondary">Owner-operated · Wi-Fi, networking, and tech help</p></div>
               </div>
               <dl className="relative mt-7 divide-y divide-border border-t border-border">
                 <ProfileRow label="Based in" value={BUSINESS_INFO.city} />
-                <ProfileRow label="Experience" value={`${BUSINESS_INFO.yearsInIt} in IT`} />
+                <ProfileRow label="Approach" value="Practical & personal" />
                 <ProfileRow label="Environment" value="UniFi · Proxmox · Cisco" />
                 {BUSINESS_INFO.certifications.length > 0 && (
                   <ProfileRow label="Certifications" value={BUSINESS_INFO.certifications.join(", ")} />
@@ -89,7 +89,7 @@ export default function AboutPage() {
               <div className="lg:sticky lg:top-28 lg:self-start">
                 <Eyebrow>The story</Eyebrow>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">How ZeroPoint helps.</h2>
-                <p className="mt-4 text-text-secondary">Reliable day-to-day support for your business, with websites and home networking when you need them.</p>
+                <p className="mt-4 text-text-secondary">Practical IT experience, a genuine interest in networking and homelabs, and a belief that technology should be easier to understand.</p>
               </div>
               <div className="border-t border-border">
                 {STORY.map(({ n, icon: Icon, label, title, copy }) => (
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
         <section className="border-b border-border bg-surface">
           <div className="mx-auto max-w-6xl px-6 py-24">
-            <div className="mb-12 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>Go deeper</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Find the help you need.</h2></div><p className="max-w-sm text-sm leading-relaxed text-text-secondary">Business IT is the core. The Lab is where we test ideas and share what we learn.</p></div>
+            <div className="mb-12 flex flex-wrap items-end justify-between gap-5"><div><Eyebrow>Go deeper</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Find the help you need.</h2></div><p className="max-w-sm text-sm leading-relaxed text-text-secondary">Networking is our specialty. The Lab is where we build, test, and share what we learn.</p></div>
             <div className="grid border-t border-border md:grid-cols-2">
               {PATHS.map(({ icon: Icon, eyebrow, title, copy, href }) => (
                 <Link key={href} href={href} className="group border-b border-border py-7 md:px-7 md:odd:border-r md:odd:pl-0 md:even:pr-0">
@@ -121,10 +121,10 @@ export default function AboutPage() {
           <div className="pointer-events-none absolute inset-0 bg-radial-fade opacity-60" />
           <div className="relative mx-auto max-w-4xl px-6 py-24 text-center sm:py-28">
             <Eyebrow>Connect</Eyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Let’s talk about your business.</h2>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-5xl">Let’s make your technology work better.</h2>
             <p className="mx-auto mt-4 max-w-lg text-text-secondary">Tell us what is working, what is not, and where you need support.</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button size="lg" render={<Link href="/contact/" />}>Get a free consult <ArrowRight className="size-4" /></Button>
+              <Button size="lg" render={<Link href="/contact/" />}>Get Tech Help <ArrowRight className="size-4" /></Button>
               {SOCIAL_LINKS.github && (
                 <Button size="lg" variant="outline" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}><GithubIcon className="size-4" />GitHub</Button>
               )}

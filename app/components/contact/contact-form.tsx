@@ -5,18 +5,19 @@ import { useSearchParams } from "next/navigation"
 import { CheckCircle2, Loader2, Mail, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BUSINESS_INFO } from "@/lib/business-info"
-import { RESPONSE_DAYS } from "@/lib/contact-config"
-import { submitForm, type SubmitResult } from "@/lib/submit-form"
+import { SUPABASE_CONFIGURED } from "@/lib/supabase/client"
+import { submitLead, type SubmitLeadResult } from "@/lib/leads"
 
 const HELP_OPTIONS = [
-  { value: "business", label: "Business IT & support" },
-  { value: "office", label: "Office network / Wi-Fi" },
+  { value: "support", label: "Computer & tech help" },
+  { value: "care", label: "Network Care" },
+  { value: "office", label: "Business networking" },
   { value: "web", label: "Website" },
-  { value: "home", label: "Home network" },
+  { value: "home", label: "Home Wi-Fi / UniFi" },
   { value: "other", label: "Other" },
 ]
 
-type Status = "idle" | "submitting" | SubmitResult
+type Status = "idle" | "submitting" | SubmitLeadResult
 
 export function ContactForm() {
   const searchParams = useSearchParams()
@@ -38,13 +39,14 @@ export function ContactForm() {
     }
 
     setStatus("submitting")
-    const result = await submitForm({
+    const referral = String(data.get("referral") ?? "").trim()
+    const result = await submitLead({
+      source: "contact",
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
-      help: String(data.get("help") ?? ""),
       message: String(data.get("message") ?? ""),
-      referral: String(data.get("referral") ?? ""),
-      _subject: "New message from zeropoint.dev contact form",
+      help: String(data.get("help") ?? ""),
+      details: referral ? { referral } : undefined,
     })
     setStatus(result)
     if (result === "sent") form.reset()
@@ -56,24 +58,24 @@ export function ContactForm() {
         <CheckCircle2 className="size-8 text-primary" />
         <p className="text-lg font-semibold text-foreground">Message sent.</p>
         <p className="max-w-sm text-sm text-text-secondary">
-          Thanks — I&rsquo;ll reply within {RESPONSE_DAYS} business days. If it&rsquo;s urgent, email me directly.
+          Thanks — Harrison will get back to you to discuss the problem and availability.
         </p>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-6">
       {status === "error" && (
         <div role="alert" className="flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
           <TriangleAlert className="mt-0.5 size-4 shrink-0" />
-          <p>Something went wrong sending that. Try again, or email <a href={`mailto:${BUSINESS_INFO.email}`} className="underline underline-offset-2">{BUSINESS_INFO.email}</a> directly.</p>
+          <p>Something went wrong sending that. Please try again.{BUSINESS_INFO.email && <> Or email <a href={`mailto:${BUSINESS_INFO.email}`} className="underline underline-offset-2">{BUSINESS_INFO.email}</a>.</>}</p>
         </div>
       )}
-      {status === "not-configured" && (
+      {(!SUPABASE_CONFIGURED || status === "not-configured") && (
         <div role="alert" className="flex items-start gap-3 rounded-xl border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning">
           <TriangleAlert className="mt-0.5 size-4 shrink-0" />
-          <p>The contact form isn&rsquo;t connected yet. Email <a href={`mailto:${BUSINESS_INFO.email}`} className="underline underline-offset-2">{BUSINESS_INFO.email}</a> directly for now.</p>
+          <p>Online requests are currently unavailable. No message has been sent.{BUSINESS_INFO.email && <> Email <a href={`mailto:${BUSINESS_INFO.email}`} className="underline underline-offset-2">{BUSINESS_INFO.email}</a> instead.</>}</p>
         </div>
       )}
 
@@ -152,7 +154,7 @@ export function ContactForm() {
         />
       </label>
 
-      <Button type="submit" size="lg" disabled={status === "submitting"} className="w-full sm:w-auto">
+      <Button type="submit" size="lg" disabled={!SUPABASE_CONFIGURED || status === "submitting"} className="w-full sm:w-auto">
         {status === "submitting" ? <Loader2 className="size-4 animate-spin" /> : <Mail className="size-4" />}
         {status === "submitting" ? "Sending…" : "Send message"}
       </Button>

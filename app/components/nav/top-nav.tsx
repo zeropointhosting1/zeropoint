@@ -47,7 +47,7 @@ export function TopNav() {
             <Wordmark />
           </Link>
 
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 lg:flex">
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 xl:flex">
             <li className="group relative">
               <DropdownMenu>
                 <DropdownMenuTrigger
@@ -101,22 +101,22 @@ export function TopNav() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             {SOCIAL_LINKS.github && (
               <Button variant="ghost" size="icon" render={<a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" />}>
                 <GithubIcon className="size-4" />
                 <span className="sr-only">GitHub</span>
               </Button>
             )}
-            <Button size="sm" render={<Link href="/estimate" />}>
-              Get an estimate
+            <Button size="sm" render={<Link href="/contact" />}>
+              Get Help
               <ArrowRight className="size-3.5" />
             </Button>
           </div>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="flex size-9 items-center justify-center rounded-md text-foreground lg:hidden"
+            className="flex size-9 items-center justify-center rounded-md text-foreground xl:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -132,7 +132,7 @@ export function TopNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 overflow-y-auto bg-background lg:hidden"
+            className="fixed inset-0 z-40 overflow-y-auto bg-background xl:hidden"
           >
             <div className="flex h-16 items-center justify-end px-6">
               <button
@@ -174,8 +174,8 @@ export function TopNav() {
                 ))}
               </motion.ul>
               <motion.div variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="mt-8 grid gap-3">
-                <Button size="lg" className="h-12 w-full text-base" render={<Link href="/estimate" />}>
-                  Get an estimate <ArrowRight className="size-4" />
+                <Button size="lg" className="h-12 w-full text-base" render={<Link href="/contact" />}>
+                  Get Help <ArrowRight className="size-4" />
                 </Button>
                 <div className="flex items-center justify-center gap-6 pt-2">
                   {SOCIAL_LINKS.github && (

@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
   title: "Websites for Small Businesses and Restaurants — ZeroPoint",
-  description: "Websites for small businesses and restaurants, offered alongside ZeroPoint monthly IT support. Optional dashboard add-ons.",
+  description: "Modern websites for Boca Raton businesses and restaurants, with hosting and ongoing updates available. Clear project quotes and accounts you own.",
   path: "/websites",
 })
 
@@ -21,7 +21,7 @@ const WHY = [
 ]
 
 const DINER_NEEDS = [
-  { icon: UtensilsCrossed, name: "The menu", detail: "Readable on a phone, searchable, and updated the same day prices change — not a blurry PDF." },
+  { icon: UtensilsCrossed, name: "The menu", detail: "Readable on a phone, searchable, and easy to update when prices change — not a blurry PDF." },
   { icon: Clock, name: "Hours & location", detail: "Today's hours, holiday changes, parking, and a map, matching what Google shows." },
   { icon: ShoppingBag, name: "Order or book", detail: "One tap to your online ordering, delivery apps, or reservations — whatever you already use." },
 ]
@@ -126,8 +126,8 @@ export default function WebsitesPage() {
             <div>
               <Eyebrow>Websites</Eyebrow>
               <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Websites<br /><span className="text-primary">for restaurants and small businesses.</span></h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">A website that helps customers find your services, menu, hours, and how to get in touch. Add it to your IT support relationship so one team looks after both.</p>
-              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-secondary"><span className="size-1.5 rounded-full bg-success" />Available as an add-on for monthly support clients</p>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">A website that helps customers find your services, menu, hours, and how to get in touch. An additional ZeroPoint service, with hosting and ongoing updates available.</p>
+              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-text-secondary"><span className="size-1.5 rounded-full bg-success" />Custom quotes · Optional hosting and updates</p>
             </div>
             <div className="border-y border-border py-6">
               <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">What you get</p>

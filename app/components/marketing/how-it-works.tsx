@@ -1,10 +1,10 @@
 import { Eyebrow } from "./eyebrow"
 
 const PROCESS = [
-  { n: "01", title: "Assess", copy: "A free call to understand your home or business, what you already have, what you want, and your budget." },
-  { n: "02", title: "Design", copy: "A written plan and price — including a parts list if you need equipment — before anything changes." },
-  { n: "03", title: "Build", copy: "Set up in person, or together over a video call." },
-  { n: "04", title: "Document", copy: "A walkthrough of what was done, plus the notes and every password, so it’s fully yours." },
+  { n: "01", title: "Tell us what’s wrong", copy: "Call, message, or submit the form. A simple description is all you need to start." },
+  { n: "02", title: "Find the best approach", copy: "We work out whether you need remote help, an on-site visit, or a network assessment, and confirm the price." },
+  { n: "03", title: "Fix or build it", copy: "Troubleshoot the immediate problem or complete the agreed installation, then check it with you." },
+  { n: "04", title: "Leave you with the details", copy: "Get a clear explanation of the work. Larger setups include documentation, configuration notes, and account ownership information." },
 ]
 
 export function HowItWorks() {
@@ -14,7 +14,7 @@ export function HowItWorks() {
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
           <div>
             <Eyebrow>How it works</Eyebrow>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">How a project works.</h2>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">From a quick fix to a fresh setup.</h2>
           </div>
           <div className="border-t border-border">
             {PROCESS.map((step) => (

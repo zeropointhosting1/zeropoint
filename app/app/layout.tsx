@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata({
-    title: "ZeroPoint — IT Support, Networking, and Websites for Small Businesses and Homes in Boca Raton",
+    title: "Boca Raton Wi-Fi & Tech Support — ZeroPoint",
     description:
-      "Local IT support in Boca Raton, FL: monthly managed support, office networks and Wi-Fi, websites for small businesses and restaurants, and home networking.",
+      "Local Wi-Fi help, UniFi installation, computer support, and small-business networking in Boca Raton and nearby South Florida. On-site or remote, with clear pricing.",
     path: "/",
   }),
 };

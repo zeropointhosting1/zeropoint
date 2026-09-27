@@ -22,32 +22,19 @@ export const SOCIAL_LINKS = {
 // page. Kept in one place so nothing has to be re-typed, and so it's
 // obvious what's still a placeholder — see TODO-CONTENT.md.
 export const BUSINESS_INFO = {
-  name: "{{TODO: your name or business name}}",
-  email: "{{TODO: contact email}}",
-  telephone: "{{TODO: contact phone number}}",
+  name: "ZeroPoint",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
+  telephone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "",
   city: "Boca Raton, FL",
-  areaServed: "{{TODO: on-site service area — e.g. \"Boca Raton and X miles\" or a list of counties}}",
-  yearsInIt: "1 year",
-  credentialLine: "A year of hands-on IT help desk experience",
+  areaServed: "Boca Raton and nearby South Florida communities",
+  credentialLine: "Hands-on IT support and networking",
   certifications: [] as string[], // {{TODO: certifications, if any — leave empty to omit the row}}
   // Legal — used by /services (payment FAQ) and /terms, /privacy.
-  paymentTerms: "{{TODO: deposit/invoice terms, e.g. \"A deposit is due before work begins, with the balance invoiced on completion.\"}}",
-  liabilityLimitation: "{{TODO: a liability limitation appropriate for your business — e.g. \"ZeroPoint's liability for any engagement is limited to the amount paid for that engagement.\" A lawyer should confirm this is appropriate for your situation.}}",
-  jurisdiction: "{{TODO: your state/jurisdiction, if you want to specify one}}",
-  legalPublishDate: "{{TODO: date you publish the Privacy/Terms pages}}",
+  paymentTerms: "Payment timing and any deposit are confirmed in your written quote before work begins.",
+  liabilityLimitation: "",
+  jurisdiction: "",
+  legalPublishDate: "",
 }
-
-// Static export — form submissions go straight to a third-party endpoint
-// from the browser, no backend of your own required. Formspree
-// (https://formspree.io) and Web3Forms (https://web3forms.com) both work
-// with a plain POST of JSON to a form-specific URL: sign up, create a
-// form, and paste its endpoint below. See TODO-CONTENT.md.
-export const FORM_ENDPOINT: string | null = null // {{TODO: Formspree/Web3Forms endpoint URL}}
-
-// Named separately so the Privacy page can say which service processes
-// submissions without hardcoding it — set this alongside FORM_ENDPOINT.
-export const FORM_SERVICE_NAME: string | null = null
-export const FORM_SERVICE_PLACEHOLDER = "{{TODO: form service name, e.g. Formspree or Web3Forms}}"
 
 // Cal.com (or similar) scheduling link. Leave null to hide the booking
 // link on the Contact page until you have one.
@@ -55,7 +42,7 @@ export const BOOKING_URL: string | null = null // {{TODO: booking link, e.g. Cal
 
 // How many business days you commit to replying within — shown on the
 // Contact page's "what happens next" block.
-export const RESPONSE_DAYS = "{{TODO: reply time in business days, e.g. 1-2}}"
+export const RESPONSE_DAYS: string | null = null
 
 // Publish these only after adding real, approved client content.
 export const SHOW_CLIENT_WORK = false
@@ -63,10 +50,10 @@ export const SHOW_TESTIMONIALS = false
 
 export const OWNER = {
   name: "Harrison Lurgio",
-  bio: "I've spent the past year working on an IT help desk, solving everyday tech problems for real people. I started ZeroPoint to bring that experience to my own business, and to build something that helps people get started in IT and keep growing in it.",
-  photoPlaceholder: "{{TODO: add your photo at public/about/headshot.jpg}}",
+  bio: "Harrison Lurgio started ZeroPoint to make professional technology help easier to get locally. His background spans hands-on IT support, networking, identity and device management, Windows systems, and Microsoft environments. He builds and tests ideas in the ZeroPoint Lab, bringing that practical experience and curiosity to each setup.",
+  photoPlaceholder: "Harrison Lurgio · Owner",
 }
 export const TIKTOK = {
-  handle: "{{TODO: TikTok handle}}",
+  handle: "",
   url: null as string | null, // {{TODO: TikTok profile URL}}
 }

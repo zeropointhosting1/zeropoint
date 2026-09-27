@@ -16,7 +16,7 @@ export function MeetOwner() {
             <UserRound aria-hidden="true" className="size-10 text-primary" /><p className="break-words text-xs text-text-secondary">{OWNER.photoPlaceholder}</p>
           </div>
         )}
-        <div><Eyebrow>Local, personal support</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Meet the person behind ZeroPoint</h2><p className="mt-4 font-semibold">{OWNER.name}</p><p className="mt-2 max-w-2xl text-text-secondary">{OWNER.bio}</p><Link href="/about/" className="mt-5 inline-block text-sm font-medium text-primary hover:underline">More about ZeroPoint →</Link></div>
+        <div><Eyebrow>Owner-operated · Boca Raton</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Meet Harrison</h2><p className="mt-4 font-semibold">{OWNER.name}</p><p className="mt-2 max-w-2xl text-text-secondary">{OWNER.bio}</p><Link href="/about/" className="mt-5 inline-block text-sm font-medium text-primary hover:underline">More about ZeroPoint →</Link></div>
       </div>
     </section>
   )

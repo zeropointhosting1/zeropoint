@@ -11,8 +11,8 @@ import { PricingLink } from "@/components/services/pricing-links"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
-  title: "Home Networking — ZeroPoint",
-  description: "Wi-Fi that reaches every room, a home network you understand, and smart devices kept away from what matters.",
+  title: "Home Wi-Fi & UniFi Installation in Boca Raton — ZeroPoint",
+  description: "Boca Raton home Wi-Fi help and UniFi installation. Coverage assessments, access-point placement, router upgrades, and documented home networks.",
   path: "/home-networking",
 })
 
@@ -30,7 +30,7 @@ const PROBLEMS = [
 
 const OUTCOMES = [
   { icon: HouseWifi, title: "No more dead zones", copy: "We plan where the Wi-Fi equipment goes based on your home's actual layout, not a guess." },
-  { icon: Wifi, title: "The right equipment for your house", copy: "Some homes just need a simple mesh kit. Others need more. We recommend what fits your home, not a one-size-fits-all box." },
+  { icon: Wifi, title: "The right equipment for your house", copy: "From a simple mesh kit to UniFi gateways, switches, and access points, we recommend what fits. Wired backhaul is used where possible." },
   { icon: ShieldCheck, title: "Smart devices kept separate", copy: "Cameras, smart plugs, and other gadgets get their own network, away from your computers and private files." },
   { icon: Baby, title: "Parental controls that work", copy: "Screen-time and content limits set per person or per device, not one blunt switch for the whole house." },
   { icon: Camera, title: "Check your cameras from anywhere", copy: "See your cameras from your phone without leaving them open to the whole internet." },
@@ -44,7 +44,7 @@ const SEPARATION_STEPS = [
 ]
 
 const PROPERTY_TYPES = [
-  { name: "Cabin or camp", detail: "Coverage for seasonal use" },
+  { name: "Second home", detail: "Coverage for seasonal use" },
   { name: "Short-term rental", detail: "A guest network that stays separate" },
   { name: "Workshop or outbuilding", detail: "Wi-Fi that reaches across the yard" },
   { name: "Backup internet", detail: "Stays online if the main connection drops" },
@@ -73,7 +73,7 @@ export default function HomeNetworkingPage() {
                 Wi-Fi that reaches<br />
                 <span className="bg-gradient-to-r from-primary via-brand-pink to-brand-cyan bg-clip-text text-transparent">every room.</span>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">We fix dead zones, keep smart gadgets away from your personal devices, and set up a home network you actually understand.</p>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Better Wi-Fi for Boca Raton homes, from a coverage assessment to a complete UniFi installation. We plan placement, configure equipment, test connections, and document the setup.</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button size="lg" render={<Link href="/estimate?for=home" />}>Tell us about your home <ArrowRight className="size-4" /></Button>
                 <Button size="lg" variant="outline" render={<Link href="/pricing/#home" />}>See pricing</Button>
@@ -169,9 +169,9 @@ export default function HomeNetworkingPage() {
         <section className="border-b border-border bg-surface">
           <div className="mx-auto grid max-w-6xl gap-14 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <Eyebrow>Cabins, rentals, and workshops</Eyebrow>
+              <Eyebrow>Second homes, rentals, and workshops</Eyebrow>
               <h2 className="mt-4 text-4xl font-bold tracking-tight text-balance">Not just your main home.</h2>
-              <p className="mt-4 text-lg leading-relaxed text-text-secondary">We do the same work for second homes, rentals, and outbuildings. For places nobody is at every day, we also make sure you&rsquo;ll know if the internet goes down, and that it can stay online without you there.</p>
+              <p className="mt-4 text-lg leading-relaxed text-text-secondary">We do the same work for second homes, rentals, and outbuildings. For places nobody is at every day, we can discuss monitoring and backup internet options as part of the network design.</p>
             </div>
             <div className="rounded-2xl border border-border bg-surface-raised p-6">
               <div className="flex items-center justify-between border-b border-border pb-5">

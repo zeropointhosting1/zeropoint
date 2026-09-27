@@ -7,17 +7,17 @@ import { Footer } from "@/components/nav/footer"
 import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ContactForm } from "@/components/contact/contact-form"
 import { BUSINESS_INFO } from "@/lib/business-info"
-import { BOOKING_URL, RESPONSE_DAYS } from "@/lib/contact-config"
+import { BOOKING_URL } from "@/lib/contact-config"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact — ZeroPoint",
-  description: "Talk to ZeroPoint about monthly business IT support, office Wi-Fi, a website, or home networking in Boca Raton.",
+  description: "Get local Wi-Fi, computer, and tech help in Boca Raton. Tell Harrison about your home or small-business network, device problem, or website project.",
   path: "/contact",
 })
 
 const NEXT_STEPS = [
-  { icon: Mail, title: `Reply within ${RESPONSE_DAYS} business days`, copy: "Tell us what you need help with and we will discuss next steps." },
+  { icon: Mail, title: "A personal reply", copy: "Tell us what you need help with and we will discuss next steps." },
   { icon: CalendarClock, title: "A free scoping call", copy: "We talk through what you need before anything is scoped or priced." },
   { icon: FileCheck2, title: "A written quote", copy: "A clear scope and price before any work begins." },
 ]
@@ -32,18 +32,18 @@ export default function ContactPage() {
           <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-16 text-center">
             <Eyebrow>Contact</Eyebrow>
             <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl">
-              Let&rsquo;s talk about your <span className="text-primary">project.</span>
+              Tell us what’s <span className="text-primary">not working.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
-              Monthly IT support, an office network, a website, or home Wi-Fi — send a message and I&rsquo;ll get back to you.
-              On-site work is available in {BUSINESS_INFO.areaServed}; remote work anywhere.
+              Wi-Fi, a computer, a printer, or a new setup — describe what you need and Harrison will help work out the next step.
+              On-site work is available in {BUSINESS_INFO.areaServed}. Remote support is available for problems that don’t need a visit.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
-              <a href={`mailto:${BUSINESS_INFO.email}`} className="inline-flex items-center gap-2 text-text-secondary transition-colors hover:text-foreground">
+              {BUSINESS_INFO.email && <a href={`mailto:${BUSINESS_INFO.email}`} className="inline-flex items-center gap-2 text-text-secondary transition-colors hover:text-foreground">
                 <Mail className="size-4 text-primary" />
                 {BUSINESS_INFO.email}
-              </a>
-              <span className="inline-flex items-center gap-2 text-text-secondary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</span>
+              </a>}
+              {BUSINESS_INFO.telephone && <a href={`tel:${BUSINESS_INFO.telephone.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-2 text-text-secondary hover:text-primary"><Phone className="size-4 shrink-0 text-primary" />{BUSINESS_INFO.telephone}</a>}
               {BOOKING_URL && (
                 <a href={BOOKING_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-text-secondary transition-colors hover:text-foreground">
                   <CalendarClock className="size-4 text-primary" />
@@ -57,7 +57,7 @@ export default function ContactPage() {
         <section className="border-b border-border bg-surface">
           <div className="mx-auto max-w-6xl px-6 py-20">
             <div className="grid gap-16 lg:grid-cols-[1fr_360px]">
-              <div className="rounded-2xl border border-border bg-background p-8 shadow-[0_24px_70px_-38px_var(--accent-glow)] sm:p-10">
+              <div className="rounded-2xl border border-border bg-background p-5 shadow-[0_24px_70px_-38px_var(--accent-glow)] sm:p-10">
                 <Suspense fallback={null}>
                   <ContactForm />
                 </Suspense>

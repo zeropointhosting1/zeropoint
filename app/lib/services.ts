@@ -1,4 +1,4 @@
-import { SUPPORT_PLANS, SUPPORT_TERMS } from "./support-plans"
+import { NETWORK_CARE_FEATURES } from "./support-plans"
 
 export type ServiceId =
   | "home-network-setup"
@@ -11,12 +11,13 @@ export type ServiceId =
   | "onboarding-offboarding"
   | "monthly-support"
   | "remote-help"
+  | "onsite-help"
   | "business-website"
   | "restaurant-website"
   | "business-dashboard"
   | "website-care"
 
-export type ServiceAudience = "home" | "business" | "web"
+export type ServiceAudience = "home" | "business" | "web" | "support"
 
 export type PricingUnit = "project" | "hour" | "app" | "month"
 
@@ -48,24 +49,24 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
   {
     id: "home-network-setup",
     audience: "home",
-    title: "Home Network Setup",
-    short: "Gateway, switching, Wi-Fi, and cameras",
+    title: "Home Network / UniFi Installation",
+    short: "UniFi gateways, switches, and access points",
     description: "Plan and configure a home network around the property, devices, and security boundaries you actually need.",
     signs: ["Wi-Fi drops or needs constant rebooting", "You don't know what's actually connected to your network", "Smart devices and personal computers share the same network"],
     includes: ["Gateway and router setup", "Switch and access-point setup", "Guest and IoT separation", "Configuration handoff"],
     delivery: "Local or remote",
-    pricing: { from: 400, unit: "project", note: "Labor only — hardware is separate. Scales with device count." },
+    pricing: { from: null, unit: "project", note: "Custom quote based on equipment, property size, cabling, and number of access points." },
   },
   {
     id: "wifi-planning",
     audience: "home",
-    title: "Wi-Fi Planning",
+    title: "Wi-Fi Assessment",
     short: "Coverage, placement, and troubleshooting",
     description: "Improve weak coverage, roaming, channel use, and access-point placement without buying hardware blindly.",
     signs: ["Dead zones in specific rooms or floors", "Video calls freeze or drop when you move around", "You're not sure if another access point would even help"],
     includes: ["Current-state review", "Access-point placement plan", "SSID and channel strategy", "Post-install validation"],
     delivery: "Local or remote",
-    pricing: { from: 150, unit: "project", note: "Remote review; on-site site survey starts from $300." },
+    pricing: { from: 99, unit: "project", note: "Can be credited toward an installation. Final scope and pricing confirmed before work." },
   },
   {
     id: "iot-camera-separation",
@@ -137,25 +138,28 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
   {
     id: "monthly-support",
     audience: "business",
-    title: "Monthly Support",
-    short: "Ongoing help, billed monthly",
-    description: "Monthly managed IT support for small businesses: monitoring, maintenance, and help from a local team.",
+    title: "Network Care",
+    short: "Optional care after your network installation",
+    description: "Optional network monitoring, updates, configuration backups, and scoped troubleshooting after ZeroPoint installs your network.",
     signs: ["You'd rather have an ongoing arrangement than one-off projects", "Small issues come up often enough to justify a standing plan", "You want a known monthly cost instead of surprise invoices"],
-    includes: [...SUPPORT_PLANS[0].features],
+    includes: [...NETWORK_CARE_FEATURES],
     delivery: "Remote",
-    pricing: { from: SUPPORT_PLANS[0].price, unit: "month", note: "See Monthly Support Plans above for all three tiers." },
+    pricing: { from: null, unit: "month", note: "Monthly scope and support time agreed before work. Additional work quoted separately." },
   },
-  // General
+  // On-demand support for homes and small businesses.
   {
-    id: "remote-help",
-    audience: "business",
-    title: "Remote Help",
-    short: "Planning and troubleshooting sessions",
-    description: "Get a second set of eyes on a design, broken deployment, hardware decision, or upgrade path.",
-    signs: ["You're stuck mid-project and need a second opinion", "You want a sanity check before buying hardware", "Something broke and you're not sure why"],
-    includes: ["Pre-call project review", "Focused working session", "Written next steps", "Parts or topology notes"],
-    delivery: "Remote",
-    pricing: { from: SUPPORT_TERMS.additionalHourlyRate, unit: "hour", note: "Most sessions run about an hour." },
+    id: "remote-help", audience: "support", title: "Remote Tech Help", short: "Computer, email, printer, and software help",
+    description: "For problems that can be solved without a visit, get focused help through a connection you authorize.",
+    signs: ["Email or software stopped working", "You need help with a computer or account", "You want guidance setting up a device"],
+    includes: ["Authorized remote session", "Focused troubleshooting", "Explanation and next steps"], delivery: "Remote",
+    pricing: { from: 75, unit: "hour", note: "30-minute minimum. Final pricing confirmed before work begins." },
+  },
+  {
+    id: "onsite-help", audience: "support", title: "On-Site Tech Help", short: "Hands-on help at your home or business",
+    description: "Computer setup, printer problems, smart TVs, and everyday troubleshooting in the local service area.",
+    signs: ["Your printer will not connect", "You bought a new computer or device", "The problem needs a hands-on visit"],
+    includes: ["Local visit by appointment", "Device setup or troubleshooting", "Walkthrough of what changed"], delivery: "Local",
+    pricing: { from: 100, unit: "hour", note: "1-hour minimum. Visit availability and final pricing confirmed before work." },
   },
   // Websites & dashboards
   {
@@ -209,9 +213,9 @@ export function offeringsFor(audience: ServiceAudience): ServiceOffering[] {
 }
 
 export function formatServicePrice(pricing: ServicePricing): string {
-  if (pricing.from === null) return "Quote on request"
-  if (pricing.unit === "hour") return `From $${pricing.from}/hr`
-  if (pricing.unit === "app") return `From $${pricing.from}/app`
-  if (pricing.unit === "month") return `From $${pricing.from}/mo`
-  return `From $${pricing.from}`
+  if (pricing.from === null) return "Custom quote"
+  if (pricing.unit === "hour") return `Starting around $${pricing.from}/hr`
+  if (pricing.unit === "app") return `Starting around $${pricing.from}/app`
+  if (pricing.unit === "month") return `Starting around $${pricing.from}/mo`
+  return `Starting around $${pricing.from}`
 }

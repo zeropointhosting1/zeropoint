@@ -21,6 +21,8 @@ const STATIC_ROUTES = [
   "/privacy/",
   "/projects/",
   "/services/",
+  "/tech-support/",
+  "/network-care/",
   "/sizer/",
   "/terms/",
   "/tools/",

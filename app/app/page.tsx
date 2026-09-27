@@ -8,12 +8,14 @@ import { HowItWorks } from "@/components/marketing/how-it-works"
 import { Testimonials } from "@/components/marketing/testimonials"
 import { ServicesCta } from "@/components/marketing/services-cta"
 import { JsonLd } from "@/components/seo/json-ld"
-import { SupportPlans } from "@/components/marketing/support-plans"
+import { StartingPricing } from "@/components/marketing/support-plans"
 import { MeetOwner } from "@/components/marketing/meet-owner"
 import { SHOW_CLIENT_WORK, SHOW_TESTIMONIALS, SITE_URL } from "@/lib/site-config"
 import { BUSINESS_INFO } from "@/lib/business-info"
 
-// Business-first homepage; client proof stays hidden until approved content exists.
+import { ServicePicker, CommonProblems, NetworkingSpecialty, TechSupportSection, NetworkCare } from "@/components/marketing/local-services"
+
+// Local technology homepage; client proof stays hidden until approved content exists.
 export default function HomePage() {
   return (
     <>
@@ -23,16 +25,30 @@ export default function HomePage() {
           "@type": "ProfessionalService",
           name: "ZeroPoint",
           url: SITE_URL,
-          email: BUSINESS_INFO.email,
-          telephone: BUSINESS_INFO.telephone,
+          email: BUSINESS_INFO.email || undefined,
+          telephone: BUSINESS_INFO.telephone || undefined,
           areaServed: BUSINESS_INFO.areaServed,
-          address: { "@type": "PostalAddress", addressLocality: BUSINESS_INFO.city },
+          description: "Local Wi-Fi, UniFi networking, and on-demand technology help for homes and small businesses.",
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Local technology services",
+            itemListElement: ["Home Wi-Fi", "UniFi installation", "Computer and tech support", "Business networking", "Network Care", "Websites"].map((name) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name, areaServed: BUSINESS_INFO.areaServed },
+            })),
+          },
+          address: { "@type": "PostalAddress", addressLocality: "Boca Raton", addressRegion: "FL", addressCountry: "US" },
         }}
       />
       <TopNav />
       <main>
         <Hero />
-        <SupportPlans preview />
+        <ServicePicker />
+        <CommonProblems />
+        <NetworkingSpecialty />
+        <TechSupportSection />
+        <StartingPricing preview />
+        <NetworkCare />
         <WhyUs />
         <HowItWorks />
         {SHOW_CLIENT_WORK && <CaseStudiesSlot />}

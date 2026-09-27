@@ -1,101 +1,20 @@
-import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, ClipboardCheck, FileSignature, MessagesSquare, PackageOpen } from "lucide-react"
-import { SupportPlans } from "@/components/marketing/support-plans"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
-import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/marketing/eyebrow"
-import { formatServicePrice, offeringsFor, type ServiceAudience } from "@/lib/services"
-import { BUSINESS_INFO } from "@/lib/business-info"
+import { StartingPricing } from "@/components/marketing/support-plans"
+import { ServicesCta } from "@/components/marketing/services-cta"
 import { pageMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = pageMetadata({
-  title: "Pricing — ZeroPoint",
-  description: "Monthly IT support plans and project pricing for small businesses, websites, and home networking. Clear pricing, month-to-month support, and no hardware markup.",
-  path: "/pricing",
-})
-
-// Monthly plans come first; these project groups retain their old anchors.
-const GROUPS: { audience: ServiceAudience; label: string; href: string }[] = [
-  { audience: "business", label: "Small Business", href: "/services" },
-  { audience: "web", label: "Websites", href: "/websites" },
-  { audience: "home", label: "Home Networking", href: "/home-networking" },
+export const metadata = pageMetadata({ title: "Tech Support & Wi-Fi Pricing in Boca Raton — ZeroPoint", description: "Remote tech help starting around $75/hour, local on-site help around $100/hour, and Wi-Fi assessments around $99. Clear quotes for installations and websites.", path: "/pricing" })
+const PROJECTS = [
+  { id: "home", name: "Home Network / UniFi Installation", copy: "Based on equipment, property size, cabling, and number of access points.", href: "/home-networking" },
+  { id: "business", name: "Business Networking", copy: "Sized around your staff, guests, POS systems, cameras, and devices.", href: "/services" },
+  { id: "web", name: "Websites", copy: "Local business and restaurant websites, with hosting and ongoing updates available.", href: "/websites" },
+  { id: "plans", name: "Network Care", copy: "Optional monthly monitoring and maintenance after installation. Scope and support time agreed for your network.", href: "/network-care" },
 ]
-
-const HOW = [
-  { icon: MessagesSquare, title: "Free consult first", copy: "A short call to understand what you need. No charge, no obligation." },
-  { icon: FileSignature, title: "Written quote before work", copy: "Scope and price confirmed in writing before anything starts." },
-  { icon: PackageOpen, title: "Labor only", copy: "Hardware is never marked up. You buy it, you own it." },
-  { icon: ClipboardCheck, title: "No surprise invoices", copy: "Anything outside the agreed scope is raised before it's done, not after." },
-]
-
-const FAQ = [
-  { q: "Why do some services say “Quote on request”?", a: "Their cost depends heavily on size: how many devices, rooms, pages, or systems are involved. Rather than publish a number that's wrong for most people, they're priced after a quick scope review." },
-  { q: "Are these final prices?", a: "They're starting points. Your written quote reflects your actual scope, and it's confirmed before any work begins." },
-  { q: "Is hardware included?", a: "No. Pricing is labor only, and hardware is never marked up. Bring your own, or use the Hardware Deals page to find gear." },
-  { q: "How does payment work?", a: `${BUSINESS_INFO.paymentTerms} Confirmed in writing before work begins.` },
-]
-
 export default function PricingPage() {
-  return (
-    <>
-      <TopNav />
-      <main>
-        <section className="relative overflow-hidden border-b border-border">
-          <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
-          <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-            <div>
-              <Eyebrow>Pricing</Eyebrow>
-              <h1 className="mt-5 text-5xl leading-[0.98] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">Clear pricing,<br /><span className="text-primary">in one place.</span></h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">Monthly support for your business, plus clear project pricing for networks, websites, and home Wi-Fi.</p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Button size="lg" render={<Link href="/contact" />}>Get a free consult <ArrowRight className="size-4" /></Button>
-                <Button size="lg" variant="outline" render={<Link href="/estimate" />}>Get an estimate</Button>
-              </div>
-            </div>
-            <div className="border-y border-border py-6">
-              <p className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">How pricing works</p>
-              <div className="mt-5 divide-y divide-border">
-                {HOW.map(({ icon: Icon, title, copy }) => <div key={title} className="flex items-center gap-3 py-4 text-sm text-text-secondary"><span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" /></span><div><span className="block font-medium text-foreground">{title}</span><span className="block text-xs">{copy}</span></div></div>)}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <SupportPlans />
-        <section className="border-b border-border bg-surface">
-          <div className="mx-auto max-w-6xl space-y-14 px-6 py-24">
-            {GROUPS.map(({ audience, label, href }) => (
-              <div key={audience} id={audience} className="scroll-mt-24">
-                <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
-                  <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{label}</h2>
-                  <Link href={href} className="group flex shrink-0 items-center gap-1 text-sm text-text-secondary transition-colors hover:text-foreground">What&rsquo;s included <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>
-                </div>
-                <div className="divide-y divide-border">
-                  {offeringsFor(audience).filter((service) => service.id !== "monthly-support").map((service) => (
-                    <div key={service.id} className="grid gap-2 py-5 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-10">
-                      <div>
-                        <h3 className="font-semibold">{service.title}</h3>
-                        <p className="mt-1 text-sm text-text-secondary">{service.short}</p>
-                      </div>
-                      <div className="sm:max-w-xs sm:text-right">
-                        <p className="text-lg font-semibold text-primary">{formatServicePrice(service.pricing)}</p>
-                        <p className="mt-1 text-xs leading-relaxed text-text-tertiary">{service.pricing.note}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="border-b border-border bg-surface">
-          <div className="mx-auto max-w-6xl px-6 py-24"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><Eyebrow>Questions</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Pricing questions.</h2></div><div className="border-t border-border">{FAQ.map(({ q, a }) => <div key={q} className="border-b border-border py-6"><h3 className="font-semibold text-foreground">{q}</h3><p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">{a}</p></div>)}</div></div></div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  )
+  return <><TopNav /><main><section className="relative overflow-hidden border-b border-border"><div className="pointer-events-none absolute inset-0 bg-hero-glow" /><div className="relative mx-auto max-w-6xl px-6 pt-32 pb-20"><Eyebrow>Pricing</Eyebrow><h1 className="mt-5 max-w-3xl text-5xl font-bold tracking-tight text-balance sm:text-6xl">Clear costs.<br /><span className="text-primary">Help that fits the job.</span></h1><p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">A one-off fix or a complete network installation: we agree on the work and price before getting started. No support subscription required.</p></div></section>
+  <div id="support" className="scroll-mt-24"><StartingPricing /></div>
+  <section className="border-b border-border"><div className="mx-auto max-w-6xl px-6 py-20"><Eyebrow>Projects &amp; optional care</Eyebrow><h2 className="mt-4 text-3xl font-bold tracking-tight">Quoted for your setup.</h2><div className="mt-8 divide-y divide-border border-y border-border">{PROJECTS.map((item) => <article id={item.id} key={item.id} className="grid scroll-mt-24 gap-3 py-7 sm:grid-cols-[1fr_auto]"><div><h3 className="text-lg font-semibold"><Link href={item.href} className="hover:text-primary hover:underline">{item.name}</Link></h3><p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">{item.copy}</p></div><p className="font-semibold text-primary">Custom quote</p></article>)}</div><div className="mt-10 grid gap-8 sm:grid-cols-2"><div><h3 className="font-semibold">What does the quote include?</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">The agreed work, labor, and any equipment costs shown separately. Hardware pricing is transparent, and you own the equipment, accounts, and configuration information.</p></div><div><h3 className="font-semibold">What if the job changes?</h3><p className="mt-2 text-sm leading-relaxed text-text-secondary">We discuss any extra work and its cost before proceeding. Payment timing and any deposit are confirmed in writing. No surprise charges.</p></div></div></div></section><ServicesCta /></main><Footer /></>
 }

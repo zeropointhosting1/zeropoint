@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { TopNav } from "@/components/nav/top-nav"
 import { Footer } from "@/components/nav/footer"
@@ -5,7 +6,6 @@ import { Eyebrow } from "@/components/marketing/eyebrow"
 import { ReviewBanner } from "@/components/legal/review-banner"
 import { LegalProse } from "@/components/legal/legal-prose"
 import { BUSINESS_INFO } from "@/lib/business-info"
-import { FORM_SERVICE_NAME, FORM_SERVICE_PLACEHOLDER } from "@/lib/site-config"
 import { pageMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMetadata({
@@ -23,7 +23,7 @@ export default function PrivacyPage() {
           <div className="mx-auto max-w-3xl px-6 pt-32 pb-24">
             <Eyebrow>Legal</Eyebrow>
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Privacy Policy</h1>
-            <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>
+            {BUSINESS_INFO.legalPublishDate && <p className="mt-4 text-sm text-text-tertiary">Last updated: {BUSINESS_INFO.legalPublishDate}</p>}
 
             <div className="mt-10">
               <ReviewBanner />
@@ -33,8 +33,10 @@ export default function PrivacyPage() {
               <h2>What this site collects</h2>
               <p>
                 ZeroPoint (&ldquo;this site&rdquo;) collects information only when you choose to give it —
-                by submitting the contact form or the estimate form. That includes your name, email
-                address, and whatever you write in the message or request. Nothing is collected just from
+                by submitting the contact form, the estimate form, or a message through the site chat.
+                That includes your name, email address, and whatever you write in the message or request.
+                The site chat also creates an anonymous, random identifier (no name or email required) so
+                a reply can find its way back to your conversation. Nothing is collected just from
                 browsing the site.
               </p>
 
@@ -44,13 +46,12 @@ export default function PrivacyPage() {
                 raised — never sold, and never used for marketing you didn&rsquo;t ask for.
               </p>
 
-              <h2>Third-party form processor</h2>
+              <h2>Where submissions go</h2>
               <p>
                 This site is a static export with no server of its own, so contact and estimate form
-                submissions are sent directly from your browser to a third-party form service
-                (currently {FORM_SERVICE_NAME ?? FORM_SERVICE_PLACEHOLDER}).
-                That service processes the submission and forwards it by email; its own privacy policy
-                governs how it handles that data in transit.
+                submissions are sent directly from your browser to Supabase, the database and
+                authentication service ZeroPoint uses to store and reply to them. Only ZeroPoint can
+                read submitted messages.
               </p>
 
               <h2>Cookies and analytics</h2>
@@ -78,8 +79,7 @@ export default function PrivacyPage() {
 
               <h2>Your information</h2>
               <p>
-                To ask what information ZeroPoint has about you, or to have it deleted, email{" "}
-                <a href={`mailto:${BUSINESS_INFO.email}`}>{BUSINESS_INFO.email}</a>.
+                To ask about information you have shared with ZeroPoint, {BUSINESS_INFO.email ? <a href={`mailto:${BUSINESS_INFO.email}`}>email {BUSINESS_INFO.email}</a> : <Link href="/contact/">see contact options</Link>}.
               </p>
 
               <h2>Changes</h2>
