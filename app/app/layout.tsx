@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteChat } from "@/components/services/service-chat";
+import { SiteChatGate } from "@/components/services/site-chat-gate";
 import { MotionProvider } from "@/components/motion-provider";
 import { pageMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site-config";
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-background text-foreground">
         <MotionProvider>
           {children}
-          <SiteChat />
+          <SiteChatGate />
         </MotionProvider>
       </body>
     </html>

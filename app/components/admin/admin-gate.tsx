@@ -48,10 +48,17 @@ export function AdminGate({ children }: { children: React.ReactNode }) {
         </Centered>
       )
     case "admin":
-      return <>{children}</>
+      return <AdminUserContext.Provider value={state.session.user.email ?? null}>{children}</AdminUserContext.Provider>
   }
 }
 
+const AdminUserContext = React.createContext<string | null>(null)
+
+// The signed-in admin's email, for the shell's account menu.
+export function useAdminEmail() {
+  return React.useContext(AdminUserContext)
+}
+
 function Centered({ children }: { children: React.ReactNode }) {
-  return <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-surface px-6 text-center">{children}</div>
+  return <div className="flex min-h-screen flex-col items-center justify-center gap-3 bg-muted/40 px-6 text-center">{children}</div>
 }

@@ -1,15 +1,13 @@
 "use client"
 
 import { LeadsTable } from "@/components/admin/leads-table"
+import { PageHeader } from "@/components/admin/ui"
 
 export default function AdminLeadsPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-semibold text-foreground">Leads</h1>
-      <p className="mt-1 text-sm text-text-secondary">Contact and estimate form submissions.</p>
-      <div className="mt-6">
-        <LeadsTable />
-      </div>
+    <div className="space-y-6">
+      <PageHeader title="Leads" description="Contact and estimate form submissions from the site." />
+      <LeadsTable />
     </div>
   )
 }

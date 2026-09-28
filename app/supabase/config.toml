@@ -7,3 +7,10 @@ project_id = "REPLACE_WITH_YOUR_PROJECT_REF"
 # this skips Supabase's JWT check rather than requiring the anon key to be
 # sent as a Bearer token for a browser call that has no session anyway.
 verify_jwt = false
+
+[functions.chat-capture-ip]
+# Opposite of the above: this one only ever runs on behalf of a signed-in
+# (anonymous-auth) visitor, and relies on that JWT being real — see the
+# function's own comments for why that's what keeps it safe to run
+# without a service-role key.
+verify_jwt = true

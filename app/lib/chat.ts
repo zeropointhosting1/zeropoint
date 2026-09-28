@@ -1,4 +1,5 @@
 import { getSupabaseClient } from "@/lib/supabase/client"
+import { parseUserAgent } from "@/lib/user-agent"
 
 export type ChatSender = "visitor" | "admin"
 
@@ -17,6 +18,10 @@ export type ChatConversation = {
   status: "open" | "closed"
   created_at: string
   last_message_at: string
+  device: string | null
+  os: string | null
+  browser: string | null
+  ip: string | null
 }
 
 // The site is a static export with no visitor login — an anonymous
@@ -46,17 +51,31 @@ export async function getOrCreateConversation(): Promise<ChatConversation> {
 
   if (existingId) {
     const { data } = await supabase.from("chat_conversations").select("*").eq("id", existingId).maybeSingle()
-    if (data) return data as ChatConversation
+    if (data) {
+      captureIp(data.id) // refresh in case they're back on a different network
+      return data as ChatConversation
+    }
   }
 
+  const ua = typeof navigator !== "undefined" ? parseUserAgent(navigator.userAgent) : null
   const { data, error } = await supabase
     .from("chat_conversations")
-    .insert({ visitor_id: session.user.id })
+    .insert({ visitor_id: session.user.id, device: ua?.device ?? null, os: ua?.os ?? null, browser: ua?.browser ?? null })
     .select("*")
     .single()
   if (error || !data) throw error ?? new Error("Couldn't start a conversation")
   window.localStorage.setItem(CONVERSATION_KEY, data.id)
+  captureIp(data.id)
   return data as ChatConversation
+}
+
+// Fire-and-forget: the widget shouldn't stall or fail on this. The IP
+// itself can only be read server-side (see the function's own comments
+// for why that's safe to do without a service-role key), so this is the
+// one part of visitor info that has to make a network call of its own
+// rather than just reading navigator.*.
+function captureIp(conversationId: string) {
+  getSupabaseClient().functions.invoke("chat-capture-ip", { body: { conversation_id: conversationId } }).catch(() => {})
 }
 
 // Admin-only (RLS: is_admin() sees every conversation, a visitor only

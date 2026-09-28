@@ -46,6 +46,20 @@ export async function fetchClientChecks(clientId: string, limit = 20): Promise<C
   return (data as ClientCheck[]) ?? []
 }
 
+// Every client's checks since `sinceIso` in one query — the dashboard's
+// uptime strips and fleet stats group these client-side rather than
+// making one request per client. 15-minute cadence means ~96 rows per
+// client per day, so the cap leaves headroom for a few dozen clients.
+export async function fetchRecentChecks(sinceIso: string, limit = 5000): Promise<ClientCheck[]> {
+  const { data } = await getSupabaseClient()
+    .from("client_checks")
+    .select("*")
+    .gte("checked_at", sinceIso)
+    .order("checked_at", { ascending: false })
+    .limit(limit)
+  return (data as ClientCheck[]) ?? []
+}
+
 // Named to avoid colliding with Supabase's own createClient (lib/supabase/client.ts)
 export async function addClient(input: ClientInput): Promise<Client> {
   const { data, error } = await getSupabaseClient().from("clients").insert(input).select("*").single()
